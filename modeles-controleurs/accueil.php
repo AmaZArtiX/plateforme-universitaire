@@ -2,5 +2,5 @@
 
   require("../configuration/config.php");
 
-  require("../vues/acceuil.vue.php")
+  require("../vues/accueil.vue.php")
  ?>
