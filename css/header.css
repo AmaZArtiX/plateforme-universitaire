@@ -1,0 +1,35 @@
+#header {
+    background-color: #8CB75B;
+    border: none;
+}
+
+#header a {
+    color: white;
+    background-color: #8CB75B;
+}
+
+#header a:hover {
+    background-color: #9ECC6B;
+}
+
+.active {
+    background-color: #507255;
+}
+
+.dropdown-toggle {
+    text-decoration: none;
+}
+
+.dropdown:hover .dropdown-menu {
+    padding: 0;
+    display: block;
+}
+
+.dropdown-menu li {
+    background-color: #8CB75B;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
