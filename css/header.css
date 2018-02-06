@@ -12,7 +12,7 @@
     background-color: #9ECC6B;
 }
 
-.active {
+#active a {
     background-color: #507255;
 }
 
