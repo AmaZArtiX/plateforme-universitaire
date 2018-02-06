@@ -1,3 +1,10 @@
+<?php
+  require("configuration/config.php");
+
+  $membres = $bdd->query("SELECT * FROM t_membre_mem");
+
+ ?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -18,8 +25,12 @@
         <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing
         responsive, mobile-first projects on the web.</p>
       </div>
-      <p>This is some text.</p>
-      <p>This is another text.</p>
+      <?php
+        while($m = $membres->fetch()) {
+
+          echo $m['mem_nom'];
+        }
+      ?>
     </div>
   </body>
   <?php require("vues/footer.vue.php"); ?>
