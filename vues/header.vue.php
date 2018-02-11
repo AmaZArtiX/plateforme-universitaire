@@ -1,31 +1,33 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" id="header">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#"><img src="./etc/UVHC-blanc.png"/></a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active" id="active"><a href="#">Accueil</a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Page 1-1</a></li>
-            <li><a href="#">Page 1-2</a></li>
-            <li><a href="#">Page 1-3</a></li>
-          </ul>
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="#">
+      <img src="./assets/UVHC-blanc.png" height="30" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Accueil</a>
         </li>
-        <li><a href="#">Page 2</a></li>
-        <li><a href="#">Page 3</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> S'inscire</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Lien</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Lien</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Lien
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Lien</a>
+            <a class="dropdown-item" href="#">Lien</a>
+            <a class="dropdown-item" href="#">Lien</a>
+          </div>
+        </li>
       </ul>
     </div>
-  </div>
-</nav>
+  </nav>
+</header>
