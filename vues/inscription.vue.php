@@ -1,3 +1,9 @@
+<?php
+
+  require("../modeles-controleurs/inscription.php");
+
+ ?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -15,7 +21,7 @@
     <!-- Header -->
     <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="../index.php">
           <img src="../assets/UVHC-blanc.png" height="30" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,46 +53,45 @@
       </nav>
     </header>
     <!-- Fin header -->
+
+    <!-- Formulaire -->
     <div class="container" style="margin-top: 100px; margin-bottom: 50px;">
       <div class="row justify-content-center">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-          <form role="form">
+          <form role="form" method="post" action="">
             <h2>Inscrivez-vous <small>C'est gratos cousin.</small></h2>
             <hr/>
             <div class="row">
       				<div class="col-xs-12 col-sm-6 col-md-6">
       					<div class="form-group">
-                  <input type="text" name="first_name" id="first_name" class="form-control input-lg" placeholder="Prénom" tabindex="1">
+                  <input type="text" name="prenom" id="prenom" class="form-control input-lg" placeholder="Prénom" tabindex="1" required>
       					</div>
               </div>
       				<div class="col-xs-12 col-sm-6 col-md-6">
       					<div class="form-group">
-      						<input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="Nom" tabindex="2">
+      						<input type="text" name="nom" id="nom" class="form-control input-lg" placeholder="Nom" tabindex="2" required>
       					</div>
       				</div>
         		</div>
-            <div class="form-group">
-        			<input type="text" name="display_name" id="display_name" class="form-control input-lg" placeholder="Nom d'utilisateur" tabindex="3">
-        		</div>
         		<div class="form-group">
-        			<input type="email" name="email" id="email" class="form-control input-lg" placeholder="Adresse e-mail" tabindex="4">
+        			<input type="email" name="email" id="email" class="form-control input-lg" placeholder="Adresse e-mail" tabindex="3" required>
         		</div>
         		<div class="row">
         			<div class="col-xs-12 col-sm-6 col-md-6">
         				<div class="form-group">
-        					<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Mot de passe" tabindex="5">
+        					<input type="password" name="mot_de_passe" id="mot_de_passe" class="form-control input-lg" placeholder="Mot de passe" tabindex="4" required>
         				</div>
         			</div>
         			<div class="col-xs-12 col-sm-6 col-md-6">
         				<div class="form-group">
-        					<input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirmation" tabindex="6">
+        					<input type="password" name="mot_de_passe_confirmation" id="mot_de_passe_confirmation" class="form-control input-lg" placeholder="Confirmation" tabindex="5" required>
         				</div>
         			</div>
         		</div>
         		<div class="row">
               <div class="col-xs-4 col-sm-3 col-md-3" data-toggle="buttons">
                 <label class="btn btn-primary">
-                  <input type="checkbox" autocomplete="off" hidden> J'accepte
+                  <input type="checkbox" name="conditons" autocomplete="off" hidden> J'accepte
                 </label>
               </div>
         			<div class="col-xs-8 col-sm-9 col-md-9">
@@ -96,19 +101,71 @@
             <hr/>
         		<div class="row">
         			<div class="col-xs-12 col-md-6">
-                <input type="submit" value="S'inscrire" class="btn btn-primary btn-block btn-lg" tabindex="7">
+                <input type="submit" value="S'inscrire" name="btn_inscription" class="btn btn-primary btn-block btn-lg" tabindex="7">
               </div>
         			<div class="col-xs-12 col-md-6">
                 <a href="connexion.vue.php" class="btn btn-success btn-block btn-lg">Se connecter</a>
               </div>
         		</div>
-
-
         	</form>
         </div>
       </div>
     </div>
+    <?php
+
+      if(isset($erreur)){
+
+        echo $erreur;
+      }
+      
+    ?>
+    <!-- Fin Formulaire -->
+
     <!-- Footer -->
-    <?php require("footer.vue.php"); ?>
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <h2 class="logo"><a href="#"><img src="../assets/UVHC-blanc.png"/></a></h2>
+                </div>
+                <div class="col-sm-2">
+                    <h5>Pour commencer</h5>
+                    <ul>
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">Se connecter</a></li>
+                        <li><a href="#">S'inscrire</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-2">
+                    <h5>À propos de nous</h5>
+                    <ul>
+                        <li><a href="#">Informations</a></li>
+                        <li><a href="#">Nous contacter</a></li>
+                        <li><a href="#">Nouveautés</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-2">
+                    <h5>Support</h5>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Aide</a></li>
+                        <li><a href="#">Forum</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-3">
+                    <div class="social-networks">
+                        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+                    </div>
+                    <button type="button" class="btn btn-default">Nous contacter</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>© 2018 Copyright</p>
+        </div>
+    </footer>
+    <!-- Fin footer -->
   </body>
 </html>

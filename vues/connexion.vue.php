@@ -14,7 +14,7 @@
     <!-- Header -->
     <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="../index.php">
           <img src="../assets/UVHC-blanc.png" height="30" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,12 +59,63 @@
         <label>
           <a href="#">Mot de passe oublié ?</a>
         </label>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <input type="submit" value="Se connecter" class="btn btn-primary btn-block btn-lg">
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <a href="inscription.vue.php" class="btn btn-success btn-block btn-lg">S'inscire</a>
+          </div>
+        </div>
       </form>
       <!-- Fin Formulaire -->
     </center>
 
     <!-- Footer -->
-    <?php require("footer.vue.php"); ?>
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <h2 class="logo"><a href="#"><img src="../assets/UVHC-blanc.png"/></a></h2>
+                </div>
+                <div class="col-sm-2">
+                    <h5>Pour commencer</h5>
+                    <ul>
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">Se connecter</a></li>
+                        <li><a href="#">S'inscrire</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-2">
+                    <h5>À propos de nous</h5>
+                    <ul>
+                        <li><a href="#">Informations</a></li>
+                        <li><a href="#">Nous contacter</a></li>
+                        <li><a href="#">Nouveautés</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-2">
+                    <h5>Support</h5>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Aide</a></li>
+                        <li><a href="#">Forum</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-3">
+                    <div class="social-networks">
+                        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+                    </div>
+                    <button type="button" class="btn btn-default">Nous contacter</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>© 2018 Copyright</p>
+        </div>
+    </footer>
+    <!-- Fin Footer -->
   </body>
 </html>
