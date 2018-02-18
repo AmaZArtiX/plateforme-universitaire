@@ -29,7 +29,22 @@
 
     global $bdd;
     $requete = $bdd->prepare("INSERT INTO t_membre_mem(mem_nom, mem_prenom, mem_mail, mem_pwd, mem_date_inscription) VALUES (?, ?, ?, ?, NOW())");
-    $requete_insertion->execute(array($nom, $prenom, $email, $mdp));
+    $requete->execute(array($nom, $prenom, $email, $mdp));
+  }
+
+  /**
+   * Affiche une alerte Bootstrap
+   * @param  [string] $titre   [titre de l'alerte]
+   * @param  [string] $message [message de l'alerte]
+   * @param  [tring] $type    [type de l'alerte]
+   * @return [type]          [description]
+   */
+  function afficherAlerte($titre, $message, $type) {
+
+    echo "<div class=\"alert alert-".$type." alert-dismissable fade show\" role=\"alert\">
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+            <strong>".$titre."</strong>".$message."
+          </div>";
   }
 
 ?>
