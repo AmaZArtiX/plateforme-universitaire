@@ -29,27 +29,46 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-            <li class="nav-item">
-              <a class="nav-link" href="../index.php">Accueil</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Lien</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="connexion.vue.php">Se connecter</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Lien
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Lien</a>
-                <a class="dropdown-item" href="#">Lien</a>
-                <a class="dropdown-item" href="#">Lien</a>
-              </div>
-            </li>
-          </ul>
+          <?php
+            if(!isset($_SESSION['mem_id'])) {
+          ?>
+              <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                <li class="nav-item">
+                  <a class="nav-link" href="../index.php">Accueil</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Forum</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="connexion.vue.php">Se connecter</a>
+                </li>
+              </ul>
+          <?php
+            } else {
+          ?>
+              <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                <li class="nav-item">
+                  <a class="nav-link" href="../index.php">Accueil</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Forum</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <?= $_SESSION['mem_prenom'] ?>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Mon compte</a>
+                    <a class="dropdown-item" href="../modeles-controleurs/deconnexion.php">Quitter</a>
+                  </div>
+                </li>
+              </ul>
+
+          <?php
+
+            }
+
+          ?>
         </div>
       </nav>
     </header>
@@ -65,17 +84,17 @@
             <div class="row">
       				<div class="col-xs-12 col-sm-6 col-md-6">
       					<div class="form-group">
-                  <input type="text" name="prenom" id="prenom" class="form-control input-lg" placeholder="Prénom" tabindex="1" required>
+                  <input type="text" name="prenom" id="prenom" class="form-control input-lg" placeholder="Prénom" value="<?php if(isset($prenom)){ echo $prenom; }?>" tabindex="1" required>
       					</div>
               </div>
       				<div class="col-xs-12 col-sm-6 col-md-6">
       					<div class="form-group">
-      						<input type="text" name="nom" id="nom" class="form-control input-lg" placeholder="Nom" tabindex="2" required>
+      						<input type="text" name="nom" id="nom" class="form-control input-lg" placeholder="Nom" value="<?php if(isset($nom)){ echo $nom; }?>" tabindex="2" required>
       					</div>
       				</div>
         		</div>
         		<div class="form-group">
-        			<input type="email" name="email" id="email" class="form-control input-lg" placeholder="Adresse e-mail" tabindex="3" required>
+        			<input type="email" name="email" id="email" class="form-control input-lg" placeholder="Adresse e-mail" value="<?php if(isset($email)){ echo $email; }?>" tabindex="3" required>
         		</div>
         		<div class="row">
         			<div class="col-xs-12 col-sm-6 col-md-6">
@@ -92,7 +111,7 @@
         		<div class="row">
               <div class="col-xs-4 col-sm-3 col-md-3" data-toggle="buttons">
                 <label class="btn btn-primary">
-                  <input type="checkbox" name="conditons" autocomplete="off" hidden> J'accepte
+                  <input type="checkbox" name="conditions" hidden> J'accepte
                 </label>
               </div>
         			<div class="col-xs-8 col-sm-9 col-md-9">
@@ -112,14 +131,24 @@
         </div>
       </div>
     </div>
-    <?php
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+          <?php
 
-      if(isset($erreur)){
+            if(isset($erreur)){
 
-        echo $erreur;
-      }
+              afficherAlerte("", $erreur, "danger");
 
-    ?>
+            } else if(isset($succes)){
+
+              afficherAlerte("Félicitations ! ", $succes, "success");
+            }
+
+          ?>
+        </div>
+      </div>
+    </div>
     <!-- Fin Formulaire -->
 
     <!-- Footer -->

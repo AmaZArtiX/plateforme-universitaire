@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.1
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Client :  localhost:8889
--- Généré le :  Dim 04 Février 2018 à 13:45
--- Version du serveur :  5.6.34
--- Version de PHP :  7.1.0
+-- Hôte : localhost:8889
+-- Généré le :  Dim 18 fév. 2018 à 17:00
+-- Version du serveur :  5.6.38
+-- Version de PHP :  7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -49,6 +49,22 @@ CREATE TABLE `t_composante_comp` (
   `comp_id` int(11) NOT NULL,
   `comp_nom` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+--
+-- Déchargement des données de la table `t_composante_comp`
+--
+
+INSERT INTO `t_composante_comp` (`comp_id`, `comp_nom`) VALUES
+(1, 'ENSIAME'),
+(2, 'FFLASH'),
+(3, 'FDEG'),
+(4, 'FSMS'),
+(5, 'IAE'),
+(7, 'IPAG'),
+(8, 'ISTV'),
+(9, 'IUT'),
+(10, 'Bibliothèques'),
+(11, 'Divers');
 
 -- --------------------------------------------------------
 
@@ -111,7 +127,7 @@ CREATE TABLE `t_topic_top` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Index pour les tables exportées
+-- Index pour les tables déchargées
 --
 
 --
@@ -157,7 +173,7 @@ ALTER TABLE `t_topic_top`
   ADD PRIMARY KEY (`top_id`);
 
 --
--- AUTO_INCREMENT pour les tables exportées
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
@@ -165,31 +181,37 @@ ALTER TABLE `t_topic_top`
 --
 ALTER TABLE `tj_topic_theme_topt`
   MODIFY `topt_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT pour la table `t_categorie_cat`
 --
 ALTER TABLE `t_categorie_cat`
   MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT pour la table `t_composante_comp`
 --
 ALTER TABLE `t_composante_comp`
-  MODIFY `comp_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `comp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT pour la table `t_formation_form`
 --
 ALTER TABLE `t_formation_form`
   MODIFY `form_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT pour la table `t_membre_mem`
 --
 ALTER TABLE `t_membre_mem`
   MODIFY `mem_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT pour la table `t_message_mess`
 --
 ALTER TABLE `t_message_mess`
   MODIFY `mess_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT pour la table `t_topic_top`
 --

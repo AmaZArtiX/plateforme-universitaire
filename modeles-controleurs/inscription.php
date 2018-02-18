@@ -1,23 +1,25 @@
 <?php
 
+  session_start();
+
   require("../configuration/config.php");
   require("../fonctions/fonctions.php");
 
   // Envoie du formulaire
   if(isset($_POST['btn_inscription'])){
 
+    // On récupère les informations saisies
+    $prenom = htmlspecialchars($_POST['prenom']);
+    $nom = htmlspecialchars($_POST['nom']);
+    $email = htmlspecialchars($_POST['email']);
+    $mot_de_passe = sha1($_POST['mot_de_passe']);
+    $mot_de_passe_confirmation = sha1($_POST['mot_de_passe_confirmation']);
+
     // Les conditions d'utilisation doivent être acceptées
-    if(!isset($_POST['conditions'])){
+    if(isset($_POST['conditions'])){
 
       // Tous les champs doivent être complétés
-      if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['email']) && !empty($_POST['mot_de_passe']) && !empty($_POST['mot_de_passe_confirmation'])){
-
-        // On récupère les informations saisies
-        $prenom = htmlspecialchars($_POST['prenom']);
-        $nom = htmlspecialchars($_POST['nom']);
-        $email = htmlspecialchars($_POST['email']);
-        $mot_de_passe = sha1($_POST['mot_de_passe']);
-        $mot_de_passe_confirmation = sha1($_POST['mot_de_passe_confirmation']);
+      if(!empty($prenom) && !empty($nom) && !empty($email) && !empty($mot_de_passe) && !empty($mot_de_passe_confirmation)){
 
         // Vérification de la taille du nom
         if(strlen($prenom) <= 36){
@@ -35,7 +37,7 @@
                 if(existe_email($email) ==  0){
 
                   // Vérification de la taille du mot de passe
-                  if(strlen($mot_de_passe) <= 40 && strlen($mot_de_passe) >= 8){
+                  if(strlen($mot_de_passe) >= 8 && strlen($mot_de_passe) <= 40){
 
                     // Vérification de l'égalité des mots de passe
                     if($mot_de_passe == $mot_de_passe_confirmation){
@@ -43,7 +45,24 @@
                       // Insertion du nouveau membre dans la bdd
                       inserer_membre($prenom, $nom, $email, $mot_de_passe);
 
-                      // TODO: mail de création de compte
+                      /*********************************************************************
+											$header = "MIME-Version: 1.0\r\n";
+											$header .= 'From: "Forum.com" <bacquet.simon@outlook.fr>'."\n";
+											$header .= 'Content-Type:text/html; charset="utf-8"'."\n";
+											$header .= 'Content-Transfer-Encoding: 8bit';
+
+											$message='
+											<html>
+												<body>
+										      <p> Félicitations ! Votre compte a bien été créé. </p
+												</body>
+											</html>
+											';
+
+											mail($mail, "Confirmation de création de compte", $message, $header);
+											************************************************************************/
+
+                      $succes = "Vous êtes bien enregistré ! Cliquez <a href=\"../vues/connexion.vue.php\" class=\"alert-link\">ici</a> pour vous connecter.";
 
                     } else {
 
