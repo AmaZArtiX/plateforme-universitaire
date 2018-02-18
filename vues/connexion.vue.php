@@ -1,3 +1,8 @@
+<?php
+
+  require("../modeles-controleurs/connexion.php");
+
+ ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -22,27 +27,46 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-            <li class="nav-item">
-              <a class="nav-link" href="../index.php">Accueil</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Lien</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="connexion.vue.php">Se connecter</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Lien
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Lien</a>
-                <a class="dropdown-item" href="#">Lien</a>
-                <a class="dropdown-item" href="#">Lien</a>
-              </div>
-            </li>
-          </ul>
+          <?php
+            if(!isset($_SESSION['mem_id'])) {
+          ?>
+              <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                <li class="nav-item">
+                  <a class="nav-link" href="../index.php">Accueil</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Forum</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="connexion.vue.php">Se connecter</a>
+                </li>
+              </ul>
+          <?php
+            } else {
+          ?>
+              <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                <li class="nav-item">
+                  <a class="nav-link" href="../index.php">Accueil</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Forum</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <?= $_SESSION['mem_prenom'] ?>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Mon compte</a>
+                    <a class="dropdown-item" href="../modeles-controleurs/deconnexion.php">Quitter</a>
+                  </div>
+                </li>
+              </ul>
+
+          <?php
+
+            }
+
+          ?>
         </div>
       </nav>
     </header>
@@ -50,19 +74,19 @@
 
     <center>
       <!-- Formulaire de connexion -->
-      <form class="form-signin" style="margin-top: 100px; margin-bottom: 100px;">
+      <form class="form-signin" method="post" action="" style="margin-top: 100px; margin-bottom: 100px;">
         <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Veuillez vous connecter</h1>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Adresse e-mail" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
+        <label for="email" class="sr-only">Adresse e-mail</label>
+        <input type="email" name="email" id="email" class="form-control" placeholder="Adresse e-mail" required autofocus>
+        <label for="mot_de_passe" class="sr-only">Password</label>
+        <input type="password" name="mot_de_passe" id="mot_de_passe" class="form-control" placeholder="Mot de passe" required>
         <label>
           <a href="#">Mot de passe oublié ?</a>
         </label>
         <div class="row">
           <div class="col-xs-12 col-md-6">
-            <input type="submit" value="Se connecter" class="btn btn-primary btn-block btn-lg">
+            <input type="submit" name="btn_connexion" value="Se connecter" class="btn btn-primary btn-block btn-lg">
           </div>
           <div class="col-xs-12 col-md-6">
             <a href="inscription.vue.php" class="btn btn-success btn-block btn-lg">S'inscrire</a>
@@ -70,6 +94,21 @@
         </div>
       </form>
       <!-- Fin Formulaire -->
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <?php
+
+              if(isset($erreur)){
+
+                afficherAlerte("", $erreur, "danger");
+
+              }
+
+            ?>
+          </div>
+        </div>
+      </div>
     </center>
 
     <!-- Footer -->

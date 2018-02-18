@@ -1,3 +1,9 @@
+<?php
+
+  session_start();
+
+ ?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -22,27 +28,46 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-            <li class="nav-item active">
-              <a class="nav-link" href="index.php">Accueil</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Lien</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="vues/connexion.vue.php">Se connecter</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Lien
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Lien</a>
-                <a class="dropdown-item" href="#">Lien</a>
-                <a class="dropdown-item" href="#">Lien</a>
-              </div>
-            </li>
-          </ul>
+          <?php
+            if(!isset($_SESSION['mem_id'])) {
+          ?>
+              <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                <li class="nav-item active">
+                  <a class="nav-link" href="index.php">Accueil</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Forum</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="vues/connexion.vue.php">Se connecter</a>
+                </li>
+              </ul>
+          <?php
+            } else {
+          ?>
+              <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                <li class="nav-item active">
+                  <a class="nav-link" href="index.php">Accueil</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Forum</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <?= $_SESSION['mem_prenom'] ?>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Mon compte</a>
+                    <a class="dropdown-item" href="modeles-controleurs/deconnexion.php">Quitter</a>
+                  </div>
+                </li>
+              </ul>
+
+          <?php
+
+            }
+
+          ?>
         </div>
       </nav>
     </header>
