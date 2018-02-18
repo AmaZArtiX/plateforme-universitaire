@@ -23,9 +23,11 @@
 .dropdown-menu {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   display: none;
-  margin-top: -5px;
+  left: auto;
+  margin-top: 0;
   padding: 0;
   position: absolute;
+  right: 0;
 }
 
 .dropdown-menu a {
