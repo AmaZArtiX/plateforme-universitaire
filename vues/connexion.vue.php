@@ -5,6 +5,7 @@
     <title>Connectez-vous</title>
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/connexion.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -13,7 +14,7 @@
   <body>
     <!-- Header -->
     <header>
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark header">
         <a class="navbar-brand" href="../index.php">
           <img src="../assets/UVHC-blanc.png" height="30" alt="">
         </a>
@@ -64,7 +65,7 @@
             <input type="submit" value="Se connecter" class="btn btn-primary btn-block btn-lg">
           </div>
           <div class="col-xs-12 col-md-6">
-            <a href="inscription.vue.php" class="btn btn-success btn-block btn-lg">S'inscire</a>
+            <a href="inscription.vue.php" class="btn btn-success btn-block btn-lg">S'inscrire</a>
           </div>
         </div>
       </form>
@@ -81,9 +82,9 @@
                 <div class="col-sm-2">
                     <h5>Pour commencer</h5>
                     <ul>
-                        <li><a href="#">Accueil</a></li>
-                        <li><a href="#">Se connecter</a></li>
-                        <li><a href="#">S'inscrire</a></li>
+                        <li><a href="../index.php">Accueil</a></li>
+                        <li><a href="../vues/connexion.vue.php">Se connecter</a></li>
+                        <li><a href="../vues/inscription.vue.php">S'inscrire</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-2">
