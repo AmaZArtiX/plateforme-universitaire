@@ -83,32 +83,32 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="first-slide" src="" alt="First slide">
+            <img class="first-slide" src="assets/UVHC-15.png" alt="First slide">
             <div class="container">
-              <div class="carousel-caption text-left">
-                <h1>Exemple</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p><a class="btn btn-lg btn-primary" href="#" role="button">S'inscrire</a></p>
+              <div class="carousel-caption text-left content content-left">
+                <h1>Université de Valenciennes</h1>
+                <p>L’université de Valenciennes et du Hainaut-Cambrésis est une université française pluridisciplinaire située à Famars, dans les Hauts-de-France. Elle est membre du PRES Université Lille Nord de France.</p>
+                <p><a class="btn btn-lg btn-primary" href="http://www.univ-valenciennes.fr/" role="button">S'y rendre</a></p>
               </div>
             </div>
           </div>
           <div class="carousel-item">
             <img class="second-slide" src="" alt="Second slide">
             <div class="container">
-              <div class="carousel-caption">
-                <h1>Exemple</h1>
+              <div class="carousel-caption content content-middle">
+                <h1>Forum étudiant</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 <p><a class="btn btn-lg btn-primary" href="#" role="button">Découvrir</a></p>
               </div>
             </div>
           </div>
           <div class="carousel-item">
-            <img class="third-slide" src="" alt="Third slide">
+            <img class="third-slide" src="assets/UVHC-ENT-15.png" alt="Third slide">
             <div class="container">
-              <div class="carousel-caption text-right">
-                <h1>Exemple</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p><a class="btn btn-lg btn-primary" href="#" role="button">Parcourir</a></p>
+              <div class="carousel-caption text-right content content-right">
+                <h1>Espace Numérique de Travail</h1>
+                <p>L'ENT (ou portail) vous permet d'accéder à travers les réseaux à l'ensemble des ressources et services numériques mis à votre disposition, que vous soyez étudiant, enseignant, chercheur, personnel administratif et technique à l'Université de Valenciennes.</p>
+                <p><a class="btn btn-lg btn-primary" href="https://portail.univ-valenciennes.fr/f/welcome/normal/render.uP" role="button">S'y rendre</a></p>
               </div>
             </div>
           </div>

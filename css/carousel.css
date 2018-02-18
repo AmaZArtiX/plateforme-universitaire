@@ -28,6 +28,24 @@ body {
   height: 32rem;
 }
 
+.content {
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.content-left {
+  padding-left: 20px;
+}
+
+.content-middle {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.content-right {
+  padding-right: 20px;
+}
+
 .marketing .col-lg-4 {
   margin-bottom: 1.5rem;
 
