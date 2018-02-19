@@ -2,14 +2,14 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                <h2 class="logo"><a href="#"> LOGO </a></h2>
+                <h2 class="logo"><a href="#"><img src="./assets/UVHC-blanc.png"/></a></h2>
             </div>
             <div class="col-sm-2">
                 <h5>Pour commencer</h5>
                 <ul>
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#">Se connecter</a></li>
-                    <li><a href="#">S'inscrire</a></li>
+                    <li><a href="./index.php">Accueil</a></li>
+                    <li><a href="./vues/connexion.vue.php">Se connecter</a></li>
+                    <li><a href="./vues/inscription.vue.php">S'inscrire</a></li>
                 </ul>
             </div>
             <div class="col-sm-2">
