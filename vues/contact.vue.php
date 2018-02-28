@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/contact.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
   </head>
@@ -29,42 +30,39 @@
           <?php
             if(!isset($_SESSION['mem_id'])) {
           ?>
-              <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-                <li class="nav-item">
-                  <a class="nav-link" href="../index.php">Accueil</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Forum</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="connexion.vue.php">Se connecter</a>
-                </li>
-              </ul>
+            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+              <li class="nav-item">
+                <a class="nav-link" href="../index.php">Accueil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Forum</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="connexion.vue.php">Se connecter</a>
+              </li>
+            </ul>
           <?php
             } else {
           ?>
-              <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-                <li class="nav-item">
-                  <a class="nav-link" href="../index.php">Accueil</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Forum</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <?= $_SESSION['mem_prenom'] ?>
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Mon compte</a>
-                    <a class="dropdown-item" href="../modeles-controleurs/deconnexion.php">Quitter</a>
-                  </div>
-                </li>
-              </ul>
-
+            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+              <li class="nav-item">
+                <a class="nav-link" href="../index.php">Accueil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Forum</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <?= $_SESSION['mem_prenom'] ?>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">Mon compte</a>
+                  <a class="dropdown-item" href="../modeles-controleurs/deconnexion.php">Quitter</a>
+                </div>
+              </li>
+            </ul>
           <?php
-
             }
-
           ?>
         </div>
       </nav>
@@ -136,13 +134,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
-                    <h2 class="logo"><a href="#"><img src="../assets/UVHC-blanc.png"/></a></h2>
+                    <h2 class="logo"><img src="../assets/UVHC-blanc.png"/></h2>
                 </div>
                 <div class="col-sm-2">
                     <h5>Pour commencer</h5>
                     <ul>
                         <li><a href="../index.php">Accueil</a></li>
+                        <?php
+                          if(!isset($_SESSION['mem_id'])) {
+                        ?>
                         <li><a href="../vues/connexion.vue.php">Se connecter</a></li>
+                        <?php
+                          }
+                        ?>
                         <li><a href="../vues/inscription.vue.php">S'inscrire</a></li>
                     </ul>
                 </div>
@@ -150,7 +154,7 @@
                     <h5>À propos de nous</h5>
                     <ul>
                         <li><a href="#">Informations</a></li>
-                        <li><a href="#">Nous contacter</a></li>
+                        <li><a href="../vues/contact.vue.php">Nous contacter</a></li>
                         <li><a href="#">Nouveautés</a></li>
                     </ul>
                 </div>
@@ -168,7 +172,7 @@
                         <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
                         <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
                     </div>
-                    <button type="button" class="btn btn-default">Nous contacter</button>
+                    <a href="../vues/contact.vue.php" class="btn btn-default">Nous contacter</a>
                 </div>
             </div>
         </div>

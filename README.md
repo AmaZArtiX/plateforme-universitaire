@@ -32,7 +32,7 @@ description
 
 ## Réalisé avec
 
-* [Bootstrap](https://getbootstrap.com/) - Framework d'interface
+* [Bootstrap](https://getbootstrap.com) - Framework d'interface
 
 ## Contributeurs
 
@@ -44,9 +44,9 @@ description
 
 ## Auteurs
 
-* **Simon Bacquet** - *tache* - [AmaZArtiX](https://github.com/AmaZArtiX/)
-* **Yacine Chtairi** - *tache* - [thechocoboy](https://github.com/thechocoboy/)
-* **Lampe Ronan** - *tache* - [Aklugua](https://github.com/Aklugua/)
+* **Simon Bacquet** - *tache* - [AmaZArtiX](https://github.com/AmaZArtiX)
+* **Yacine Chtairi** - *tache* - [thechocoboy](https://github.com/thechocoboy)
+* **Lampe Ronan** - *tache* - [Aklugua](https://github.com/Aklugua)
 
 ## License
 

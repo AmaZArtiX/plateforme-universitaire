@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/carousel.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
   </head>
@@ -21,7 +22,7 @@
     <!-- Header -->
     <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark header">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="index.php">
           <img src="assets/UVHC-blanc.png" height="30" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +90,14 @@
                 <h1>Créer un compte</h1>
                 <p>La création d'un compte vous permettra d'accéder au Forum ainsi qu'à la Plateforme d'aide en ligne proposé par nos services. N'hésitez plus, ça ne prend que quelques secondes !</p>
                 <p><a class="btn btn-lg btn-primary" href="vues/inscription.vue.php" role="button">S'inscrire</a>
-                  <a class="btn btn-lg btn-primary" href="vues/connexion.vue.php" role="button">Déjà inscrit(e) ? Connectez-vous !</a></p>
+                  <?php
+                    if(!isset($_SESSION['mem_id'])) {
+                  ?>
+                  <a class="btn btn-lg btn-success" href="vues/connexion.vue.php" role="button">Déjà inscrit(e) ? Connectez-vous !</a>
+                  <?php
+                    }
+                  ?>
+                </p>
               </div>
             </div>
           </div>
@@ -125,7 +133,7 @@
       </div>
       <!-- Fin carrousel -->
       <!-- Container -->
-      <div class="container marketing">
+      <div class="container marketing upfooter">
         <!-- Featurette -->
 
         <div class="row featurette">
@@ -170,19 +178,19 @@
             <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
             <h2>Ronan</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">Voir &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="https://github.com/Aklugua" role="button">Voir &raquo;</a></p>
           </div>
           <div class="col-lg-4">
             <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
             <h2>Simon</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">Voir &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="https://github.com/AmaZArtiX" role="button">Voir &raquo;</a></p>
           </div>
           <div class="col-lg-4">
             <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
             <h2>Yacine</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum..</p>
-            <p><a class="btn btn-secondary" href="#" role="button">Voir &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="https://github.com/thechocoboy" role="button">Voir &raquo;</a></p>
           </div>
         </div>
         <!-- Fin des colonnes -->
@@ -193,13 +201,19 @@
           <div class="container">
               <div class="row">
                   <div class="col-sm-3">
-                      <h2 class="logo"><a href="#"><img src="./assets/UVHC-blanc.png"/></a></h2>
+                      <h2 class="logo"><img src="./assets/UVHC-blanc.png"/></h2>
                   </div>
                   <div class="col-sm-2">
                       <h5>Pour commencer</h5>
                       <ul>
                           <li><a href="./index.php">Accueil</a></li>
+                          <?php
+                            if(!isset($_SESSION['mem_id'])) {
+                          ?>
                           <li><a href="./vues/connexion.vue.php">Se connecter</a></li>
+                          <?php
+                            }
+                          ?>
                           <li><a href="./vues/inscription.vue.php">S'inscrire</a></li>
                       </ul>
                   </div>
@@ -207,7 +221,7 @@
                       <h5>À propos de nous</h5>
                       <ul>
                           <li><a href="#">Informations</a></li>
-                          <li><a href="#">Nous contacter</a></li>
+                          <li><a href="vues/contact.vue.php">Nous contacter</a></li>
                           <li><a href="#">Nouveautés</a></li>
                       </ul>
                   </div>
