@@ -28,8 +28,9 @@
   function inserer_membre($prenom, $nom, $email, $mdp){
 
     global $bdd;
-    $requete = $bdd->prepare("INSERT INTO t_membre_mem(mem_nom, mem_prenom, mem_mail, mem_pwd, mem_date_inscription) VALUES (?, ?, ?, ?, NOW())");
-    $requete->execute(array($nom, $prenom, $email, $mdp));
+    $requete = $bdd->prepare("INSERT INTO t_membre_mem(mem_nom, mem_prenom, mem_mail, mem_pwd, mem_administrateur, mem_date_inscription) VALUES (?, ?, ?, ?, ?, NOW())");
+    $result = $requete->execute(array($nom, $prenom, $email, 0, $mdp));
+    return $result;
   }
 
   /**
