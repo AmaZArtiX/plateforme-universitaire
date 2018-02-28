@@ -49,7 +49,7 @@
 
                       // Envoie du mail
                       /***********************************************************/
-                      /*$header = "MIME-Version: 1.0\r\n";
+                      $header = "MIME-Version: 1.0\r\n";
                       $header .= 'From: "'.$nom_complet.'" <'.$mail.'>'."\n";
                       $header .= 'Content-Type:text/html; charset="utf-8"'."\n";
                       $header .= 'Content-Transfer-Encoding: 8bit';
@@ -58,12 +58,11 @@
                       <html>
                         <body>
                           <p>'.$message.'</p>
-                          <p>Numéro de téléphone du contact: '.$telephone.'</p>
                         </body>
                       </html>
                       ';
 
-                      mail("bacquet.simon@outlook.fr", $sujet, $message_mail, $header);*/
+                      mail("bacquet.simon@outlook.fr", $sujet, $message_mail, $header);
                       /***********************************************************/
 
                       $succes = "Votre message a bien été envoyé, nous vous remercions pour l'attention que vous portez à notre application";

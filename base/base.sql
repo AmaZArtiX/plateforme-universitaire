@@ -2,87 +2,82 @@
 -- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:8889
--- Généré le :  jeu. 22 fév. 2018 à 22:20
--- Version du serveur :  5.6.38
--- Version de PHP :  7.2.1
+-- Host: localhost:8889
+-- Generation Time: Feb 28, 2018 at 10:42 PM
+-- Server version: 5.6.38
+-- PHP Version: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Base de données :  `bd_platuniv`
+-- Database: `bd_platuniv`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `tj_topic_theme_topt`
+-- Table structure for table `tj_topictheme_topth`
 --
 
-CREATE TABLE `tj_topic_theme_topt` (
-  `topt_id` int(11) NOT NULL,
+CREATE TABLE `tj_topictheme_topth` (
+  `topth_id` int(11) NOT NULL,
   `top_id` int(11) NOT NULL,
-  `comp_id` int(11) NOT NULL,
-  `cat_id` int(11) NOT NULL
+  `cat_id` int(11) NOT NULL,
+  `sscat` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `t_categorie_cat`
+-- Table structure for table `t_categorie_cat`
 --
 
 CREATE TABLE `t_categorie_cat` (
   `cat_id` int(11) NOT NULL,
-  `comp_id` int(11) NOT NULL,
-  `cat_nom` int(11) NOT NULL
+  `for_id` int(11) NOT NULL,
+  `cat_nom` varchar(32) NOT NULL,
+  `cat_description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
--- Structure de la table `t_composante_comp`
+-- Dumping data for table `t_categorie_cat`
 --
 
-CREATE TABLE `t_composante_comp` (
-  `comp_id` int(11) NOT NULL,
-  `comp_nom` varchar(32) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
---
--- Déchargement des données de la table `t_composante_comp`
---
-
-INSERT INTO `t_composante_comp` (`comp_id`, `comp_nom`) VALUES
-(1, 'ENSIAME'),
-(2, 'FFLASH'),
-(3, 'FDEG'),
-(4, 'FSMS'),
-(5, 'IAE'),
-(7, 'IPAG'),
-(8, 'ISTV'),
-(9, 'IUT'),
-(10, 'Bibliothèques'),
-(11, 'Divers');
+INSERT INTO `t_categorie_cat` (`cat_id`, `for_id`, `cat_nom`, `cat_description`) VALUES
+(1, 1, 'ENSIAME', 'École d\'ingénieur'),
+(2, 1, 'FFLASH', 'description'),
+(3, 1, 'FDEG', 'description'),
+(4, 1, 'FSMS', 'description'),
+(5, 1, 'IAE', 'Description'),
+(6, 1, 'IPAG', 'Description'),
+(7, 1, 'ISTV', 'Description'),
+(8, 1, 'IUT', 'Description'),
+(9, 1, 'Bibliothèques', 'Description');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `t_formation_form`
+-- Table structure for table `t_forum_for`
 --
 
-CREATE TABLE `t_formation_form` (
-  `form_id` int(11) NOT NULL,
-  `comp_id` int(11) NOT NULL,
-  `form_nom` varchar(32) NOT NULL,
-  `form_annee` tinyint(1) NOT NULL
+CREATE TABLE `t_forum_for` (
+  `for_id` int(11) NOT NULL,
+  `for_nom` varchar(32) NOT NULL,
+  `for_priorite` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `t_forum_for`
+--
+
+INSERT INTO `t_forum_for` (`for_id`, `for_nom`, `for_priorite`) VALUES
+(1, 'Composantes', 1);
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `t_membre_mem`
+-- Table structure for table `t_membre_mem`
 --
 
 CREATE TABLE `t_membre_mem` (
@@ -91,21 +86,14 @@ CREATE TABLE `t_membre_mem` (
   `mem_prenom` varchar(32) NOT NULL,
   `mem_mail` varchar(320) NOT NULL,
   `mem_pwd` char(40) NOT NULL,
-  `mem_administrateur` tinyint(1) NOT NULL,
+  `mem_administrateur` int(1) NOT NULL,
   `mem_date_inscription` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
---
--- Déchargement des données de la table `t_membre_mem`
---
-
-INSERT INTO `t_membre_mem` (`mem_id`, `mem_nom`, `mem_prenom`, `mem_mail`, `mem_pwd`, `mem_administrateur`, `mem_date_inscription`) VALUES
-(1, 'Bacquet', 'Simon', 'bacquet.simon@outlook.fr', '28ea55d6c22578e7a26e3a7769dcc3a74a1e34f1', 0, '2018-02-18');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `t_message_mess`
+-- Table structure for table `t_message_mess`
 --
 
 CREATE TABLE `t_message_mess` (
@@ -120,7 +108,19 @@ CREATE TABLE `t_message_mess` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `t_topic_top`
+-- Table structure for table `t_souscategorie_sscat`
+--
+
+CREATE TABLE `t_souscategorie_sscat` (
+  `sscat_id` int(11) NOT NULL,
+  `cat_id` int(11) NOT NULL,
+  `sscat_nom` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t_topic_top`
 --
 
 CREATE TABLE `t_topic_top` (
@@ -134,138 +134,132 @@ CREATE TABLE `t_topic_top` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `tj_topic_theme_topt`
+-- Indexes for table `tj_topictheme_topth`
 --
-ALTER TABLE `tj_topic_theme_topt`
-  ADD PRIMARY KEY (`topt_id`),
-  ADD KEY `FOREIGN` (`top_id`) USING BTREE,
-  ADD KEY `FOREIGN_5` (`cat_id`),
-  ADD KEY `FOREIGN_6` (`comp_id`);
+ALTER TABLE `tj_topictheme_topth`
+  ADD PRIMARY KEY (`topth_id`),
+  ADD KEY `fk_topictheme_top_id` (`top_id`),
+  ADD KEY `fk_topictheme_cat_id` (`cat_id`),
+  ADD KEY `fk_topictheme_sscat_id` (`sscat`);
 
 --
--- Index pour la table `t_categorie_cat`
+-- Indexes for table `t_categorie_cat`
 --
 ALTER TABLE `t_categorie_cat`
   ADD PRIMARY KEY (`cat_id`),
-  ADD KEY `FOREIGN_4` (`comp_id`);
+  ADD KEY `fk_categorie_for_id` (`for_id`);
 
 --
--- Index pour la table `t_composante_comp`
+-- Indexes for table `t_forum_for`
 --
-ALTER TABLE `t_composante_comp`
-  ADD PRIMARY KEY (`comp_id`);
+ALTER TABLE `t_forum_for`
+  ADD PRIMARY KEY (`for_id`);
 
 --
--- Index pour la table `t_formation_form`
---
-ALTER TABLE `t_formation_form`
-  ADD PRIMARY KEY (`form_id`),
-  ADD KEY `FOREIGN_3` (`comp_id`);
-
---
--- Index pour la table `t_membre_mem`
+-- Indexes for table `t_membre_mem`
 --
 ALTER TABLE `t_membre_mem`
   ADD PRIMARY KEY (`mem_id`);
 
 --
--- Index pour la table `t_message_mess`
+-- Indexes for table `t_message_mess`
 --
 ALTER TABLE `t_message_mess`
   ADD PRIMARY KEY (`mess_id`),
-  ADD KEY `FOREIGN_1` (`mem_id`),
-  ADD KEY `FOREIGN_2` (`top_id`);
+  ADD KEY `fk_message_top_id` (`top_id`),
+  ADD KEY `fk_message_mem_id` (`mem_id`);
 
 --
--- Index pour la table `t_topic_top`
+-- Indexes for table `t_souscategorie_sscat`
+--
+ALTER TABLE `t_souscategorie_sscat`
+  ADD PRIMARY KEY (`sscat_id`),
+  ADD KEY `fk_souscategorie_cat_id` (`cat_id`);
+
+--
+-- Indexes for table `t_topic_top`
 --
 ALTER TABLE `t_topic_top`
   ADD PRIMARY KEY (`top_id`),
-  ADD KEY `FOREIGN` (`mem_id`);
+  ADD KEY `fk_topic_mem_id` (`mem_id`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `tj_topic_theme_topt`
+-- AUTO_INCREMENT for table `tj_topictheme_topth`
 --
-ALTER TABLE `tj_topic_theme_topt`
-  MODIFY `topt_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tj_topictheme_topth`
+  MODIFY `topth_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `t_categorie_cat`
+-- AUTO_INCREMENT for table `t_categorie_cat`
 --
 ALTER TABLE `t_categorie_cat`
-  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT pour la table `t_composante_comp`
+-- AUTO_INCREMENT for table `t_forum_for`
 --
-ALTER TABLE `t_composante_comp`
-  MODIFY `comp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+ALTER TABLE `t_forum_for`
+  MODIFY `for_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT pour la table `t_formation_form`
---
-ALTER TABLE `t_formation_form`
-  MODIFY `form_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `t_membre_mem`
+-- AUTO_INCREMENT for table `t_membre_mem`
 --
 ALTER TABLE `t_membre_mem`
-  MODIFY `mem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `mem_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `t_message_mess`
+-- AUTO_INCREMENT for table `t_message_mess`
 --
 ALTER TABLE `t_message_mess`
   MODIFY `mess_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `t_topic_top`
+-- AUTO_INCREMENT for table `t_topic_top`
 --
 ALTER TABLE `t_topic_top`
   MODIFY `top_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `tj_topic_theme_topt`
+-- Constraints for table `tj_topictheme_topth`
 --
-ALTER TABLE `tj_topic_theme_topt`
-  ADD CONSTRAINT `FOREIGN_5` FOREIGN KEY (`cat_id`) REFERENCES `t_categorie_cat` (`cat_id`),
-  ADD CONSTRAINT `FOREIGN_6` FOREIGN KEY (`comp_id`) REFERENCES `t_composante_comp` (`comp_id`),
-  ADD CONSTRAINT `test` FOREIGN KEY (`top_id`) REFERENCES `t_topic_top` (`top_id`);
+ALTER TABLE `tj_topictheme_topth`
+  ADD CONSTRAINT `fk_topictheme_cat_id` FOREIGN KEY (`cat_id`) REFERENCES `t_categorie_cat` (`cat_id`),
+  ADD CONSTRAINT `fk_topictheme_sscat_id` FOREIGN KEY (`sscat`) REFERENCES `t_souscategorie_sscat` (`sscat_id`),
+  ADD CONSTRAINT `fk_topictheme_top_id` FOREIGN KEY (`top_id`) REFERENCES `t_topic_top` (`top_id`);
 
 --
--- Contraintes pour la table `t_categorie_cat`
+-- Constraints for table `t_categorie_cat`
 --
 ALTER TABLE `t_categorie_cat`
-  ADD CONSTRAINT `FOREIGN_4` FOREIGN KEY (`comp_id`) REFERENCES `t_composante_comp` (`comp_id`);
+  ADD CONSTRAINT `fk_categorie_for_id` FOREIGN KEY (`for_id`) REFERENCES `t_forum_for` (`for_id`);
 
 --
--- Contraintes pour la table `t_formation_form`
---
-ALTER TABLE `t_formation_form`
-  ADD CONSTRAINT `FOREIGN_3` FOREIGN KEY (`comp_id`) REFERENCES `t_composante_comp` (`comp_id`);
-
---
--- Contraintes pour la table `t_message_mess`
+-- Constraints for table `t_message_mess`
 --
 ALTER TABLE `t_message_mess`
-  ADD CONSTRAINT `FOREIGN_1` FOREIGN KEY (`mem_id`) REFERENCES `t_membre_mem` (`mem_id`),
-  ADD CONSTRAINT `FOREIGN_2` FOREIGN KEY (`top_id`) REFERENCES `t_topic_top` (`top_id`);
+  ADD CONSTRAINT `fk_message_mem_id` FOREIGN KEY (`mem_id`) REFERENCES `t_membre_mem` (`mem_id`),
+  ADD CONSTRAINT `fk_message_top_id` FOREIGN KEY (`top_id`) REFERENCES `t_topic_top` (`top_id`);
 
 --
--- Contraintes pour la table `t_topic_top`
+-- Constraints for table `t_souscategorie_sscat`
+--
+ALTER TABLE `t_souscategorie_sscat`
+  ADD CONSTRAINT `fk_souscategorie_cat_id` FOREIGN KEY (`cat_id`) REFERENCES `t_categorie_cat` (`cat_id`);
+
+--
+-- Constraints for table `t_topic_top`
 --
 ALTER TABLE `t_topic_top`
-  ADD CONSTRAINT `FOREIGN` FOREIGN KEY (`mem_id`) REFERENCES `t_membre_mem` (`mem_id`);
+  ADD CONSTRAINT `fk_topic_mem_id` FOREIGN KEY (`mem_id`) REFERENCES `t_membre_mem` (`mem_id`);
