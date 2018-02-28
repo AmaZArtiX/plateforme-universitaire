@@ -1,6 +1,7 @@
-html,
-body {
-  height: 100%;
+html {
+  min-height: 100%;
+  position: relative;
+  padding-bottom: 300px;
 }
 /*
 body {

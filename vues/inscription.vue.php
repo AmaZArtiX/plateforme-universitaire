@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/connexion.css">
+    <link rel="stylesheet" href="../css/inscription.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/inscription.js"></script>
@@ -73,7 +73,7 @@
       </nav>
     </header>
     <!-- Fin header -->
-    
+
     <!-- Formulaire -->
     <div class="container" style="margin-top: 100px; margin-bottom: 50px;">
       <div class="row justify-content-center">
@@ -108,8 +108,8 @@
         				</div>
         			</div>
         		</div>
-        		<div class="row">
-              <div class="col-xs-4 col-sm-3 col-md-3" data-toggle="buttons">
+        		<div class="row center">
+              <div class="col-xs-4 col-sm-3 col-md-3 clabel" data-toggle="buttons">
                 <label class="btn btn-primary">
                   <input type="checkbox" name="conditions" hidden> J'accepte
                 </label>
@@ -123,9 +123,15 @@
         			<div class="col-xs-12 col-md-6">
                 <input type="submit" value="S'inscrire" name="btn_inscription" class="btn btn-primary btn-block btn-lg" tabindex="7">
               </div>
+              <?php
+                if(!isset($_SESSION['mem_id'])) {
+              ?>
         			<div class="col-xs-12 col-md-6">
                 <a href="connexion.vue.php" class="btn btn-success btn-block btn-lg">Se connecter</a>
               </div>
+              <?php
+                }
+              ?>
         		</div>
         	</form>
         </div>
@@ -156,13 +162,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
-                    <h2 class="logo"><a href="#"><img src="../assets/UVHC-blanc.png"/></a></h2>
+                    <h2 class="logo"><img src="../assets/UVHC-blanc.png"/></h2>
                 </div>
                 <div class="col-sm-2">
                     <h5>Pour commencer</h5>
                     <ul>
                         <li><a href="../index.php">Accueil</a></li>
+                        <?php
+                          if(!isset($_SESSION['mem_id'])) {
+                        ?>
                         <li><a href="../vues/connexion.vue.php">Se connecter</a></li>
+                        <?php
+                          }
+                        ?>
                         <li><a href="../vues/inscription.vue.php">S'inscrire</a></li>
                     </ul>
                 </div>
@@ -170,7 +182,7 @@
                     <h5>À propos de nous</h5>
                     <ul>
                         <li><a href="#">Informations</a></li>
-                        <li><a href="#">Nous contacter</a></li>
+                        <li><a href="../vues/contact.vue.php">Nous contacter</a></li>
                         <li><a href="#">Nouveautés</a></li>
                     </ul>
                 </div>
@@ -188,7 +200,7 @@
                         <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
                         <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
                     </div>
-                    <button type="button" class="btn btn-default">Nous contacter</button>
+                    <a href="../vues/contact.vue.php" class="btn btn-default">Nous contacter</a>
                 </div>
             </div>
         </div>
