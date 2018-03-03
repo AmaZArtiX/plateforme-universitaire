@@ -8,15 +8,12 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Inscription</title>
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/inscription.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/inscription.js"></script>
   </head>
   <body>
     <!-- Header -->
@@ -59,6 +56,13 @@
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="#">Mon compte</a>
+                    <?php
+                      if($_SESSION['mem_administrateur'] == 1) {
+                    ?>
+                    <a class="dropdown-item" href="../vues/administration.vue.php">Administration</a>
+                    <?php
+                      }
+                    ?>
                     <a class="dropdown-item" href="../modeles-controleurs/deconnexion.php">Quitter</a>
                   </div>
                 </li>
@@ -209,5 +213,9 @@
         </div>
     </footer>
     <!-- Fin footer -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/inscription.js"></script>
   </body>
 </html>

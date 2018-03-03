@@ -59,6 +59,13 @@
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="#">Mon compte</a>
+                    <?php
+                      if($_SESSION['mem_administrateur'] == 1) {
+                    ?>
+                    <a class="dropdown-item" href="vues/administration.vue.php">Administration</a>
+                    <?php
+                      }
+                    ?>
                     <a class="dropdown-item" href="modeles-controleurs/deconnexion.php">Deconnexion</a>
                   </div>
                 </li>
