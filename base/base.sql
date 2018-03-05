@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le :  Dim 18 fév. 2018 à 17:00
+-- Généré le :  jeu. 22 fév. 2018 à 22:20
 -- Version du serveur :  5.6.38
 -- Version de PHP :  7.2.1
 
@@ -95,6 +95,13 @@ CREATE TABLE `t_membre_mem` (
   `mem_date_inscription` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
+--
+-- Déchargement des données de la table `t_membre_mem`
+--
+
+INSERT INTO `t_membre_mem` (`mem_id`, `mem_nom`, `mem_prenom`, `mem_mail`, `mem_pwd`, `mem_administrateur`, `mem_date_inscription`) VALUES
+(1, 'Bacquet', 'Simon', 'bacquet.simon@outlook.fr', '28ea55d6c22578e7a26e3a7769dcc3a74a1e34f1', 0, '2018-02-18');
+
 -- --------------------------------------------------------
 
 --
@@ -134,13 +141,17 @@ CREATE TABLE `t_topic_top` (
 -- Index pour la table `tj_topic_theme_topt`
 --
 ALTER TABLE `tj_topic_theme_topt`
-  ADD PRIMARY KEY (`topt_id`);
+  ADD PRIMARY KEY (`topt_id`),
+  ADD KEY `FOREIGN` (`top_id`) USING BTREE,
+  ADD KEY `FOREIGN_5` (`cat_id`),
+  ADD KEY `FOREIGN_6` (`comp_id`);
 
 --
 -- Index pour la table `t_categorie_cat`
 --
 ALTER TABLE `t_categorie_cat`
-  ADD PRIMARY KEY (`cat_id`);
+  ADD PRIMARY KEY (`cat_id`),
+  ADD KEY `FOREIGN_4` (`comp_id`);
 
 --
 -- Index pour la table `t_composante_comp`
@@ -152,7 +163,8 @@ ALTER TABLE `t_composante_comp`
 -- Index pour la table `t_formation_form`
 --
 ALTER TABLE `t_formation_form`
-  ADD PRIMARY KEY (`form_id`);
+  ADD PRIMARY KEY (`form_id`),
+  ADD KEY `FOREIGN_3` (`comp_id`);
 
 --
 -- Index pour la table `t_membre_mem`
@@ -164,13 +176,16 @@ ALTER TABLE `t_membre_mem`
 -- Index pour la table `t_message_mess`
 --
 ALTER TABLE `t_message_mess`
-  ADD PRIMARY KEY (`mess_id`);
+  ADD PRIMARY KEY (`mess_id`),
+  ADD KEY `FOREIGN_1` (`mem_id`),
+  ADD KEY `FOREIGN_2` (`top_id`);
 
 --
 -- Index pour la table `t_topic_top`
 --
 ALTER TABLE `t_topic_top`
-  ADD PRIMARY KEY (`top_id`);
+  ADD PRIMARY KEY (`top_id`),
+  ADD KEY `FOREIGN` (`mem_id`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -204,7 +219,7 @@ ALTER TABLE `t_formation_form`
 -- AUTO_INCREMENT pour la table `t_membre_mem`
 --
 ALTER TABLE `t_membre_mem`
-  MODIFY `mem_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `mem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `t_message_mess`
@@ -217,3 +232,40 @@ ALTER TABLE `t_message_mess`
 --
 ALTER TABLE `t_topic_top`
   MODIFY `top_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `tj_topic_theme_topt`
+--
+ALTER TABLE `tj_topic_theme_topt`
+  ADD CONSTRAINT `FOREIGN_5` FOREIGN KEY (`cat_id`) REFERENCES `t_categorie_cat` (`cat_id`),
+  ADD CONSTRAINT `FOREIGN_6` FOREIGN KEY (`comp_id`) REFERENCES `t_composante_comp` (`comp_id`),
+  ADD CONSTRAINT `test` FOREIGN KEY (`top_id`) REFERENCES `t_topic_top` (`top_id`);
+
+--
+-- Contraintes pour la table `t_categorie_cat`
+--
+ALTER TABLE `t_categorie_cat`
+  ADD CONSTRAINT `FOREIGN_4` FOREIGN KEY (`comp_id`) REFERENCES `t_composante_comp` (`comp_id`);
+
+--
+-- Contraintes pour la table `t_formation_form`
+--
+ALTER TABLE `t_formation_form`
+  ADD CONSTRAINT `FOREIGN_3` FOREIGN KEY (`comp_id`) REFERENCES `t_composante_comp` (`comp_id`);
+
+--
+-- Contraintes pour la table `t_message_mess`
+--
+ALTER TABLE `t_message_mess`
+  ADD CONSTRAINT `FOREIGN_1` FOREIGN KEY (`mem_id`) REFERENCES `t_membre_mem` (`mem_id`),
+  ADD CONSTRAINT `FOREIGN_2` FOREIGN KEY (`top_id`) REFERENCES `t_topic_top` (`top_id`);
+
+--
+-- Contraintes pour la table `t_topic_top`
+--
+ALTER TABLE `t_topic_top`
+  ADD CONSTRAINT `FOREIGN` FOREIGN KEY (`mem_id`) REFERENCES `t_membre_mem` (`mem_id`);
