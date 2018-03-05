@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/carousel.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
   </head>
@@ -21,7 +22,7 @@
     <!-- Header -->
     <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark header">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="index.php">
           <img src="assets/UVHC-blanc.png" height="30" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,6 +59,13 @@
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="#">Mon compte</a>
+                    <?php
+                      if($_SESSION['mem_administrateur'] == 1) {
+                    ?>
+                    <a class="dropdown-item" href="vues/administration.vue.php">Administration</a>
+                    <?php
+                      }
+                    ?>
                     <a class="dropdown-item" href="modeles-controleurs/deconnexion.php">Deconnexion</a>
                   </div>
                 </li>
@@ -83,12 +91,20 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="first-slide" src="assets/UVHC-15.png" alt="First slide">
+            <img class="first-slide" src="" alt="First slide">
             <div class="container">
               <div class="carousel-caption text-left content content-left">
-                <h1>Université de Valenciennes</h1>
-                <p>L’université de Valenciennes et du Hainaut-Cambrésis est une université française pluridisciplinaire située à Famars, dans les Hauts-de-France. Elle est membre du PRES Université Lille Nord de France.</p>
-                <p><a class="btn btn-lg btn-primary" href="http://www.univ-valenciennes.fr/" role="button">S'y rendre</a></p>
+                <h1>Créer un compte</h1>
+                <p>La création d'un compte vous permettra d'accéder au Forum ainsi qu'à la Plateforme d'aide en ligne proposé par nos services. N'hésitez plus, ça ne prend que quelques secondes !</p>
+                <p><a class="btn btn-lg btn-primary" href="vues/inscription.vue.php" role="button">S'inscrire</a>
+                  <?php
+                    if(!isset($_SESSION['mem_id'])) {
+                  ?>
+                  <a class="btn btn-lg btn-success" href="vues/connexion.vue.php" role="button">Déjà inscrit(e) ? Connectez-vous !</a>
+                  <?php
+                    }
+                  ?>
+                </p>
               </div>
             </div>
           </div>
@@ -97,18 +113,18 @@
             <div class="container">
               <div class="carousel-caption content content-middle">
                 <h1>Forum étudiant</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Le Forum étudiant vous permettra de discuter et d'échanger vos expériences et ressentis sur les cours dispensés à l'Université de Valenciennes et du Hainaut-Cambrésis. Rejoignez des centaines d'étudiant(e)s dès maintenant !</p>
                 <p><a class="btn btn-lg btn-primary" href="#" role="button">Découvrir</a></p>
               </div>
             </div>
           </div>
           <div class="carousel-item">
-            <img class="third-slide" src="assets/UVHC-ENT-15.png" alt="Third slide">
+            <img class="third-slide" src="" alt="Third slide">
             <div class="container">
               <div class="carousel-caption text-right content content-right">
-                <h1>Espace Numérique de Travail</h1>
-                <p>L'ENT (ou portail) vous permet d'accéder à travers les réseaux à l'ensemble des ressources et services numériques mis à votre disposition, que vous soyez étudiant, enseignant, chercheur, personnel administratif et technique à l'Université de Valenciennes.</p>
-                <p><a class="btn btn-lg btn-primary" href="https://portail.univ-valenciennes.fr/f/welcome/normal/render.uP" role="button">S'y rendre</a></p>
+                <h1>Plateforme d'aide</h1>
+                <p>Description de la plateforme.</p>
+                <p><a class="btn btn-lg btn-primary" href="#" role="button">Accéder</a></p>
               </div>
             </div>
           </div>
@@ -124,9 +140,8 @@
       </div>
       <!-- Fin carrousel -->
       <!-- Container -->
-      <div class="container marketing">
+      <div class="container marketing upfooter">
         <!-- Featurette -->
-        <hr class="featurette-divider">
 
         <div class="row featurette">
           <div class="col-md-7">
@@ -168,28 +183,78 @@
         <div class="row">
           <div class="col-lg-4">
             <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>Simon</h2>
+            <h2>Ronan</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">Voir &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="https://github.com/Aklugua" role="button">Voir &raquo;</a></p>
           </div>
           <div class="col-lg-4">
             <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>Ronan</h2>
+            <h2>Simon</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">Voir &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="https://github.com/AmaZArtiX" role="button">Voir &raquo;</a></p>
           </div>
           <div class="col-lg-4">
             <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
             <h2>Yacine</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum..</p>
-            <p><a class="btn btn-secondary" href="#" role="button">Voir &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="https://github.com/thechocoboy" role="button">Voir &raquo;</a></p>
           </div>
         </div>
         <!-- Fin des colonnes -->
       </div>
       <!-- Fin container -->
       <!-- Footer -->
-      <?php require("vues/footer.vue.php"); ?>
+      <footer id="footer">
+          <div class="container">
+              <div class="row">
+                  <div class="col-sm-3">
+                      <h2 class="logo"><img src="./assets/UVHC-blanc.png"/></h2>
+                  </div>
+                  <div class="col-sm-2">
+                      <h5>Pour commencer</h5>
+                      <ul>
+                          <li><a href="./index.php">Accueil</a></li>
+                          <?php
+                            if(!isset($_SESSION['mem_id'])) {
+                          ?>
+                          <li><a href="./vues/connexion.vue.php">Se connecter</a></li>
+                          <?php
+                            }
+                          ?>
+                          <li><a href="./vues/inscription.vue.php">S'inscrire</a></li>
+                      </ul>
+                  </div>
+                  <div class="col-sm-2">
+                      <h5>À propos de nous</h5>
+                      <ul>
+                          <li><a href="#">Informations</a></li>
+                          <li><a href="vues/contact.vue.php">Nous contacter</a></li>
+                          <li><a href="#">Nouveautés</a></li>
+                      </ul>
+                  </div>
+                  <div class="col-sm-2">
+                      <h5>Support</h5>
+                      <ul>
+                          <li><a href="#">FAQ</a></li>
+                          <li><a href="#">Aide</a></li>
+                          <li><a href="#">Forum</a></li>
+                      </ul>
+                  </div>
+                  <div class="col-sm-3">
+                      <div class="social-networks">
+                          <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                          <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                          <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+                      </div>
+                      <a href="vues/contact.vue.php" class="btn btn-default">Nous contacter</a>
+                  </div>
+              </div>
+          </div>
+          <div class="footer-copyright">
+              <p>© 2018 Copyright</p>
+          </div>
+      </footer>
+      <!-- ./Footer -->
 
     </main>
   </body>

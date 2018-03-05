@@ -7,14 +7,12 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Connectez-vous</title>
+    <title>Connection</title>
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/connexion.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
   </head>
   <body>
     <!-- Header -->
@@ -116,7 +114,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
-                    <h2 class="logo"><a href="#"><img src="../assets/UVHC-blanc.png"/></a></h2>
+                    <h2 class="logo"><img src="../assets/UVHC-blanc.png"/></h2>
                 </div>
                 <div class="col-sm-2">
                     <h5>Pour commencer</h5>
@@ -130,7 +128,7 @@
                     <h5>À propos de nous</h5>
                     <ul>
                         <li><a href="#">Informations</a></li>
-                        <li><a href="#">Nous contacter</a></li>
+                        <li><a href="../vues/contact.vue.php">Nous contacter</a></li>
                         <li><a href="#">Nouveautés</a></li>
                     </ul>
                 </div>
@@ -148,7 +146,7 @@
                         <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
                         <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
                     </div>
-                    <button type="button" class="btn btn-default">Nous contacter</button>
+                    <a href="../vues/contact.vue.php" class="btn btn-default">Nous contacter</a>
                 </div>
             </div>
         </div>
@@ -157,5 +155,8 @@
         </div>
     </footer>
     <!-- Fin Footer -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
   </body>
 </html>
