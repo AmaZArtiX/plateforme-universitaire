@@ -74,7 +74,8 @@
       <!-- Formulaire de connexion -->
       <form class="form-signin" method="post" action="" style="margin-top: 100px; margin-bottom: 100px;">
         <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Veuillez vous connecter</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Veuillez vous connecter
+        </h1>
         <label for="email" class="sr-only">Adresse e-mail</label>
         <input type="email" name="email" id="email" class="form-control" placeholder="Adresse e-mail" required autofocus>
         <label for="mot_de_passe" class="sr-only">Password</label>

@@ -16,6 +16,7 @@
       return 1;
     else
       return 0;
+
   }
 
   /**
@@ -29,7 +30,11 @@
 
     global $bdd;
     $requete = $bdd->prepare("INSERT INTO t_membre_mem(mem_nom, mem_prenom, mem_mail, mem_pwd, mem_administrateur, mem_date_inscription) VALUES (?, ?, ?, ?, ?, NOW())");
+<<<<<<< Updated upstream
     $result = $requete->execute(array($nom, $prenom, $email, $mdp, 0));
+=======
+    $result = $requete->execute(array(filtrerMots($nom), filtrerMots($prenom), $email, $mdp, 0));
+>>>>>>> Stashed changes
     return $result;
   }
 
@@ -84,6 +89,29 @@
             <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
             <strong>".$titre."</strong>".$message."
           </div>";
+  }
+
+  function filtrerMots($commentaire) {
+
+    $bdd = new PDO('mysql:host=localhost;dbname=bd_platuniv', 'root', ''); //à changer pour Simon
+    $requete = $bdd->query("SELECT * FROM t_grossierete_gross");
+
+    $mots = []; //tableau de mots
+    $rp = []; //tableau de remplaçants
+
+    while($m = $requete->fetch()) {
+      array_push($mots, $m['mot']); //empile les valeurs dans le tableau
+      $r = '';
+      for($i=0;$i<strlen($m['mot']);$i++){ //nombre d'* en fonction du nombre de caractères du mot filtré
+        $r .= '*'; //concaténation
+      }
+      array_push($rp, $r);
+    }
+
+    $commentaire = str_replace($mots, $rp, $commentaire);
+
+    return $commentaire;
+ 
   }
 
 ?>
