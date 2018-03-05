@@ -7,14 +7,12 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Connectez-vous</title>
+    <title>Connection</title>
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/connexion.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
   </head>
   <body>
     <!-- Header -->
@@ -157,5 +155,8 @@
         </div>
     </footer>
     <!-- Fin Footer -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
   </body>
 </html>

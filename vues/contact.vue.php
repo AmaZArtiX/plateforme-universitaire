@@ -13,8 +13,6 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/contact.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
   </head>
   <body>
     <!-- Header -->
@@ -57,6 +55,13 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="#">Mon compte</a>
+                  <?php
+                    if($_SESSION['mem_administrateur'] == 1) {
+                  ?>
+                  <a class="dropdown-item" href="../vues/administration.vue.php">Administration</a>
+                  <?php
+                    }
+                  ?>
                   <a class="dropdown-item" href="../modeles-controleurs/deconnexion.php">Quitter</a>
                 </div>
               </li>
@@ -181,5 +186,8 @@
         </div>
     </footer>
     <!-- Fin Footer -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
   </body>
 </html>
