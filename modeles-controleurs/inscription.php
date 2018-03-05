@@ -21,10 +21,10 @@
 
       // Tous les champs doivent être complétés
       if(!empty($prenom) && !empty($nom) && !empty($email) && !empty($mot_de_passe) && !empty($mot_de_passe_confirmation)){
-
+          
         // Vérification de la taille du nom
         if(strlen($prenom) <= 36){
-
+          
           // Vérification de la taille du prénom
           if(strlen($nom) <= 32){
 
@@ -45,6 +45,7 @@
                     if($mot_de_passe == $mot_de_passe_confirmation){
 
                       // Insertion du nouveau membre dans la bdd
+<<<<<<< Updated upstream
                       if(inserer_membre($prenom, $nom, $email, $mot_de_passe)){
 
                         /*********************************************************************
@@ -69,6 +70,30 @@
 
                         $erreur = "Votre inscription a échoué, veuillez ré-essayer ultérieurement.";
                       }
+=======
+                      
+                      inserer_membre(filtrerMots($prenom), $nom, $email, $mot_de_passe);
+
+                      /*********************************************************************
+											$header = "MIME-Version: 1.0\r\n";
+											$header .= 'From: "Forum.com" <bacquet.simon@outlook.fr>'."\n";
+											$header .= 'Content-Type:text/html; charset="utf-8"'."\n";
+											$header .= 'Content-Transfer-Encoding: 8bit';
+
+											$message='
+											<html>
+												<body>
+										      <p> Félicitations ! Votre compte a bien été créé. </p
+												</body>
+											</html>
+											';
+
+											mail($mail, "Confirmation de création de compte", $message, $header);
+											************************************************************************/
+
+                      $succes = "Vous êtes bien enregistré ! Cliquez <a href=\"../vues/connexion.vue.php\" class=\"alert-link\">ici</a> pour vous connecter.";
+
+>>>>>>> Stashed changes
                     } else {
 
                       $erreur = "Vos mots de passe doivent être identiques";
