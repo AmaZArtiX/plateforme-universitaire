@@ -15,8 +15,6 @@
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/index.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
   </head>
   <body>
     <!-- Header -->
@@ -37,7 +35,7 @@
                   <a class="nav-link" href="index.php">Accueil</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Forum</a>
+                  <a class="nav-link" href="vues/forum.vue.php">Forum</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="vues/connexion.vue.php">Se connecter</a>
@@ -51,7 +49,7 @@
                   <a class="nav-link" href="index.php">Accueil</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Forum</a>
+                  <a class="nav-link" href="vues/forum.vue.php">Forum</a>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -95,7 +93,7 @@
             <div class="container">
               <div class="carousel-caption text-left content content-left">
                 <h1>Créer un compte</h1>
-                <p>La création d'un compte vous permettra d'accéder au Forum ainsi qu'à la Plateforme d'aide en ligne proposé par nos services. N'hésitez plus, ça ne prend que quelques secondes !</p>
+                <p>La création d'un compte vous permettra de publier sur le Forum ainsi qu'accéder à la Plateforme d'aide en ligne proposé par nos services. N'hésitez plus, ça ne prend que quelques secondes !</p>
                 <p><a class="btn btn-lg btn-primary" href="vues/inscription.vue.php" role="button">S'inscrire</a>
                   <?php
                     if(!isset($_SESSION['mem_id'])) {
@@ -114,7 +112,7 @@
               <div class="carousel-caption content content-middle">
                 <h1>Forum étudiant</h1>
                 <p>Le Forum étudiant vous permettra de discuter et d'échanger vos expériences et ressentis sur les cours dispensés à l'Université de Valenciennes et du Hainaut-Cambrésis. Rejoignez des centaines d'étudiant(e)s dès maintenant !</p>
-                <p><a class="btn btn-lg btn-primary" href="#" role="button">Découvrir</a></p>
+                <p><a class="btn btn-lg btn-primary" href="vues/forum.vue.php" role="button">Découvrir</a></p>
               </div>
             </div>
           </div>
@@ -203,6 +201,7 @@
         <!-- Fin des colonnes -->
       </div>
       <!-- Fin container -->
+
       <!-- Footer -->
       <footer id="footer">
           <div class="container">
@@ -237,7 +236,7 @@
                       <ul>
                           <li><a href="#">FAQ</a></li>
                           <li><a href="#">Aide</a></li>
-                          <li><a href="#">Forum</a></li>
+                          <li><a href="vues/forum.vue.php">Forum</a></li>
                       </ul>
                   </div>
                   <div class="col-sm-3">
@@ -257,5 +256,8 @@
       <!-- ./Footer -->
 
     </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
