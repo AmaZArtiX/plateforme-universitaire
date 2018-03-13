@@ -28,13 +28,13 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <?php
             if(!isset($_SESSION['mem_id'])) {
-          ?>
+           ?>
               <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
                 <li class="nav-item">
                   <a class="nav-link" href="../index.php">Accueil</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Forum</a>
+                  <a class="nav-link" href="forum.vue.php">Forum</a>
                 </li>
                 <li class="nav-item active">
                   <a class="nav-link" href="connexion.vue.php">Se connecter</a>
@@ -42,13 +42,13 @@
               </ul>
           <?php
             } else {
-          ?>
+           ?>
               <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
                 <li class="nav-item">
                   <a class="nav-link" href="../index.php">Accueil</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Forum</a>
+                  <a class="nav-link" href="forum.vue.php">Forum</a>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -59,7 +59,7 @@
                     <?php
                       if($_SESSION['mem_administrateur'] == 1) {
                     ?>
-                    <a class="dropdown-item" href="../vues/administration.vue.php">Administration</a>
+                    <a class="dropdown-item" href="administration.vue.php">Administration</a>
                     <?php
                       }
                     ?>
@@ -80,7 +80,7 @@
 
     <!-- Header Management-->
     <header>
-      <div class="container-fluid" style="margin-top:58px; margin-bottom:25px; background-color:#8CB75B;">
+      <div class="container-fluid" style="margin-top:3.5rem; margin-bottom:25px; background-color:#8CB75B;">
         <div class="row">
           <div class="col-md-10">
             <h1 style="color:white;"> Tableau de bord <small style="color:#C6DBAE;">Gérer la messagerie</small></h1>
@@ -158,18 +158,18 @@
                         <?php
                           if(!isset($_SESSION['mem_id'])) {
                         ?>
-                        <li><a href="../vues/connexion.vue.php">Se connecter</a></li>
+                        <li><a href="connexion.vue.php">Se connecter</a></li>
                         <?php
                           }
                         ?>
-                        <li><a href="../vues/inscription.vue.php">S'inscrire</a></li>
+                        <li><a href="inscription.vue.php">S'inscrire</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-2">
                     <h5>À propos de nous</h5>
                     <ul>
                         <li><a href="#">Informations</a></li>
-                        <li><a href="../vues/contact.vue.php">Nous contacter</a></li>
+                        <li><a href="contact.vue.php">Nous contacter</a></li>
                         <li><a href="#">Nouveautés</a></li>
                     </ul>
                 </div>
@@ -178,7 +178,7 @@
                     <ul>
                         <li><a href="#">FAQ</a></li>
                         <li><a href="#">Aide</a></li>
-                        <li><a href="#">Forum</a></li>
+                        <li><a href="forum.vue.php">Forum</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
@@ -187,7 +187,7 @@
                         <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
                         <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
                     </div>
-                    <a href="../vues/contact.vue.php" class="btn btn-default">Nous contacter</a>
+                    <a href="contact.vue.php" class="btn btn-default">Nous contacter</a>
                 </div>
             </div>
         </div>

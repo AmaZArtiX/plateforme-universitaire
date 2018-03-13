@@ -1,0 +1,9 @@
+html {
+  min-height: 100%;
+  position: relative;
+  padding-bottom: 400px;
+}
+
+.lien {
+  cursor: pointer;
+}
