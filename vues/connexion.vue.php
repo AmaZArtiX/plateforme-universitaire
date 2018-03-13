@@ -55,7 +55,7 @@
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="#">Mon compte</a>
-                    <a class="dropdown-item" href="../modeles-controleurs/deconnexion.php">Quitter</a>
+                    <a class="dropdown-item" href="../modeles-controleurs/deconnexion.php">Deconnexion</a>
                   </div>
                 </li>
               </ul>
