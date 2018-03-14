@@ -89,7 +89,7 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="first-slide" src="" alt="First slide">
+            <img class="first-slide" src="" alt="">
             <div class="container">
               <div class="carousel-caption text-left content content-left">
                 <h1>Créer un compte</h1>
@@ -107,7 +107,7 @@
             </div>
           </div>
           <div class="carousel-item">
-            <img class="second-slide" src="" alt="Second slide">
+            <img class="second-slide" src="" alt="">
             <div class="container">
               <div class="carousel-caption content content-middle">
                 <h1>Forum étudiant</h1>
@@ -117,7 +117,7 @@
             </div>
           </div>
           <div class="carousel-item">
-            <img class="third-slide" src="" alt="Third slide">
+            <img class="third-slide" src="" alt="">
             <div class="container">
               <div class="carousel-caption text-right content content-right">
                 <h1>Plateforme d'aide</h1>
