@@ -61,9 +61,9 @@
               <a href="administration.vue.php" class="list-group-item active" style="background-color:#8CB75B; border-color:#8CB75B;">
                 Tableau de bord
               </a>
-              <a href="messagerie.vue.php" class="list-group-item d-flex justify-content-between align-items-center" style="color:#8CB75B;"> Messagerie <span class="badge badge-secondary">12</span></a>
-              <a href="topic.vue.php" class="list-group-item d-flex justify-content-between align-items-center" style="color:#8CB75B;"> Topics <span class="badge badge-secondary">33</span></a>
-              <a href="utilisateur.vue.php" class="list-group-item d-flex justify-content-between align-items-center" style="color:#8CB75B;"> Utilisateurs <span class="badge badge-secondary">203</span></a>
+              <a href="administration.messagerie.vue.php" class="list-group-item d-flex justify-content-between align-items-center" style="color:#8CB75B;"> Messagerie <span class="badge badge-secondary">12</span></a>
+              <a href="administration.topic.vue.php" class="list-group-item d-flex justify-content-between align-items-center" style="color:#8CB75B;"> Topics <span class="badge badge-secondary">33</span></a>
+              <a href="administration.utilisateur.vue.php" class="list-group-item d-flex justify-content-between align-items-center" style="color:#8CB75B;"> Utilisateurs <span class="badge badge-secondary">203</span></a>
               <a href="#" class="list-group-item d-flex justify-content-between align-items-center" style="color:#8CB75B;"> Autres <span class="badge badge-secondary">+999</span></a>
             </div>
           </div>
