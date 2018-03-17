@@ -25,13 +25,16 @@
       <ol class="breadcrumb">
         <?php
           if (isset($_GET['categorie']) && !isset($_GET['ss-categorie'])) {
-            header('Location: ./forum.ss-categories.vue.php?categorie=' . $_GET['categorie']);
+            echo '
+              <li class="breadcrumb-item"><a href="./forum.vue.php">Accueil</a></li>
+              <li class="breadcrumb-item active" aria-current="page">@' . $_GET['categorie'] . '</li>
+              ';
           } elseif (isset($_GET['categorie']) && isset($_GET['ss-categorie'])) {
             header('Location: ./forum.topics.vue.php?categorie=' . $_GET['categorie'] . '&ss-categorie=' . $_GET['ss-categorie']);
           } elseif (!isset($_GET['categorie']) && isset($_GET['ss-categorie'])) {
             header('Location: ./forum.vue.php');
           } elseif (!isset($_GET['categorie']) && !isset($_GET['ss-categorie'])) {
-            echo '<li class="breadcrumb-item active" aria-current="page">Accueil</li>';
+            header('Location: ./forum.vue.php');
           }
         ?>
       </ol>
@@ -44,23 +47,23 @@
         <div class="col-md-9">
           <div class="card" style="margin-bottom:25px;">
             <h6 class="card-header" style="color:white; background-color:#8CB75B; border-color:#8CB75B;">
-              <b>▲ <a href="./forum.ss-categories.vue.php?categorie=Catégorie" style="color:white;">@Catégorie</a></b>
+              <b>► <a href="./forum.topics.vue.php?categorie=Catégorie&ss-categorie=Sous-catégorie" style="color:white;">@Sous-catégorie</a></b>
             </h6>
             <div class="table-responsive">
               <table class="table table-striped table-hover mb-0">
-                <tr class="lien align-middle" onclick="location.href = './forum.topics.vue.php?categorie=Catégorie&ss-categorie=Sous-catégorie'">
-                  <td class="align-middle">►</td>
-                  <td class="align-middle"><b>@Sous-catégorie</b> <br/> <small class="text-muted">@Tout ce qu'il y a à savoir.</small></td>
+                <tr class="lien align-middle" onclick="location.href = './forum.topic.vue.php?categorie=Catégorie&ss-categorie=Sous-catégorie'">
+                  <td class="align-middle">¤</td>
+                  <td class="align-middle"><b>@Topic</b> <br/> <small class="text-muted">@Tout ce qu'il y a à savoir.</small></td>
                   <td class="text-center text-muted align-middle">@2 <br/> Topics</td>
                   <td class="text-center text-muted align-middle">@2 <br/> Posts</td>
-                  <td class="align-middle" style="text-align:right;">Re: @Topic <br/> par <b><a href="">@Toto</a></b> @13/03/2018</td>
+                  <td class="align-middle" style="text-align:right;">par <b><a href="">@Toto</a></b> @13/03/2018</td>
                 </tr>
-                <tr class="lien align-middle" onclick="location.href = './forum.topics.vue.php?categorie=Catégorie&ss-categorie=Sous-catégorie'">
-                  <td class="align-middle">►</td>
-                  <td class="align-middle"><b>@Sous-catégorie</b> <br/> <small class="text-muted">@Exemples de topics, vous pouvez voir comment tout fonctionne.</small></td>
+                <tr class="lien align-middle" onclick="location.href = './forum.topic.vue.php?categorie=Catégorie&ss-categorie=Sous-catégorie'">
+                  <td class="align-middle">¤</td>
+                  <td class="align-middle"><b>@Topic</b> <br/> <small class="text-muted">@Exemples de topics, vous pouvez voir comment tout fonctionne.</small></td>
                   <td class="text-center text-muted align-middle">@6 <br/> Topics</td>
                   <td class="text-center text-muted align-middle">@45 <br/> Posts</td>
-                  <td class="align-middle" style="text-align:right;">Re: @Topic <br/> par <b><a href="">@Titi</a></b> @13/03/2018</td>
+                  <td class="align-middle" style="text-align:right;">par <b><a href="">@Titi</a></b> @13/03/2018</td>
                 </tr>
               </table>
             </div>
@@ -68,23 +71,23 @@
 
           <div class="card" style="margin-bottom:25px;">
             <h6 class="card-header" style="color:white; background-color:#8CB75B; border-color:#8CB75B;">
-              <b>▲ <a href="./forum.ss-categories.vue.php?categorie=Catégorie" style="color:white;">@Catégorie</a></b>
+              <b>► <a href="./forum.topics.vue.php?categorie=Catégorie&ss-categorie=Sous-catégorie" style="color:white;">@Sous-catégorie</a></b>
             </h6>
             <div class="table-responsive">
               <table class="table table-striped table-hover mb-0">
-                <tr class="lien align-middle" onclick="location.href = './forum.topics.vue.php?categorie=Catégorie&ss-categorie=Sous-catégorie'">
-                  <td class="align-middle">►</td>
-                  <td class="align-middle"><b>@Sous-catégorie</b> <br/> <small class="text-muted">@Tout ce qu'il y a à savoir.</small></td>
+                <tr class="lien align-middle" onclick="location.href = './forum.topic.vue.php?categorie=Catégorie&ss-categorie=Sous-catégorie'">
+                  <td class="align-middle">¤</td>
+                  <td class="align-middle"><b>@Topic</b> <br/> <small class="text-muted">@Tout ce qu'il y a à savoir.</small></td>
                   <td class="text-center text-muted align-middle">@2 <br/> Topics</td>
                   <td class="text-center text-muted align-middle">@2 <br/> Posts</td>
-                  <td class="align-middle" style="text-align:right;">Re: @Topic <br/> par <b><a href="">@Toto</a></b> @13/03/2018</td>
+                  <td class="align-middle" style="text-align:right;">par <b><a href="">@Toto</a></b> @13/03/2018</td>
                 </tr>
-                <tr class="lien align-middle" onclick="location.href = './forum.topics.vue.php?categorie=Catégorie&ss-categorie=Sous-catégorie'">
-                  <td class="align-middle">►</td>
-                  <td class="align-middle"><b>@Sous-catégorie</b> <br/> <small class="text-muted">@Exemples de topics, vous pouvez voir comment tout fonctionne.</small></td>
+                <tr class="lien align-middle" onclick="location.href = './forum.topic.vue.php?categorie=Catégorie&ss-categorie=Sous-catégorie'">
+                  <td class="align-middle">¤</td>
+                  <td class="align-middle"><b>@Topic</b> <br/> <small class="text-muted">@Exemples de topics, vous pouvez voir comment tout fonctionne.</small></td>
                   <td class="text-center text-muted align-middle">@6 <br/> Topics</td>
                   <td class="text-center text-muted align-middle">@45 <br/> Posts</td>
-                  <td class="align-middle" style="text-align:right;">Re: @Topic <br/> par <b><a href="">@Titi</a></b> @13/03/2018</td>
+                  <td class="align-middle" style="text-align:right;">par <b><a href="">@Titi</a></b> @13/03/2018</td>
                 </tr>
               </table>
             </div>
