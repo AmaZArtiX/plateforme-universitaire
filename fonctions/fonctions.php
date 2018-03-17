@@ -16,7 +16,6 @@
       return 1;
     else
       return 0;
-
   }
 
   /**
@@ -30,11 +29,7 @@
 
     global $bdd;
     $requete = $bdd->prepare("INSERT INTO t_membre_mem(mem_nom, mem_prenom, mem_mail, mem_pwd, mem_administrateur, mem_date_inscription) VALUES (?, ?, ?, ?, ?, NOW())");
-<<<<<<< Updated upstream
     $result = $requete->execute(array($nom, $prenom, $email, $mdp, 0));
-=======
-    $result = $requete->execute(array(filtrerMots($nom), filtrerMots($prenom), $email, $mdp, 0));
->>>>>>> Stashed changes
     return $result;
   }
 
@@ -93,7 +88,7 @@
 
   function filtrerMots($commentaire) {
 
-    $bdd = new PDO('mysql:host=localhost;dbname=bd_platuniv', 'root', ''); //à changer pour Simon
+    global $bdd;
     $requete = $bdd->query("SELECT * FROM t_grossierete_gross");
 
     $mots = []; //tableau de mots
@@ -111,7 +106,6 @@
     $commentaire = str_replace($mots, $rp, $commentaire);
 
     return $commentaire;
- 
   }
 
 ?>

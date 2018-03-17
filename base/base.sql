@@ -24,7 +24,7 @@ CREATE TABLE `tj_topictheme_topth` (
   `topth_id` int(11) NOT NULL,
   `top_id` int(11) NOT NULL,
   `cat_id` int(11) NOT NULL,
-  `sscat` int(11) NOT NULL
+  `sscat_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -201,13 +201,13 @@ ALTER TABLE `tj_topictheme_topth`
 -- AUTO_INCREMENT for table `t_categorie_cat`
 --
 ALTER TABLE `t_categorie_cat`
-  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t_forum_for`
 --
 ALTER TABLE `t_forum_for`
-  MODIFY `for_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `for_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `t_membre_mem`
