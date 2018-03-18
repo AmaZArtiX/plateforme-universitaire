@@ -23,17 +23,7 @@
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb" class="container" style="margin-top:5rem; margin-bottom: 25px;">
       <ol class="breadcrumb">
-        <?php
-          if (isset($_GET['categorie']) && !isset($_GET['ss-categorie'])) {
-            header('Location: ./forum.ss-categories.vue.php?categorie=' . $_GET['categorie']);
-          } elseif (isset($_GET['categorie']) && isset($_GET['ss-categorie'])) {
-            header('Location: ./forum.topics.vue.php?categorie=' . $_GET['categorie'] . '&ss-categorie=' . $_GET['ss-categorie']);
-          } elseif (!isset($_GET['categorie']) && isset($_GET['ss-categorie'])) {
-            header('Location: ./forum.vue.php');
-          } elseif (!isset($_GET['categorie']) && !isset($_GET['ss-categorie'])) {
-            echo '<li class="breadcrumb-item active" aria-current="page">Accueil</li>';
-          }
-        ?>
+        <li class="breadcrumb-item active" aria-current="page">Accueil</li>
       </ol>
     </nav>
     <!-- Fin Breadcrumb -->
@@ -42,53 +32,30 @@
     <div class="container">
       <div class="row">
         <div class="col-md-9">
-          <div class="card" style="margin-bottom:25px;">
-            <h6 class="card-header" style="color:white; background-color:#8CB75B; border-color:#8CB75B;">
-              <b>▲ <a href="./forum.ss-categories.vue.php?categorie=Catégorie" style="color:white;">@Catégorie</a></b>
-            </h6>
-            <div class="table-responsive">
-              <table class="table table-striped table-hover mb-0">
-                <tr class="lien align-middle" onclick="location.href = './forum.topics.vue.php?categorie=Catégorie&ss-categorie=Sous-catégorie'">
-                  <td class="align-middle">►</td>
-                  <td class="align-middle"><b>@Sous-catégorie</b> <br/> <small class="text-muted">@Tout ce qu'il y a à savoir.</small></td>
-                  <td class="text-center text-muted align-middle">@2 <br/> Topics</td>
-                  <td class="text-center text-muted align-middle">@2 <br/> Posts</td>
-                  <td class="align-middle" style="text-align:right;">Re: @Topic <br/> par <b><a href="">@Toto</a></b> @13/03/2018</td>
-                </tr>
-                <tr class="lien align-middle" onclick="location.href = './forum.topics.vue.php?categorie=Catégorie&ss-categorie=Sous-catégorie'">
-                  <td class="align-middle">►</td>
-                  <td class="align-middle"><b>@Sous-catégorie</b> <br/> <small class="text-muted">@Exemples de topics, vous pouvez voir comment tout fonctionne.</small></td>
-                  <td class="text-center text-muted align-middle">@6 <br/> Topics</td>
-                  <td class="text-center text-muted align-middle">@45 <br/> Posts</td>
-                  <td class="align-middle" style="text-align:right;">Re: @Topic <br/> par <b><a href="">@Titi</a></b> @13/03/2018</td>
-                </tr>
-              </table>
-            </div>
-          </div>
+          <?php while ($f = $forums->fetch()) {
 
-          <div class="card" style="margin-bottom:25px;">
-            <h6 class="card-header" style="color:white; background-color:#8CB75B; border-color:#8CB75B;">
-              <b>▲ <a href="./forum.ss-categories.vue.php?categorie=Catégorie" style="color:white;">@Catégorie</a></b>
-            </h6>
-            <div class="table-responsive">
-              <table class="table table-striped table-hover mb-0">
-                <tr class="lien align-middle" onclick="location.href = './forum.topics.vue.php?categorie=Catégorie&ss-categorie=Sous-catégorie'">
-                  <td class="align-middle">►</td>
-                  <td class="align-middle"><b>@Sous-catégorie</b> <br/> <small class="text-muted">@Tout ce qu'il y a à savoir.</small></td>
-                  <td class="text-center text-muted align-middle">@2 <br/> Topics</td>
-                  <td class="text-center text-muted align-middle">@2 <br/> Posts</td>
-                  <td class="align-middle" style="text-align:right;">Re: @Topic <br/> par <b><a href="">@Toto</a></b> @13/03/2018</td>
-                </tr>
-                <tr class="lien align-middle" onclick="location.href = './forum.topics.vue.php?categorie=Catégorie&ss-categorie=Sous-catégorie'">
-                  <td class="align-middle">►</td>
-                  <td class="align-middle"><b>@Sous-catégorie</b> <br/> <small class="text-muted">@Exemples de topics, vous pouvez voir comment tout fonctionne.</small></td>
-                  <td class="text-center text-muted align-middle">@6 <br/> Topics</td>
-                  <td class="text-center text-muted align-middle">@45 <br/> Posts</td>
-                  <td class="align-middle" style="text-align:right;">Re: @Topic <br/> par <b><a href="">@Titi</a></b> @13/03/2018</td>
-                </tr>
-              </table>
+            $categories->execute(array($f['for_id']));
+
+          ?>
+            <div class="card" style="margin-bottom:25px;">
+              <h6 class="card-header" style="color:white; background-color:#8CB75B; border-color:#8CB75B;">
+                <b>▲ <a href="#" style="color:white;"><?= $f['for_nom'] ?></a></b>
+              </h6>
+              <div class="table-responsive">
+                <table class="table table-striped table-hover mb-0">
+                  <?php while ($c = $categories->fetch()) { ?>
+                    <tr class="lien align-middle" onclick="location.href = './forum.categories.vue.php?categorie=<?= $c['cat_nom'] ?>'">
+                      <td class="align-middle">►</td>
+                      <td class="align-middle"><b><?= $c['cat_nom'] ?></b> <br/> <small class="text-muted"><?= $c['cat_description'] ?></small></td>
+                      <td class="text-center text-muted align-middle"><?= get_nb_topics_categorie($c['cat_id']) ?><br/> Topics</td>
+                      <td class="text-center text-muted align-middle"><?= get_nb_posts_categorie($c['cat_id']) ?><br/> Posts</td>
+                      <td class="align-middle" style="text-align:right;"><?= get_dernier_topic_categorie($c['cat_id']) ?></td>
+                    </tr>
+                  <?php } ?>
+                </table>
+              </div>
             </div>
-          </div>
+          <?php } ?>
         </div>
         <div class="col-md-3">
 
@@ -97,12 +64,17 @@
             <h6 class="card-header">Dernières publications</h6>
             <div class="table-responsive">
               <table class="table table-striped table-hover mb-0">
-                <tr class="lien align-middle" onclick="location.href = '#'">
-                  <td class="align-middle"><b>Re: <a href="./forum.topic.vue.php?categorie=Catégorie&ss-categorie=Sous-catégorie">@Informations</a></b> <br/> <small class="text-muted">par <b><a href="">@Toto</a></b></small> <br/> @Réponse...</td>
-                </tr>
-                <tr class="lien align-middle" onclick="location.href = '#'">
-                  <td class="align-middle"><b>Re: <a href="./forum.topic.vue.php?categorie=Catégorie&ss-categorie=Sous-catégorie">@Généralités</a></b> <br/> <small class="text-muted">par <b><a href="">@Titi</a></b></small> <br/> @Réponse...</td>
-                </tr>
+                <?php
+
+                  $dernieres_publis = get_derniers_topics();
+
+                  while ($dp = $dernieres_publis->fetch()) {
+
+                ?>
+                  <tr class="lien align-middle" onclick="location.href='./forum.topic.vue.php?titre=<?= url_custom_encode($dp['top_sujet']) ?>&id=<?= $dp['top_id'] ?>&page=1'">
+                    <td class="align-middle"><b>Re: <a href="./forum.topic.vue.php?titre=<?= url_custom_encode($dp['top_sujet']) ?>&id=<?= $dp['top_id'] ?>&page=1"><?= $dp['top_sujet'] ?></a></b> <br/> <small class="text-muted">par <b><a href="#"><?= get_nom_prenom_membre($dp['mem_id']) ?></a></b></small></td>
+                  </tr>
+                <?php } ?>
               </table>
             </div>
           </div>

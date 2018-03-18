@@ -86,6 +86,11 @@
           </div>";
   }
 
+  /**
+   * [filtrerMots description]
+   * @param  [type] $commentaire [description]
+   * @return [type]              [description]
+   */
   function filtrerMots($commentaire) {
 
     global $bdd;
@@ -108,4 +113,246 @@
     return $commentaire;
   }
 
+  /**
+   * [get_nb_topics_categorie description]
+   * @param  [type] $id_categorie [description]
+   * @return [type]               [description]
+   */
+  function get_nb_topics_categorie($id_categorie){
+
+    global $bdd;
+    $nb_topics = $bdd->prepare("SELECT t_topic_top.top_id FROM t_topic_top INNER JOIN tj_topictheme_topth ON t_topic_top.top_id = tj_topictheme_topth.top_id WHERE tj_topictheme_topth.cat_id = ?");
+
+    $nb_topics->execute(array($id_categorie));
+
+    return $nb_topics->rowCount();
+  }
+
+  /**
+   * [get_nb_posts_categorie description]
+   * @param  [type] $id_categorie [description]
+   * @return [type]               [description]
+   */
+  function get_nb_posts_categorie($id_categorie){
+
+    global $bdd;
+    $nb_posts = $bdd->prepare("SELECT t_message_mess.mess_id FROM t_message_mess INNER JOIN t_topic_top ON t_message_mess.top_id = t_topic_top.top_id INNER JOIN tj_topictheme_topth ON t_topic_top.top_id = tj_topictheme_topth.top_id WHERE tj_topictheme_topth.cat_id = ?");
+
+    $nb_posts->execute(array($id_categorie));
+
+    return $nb_posts->rowCount();
+  }
+
+  /**
+   * [get_dernier_topic_categorie description]
+   * @param  [type] $id_categorie [description]
+   * @return [type]               [description]
+   */
+  function get_dernier_topic_categorie($id_categorie){
+
+    global $bdd;
+
+    $requete = $bdd->prepare("SELECT t_topic_top.top_sujet, t_topic_top.mem_id, t_topic_top.top_date_creation FROM t_topic_top INNER JOIN tj_topictheme_topth ON t_topic_top.top_id = tj_topictheme_topth.top_id WHERE tj_topictheme_topth.cat_id = ? ORDER BY t_topic_top.top_date_creation DESC LIMIT 0,1");
+    $requete->execute(array($id_categorie));
+
+    if($requete->rowCount() > 0){
+
+      $requete = $requete->fetch();
+      $dernier_topic = "Re: ".$requete['top_sujet'];
+      $dernier_topic .= "<br/> par <b><a href=\"#\">".get_nom_prenom_membre($requete['mem_id'])."</a><b>";
+      $dernier_topic .= " ".date_format(date_create($requete['top_date_creation']), 'd/m/Y H:i:s');
+
+    } else {
+
+      $dernier_topic = "Aucun topic";
+    }
+
+    return $dernier_topic;
+  }
+
+  /**
+   * [get_nom_prenom_membre description]
+   * @param  [type] $id_membre [description]
+   * @return [type]            [description]
+   */
+  function get_nom_prenom_membre($id_membre){
+
+    global $bdd;
+
+    $requete = $bdd->prepare("SELECT * FROM t_membre_mem WHERE t_membre_mem.mem_id = ?");
+    $requete->execute(array($id_membre));
+    $requete = $requete->fetch();
+
+    return $requete['mem_prenom']." ".$requete['mem_nom'];
+  }
+
+  /**
+   * [get_dernier_topics description]
+   * @return [type] [description]
+   */
+  function get_derniers_topics(){
+
+    global $bdd;
+    $requete = $bdd->query("SELECT * FROM t_topic_top ORDER BY t_topic_top.top_date_creation DESC LIMIT 0,3");
+
+    return $requete;
+  }
+
+  /**
+   * [get_nb_topics_sscategorie description]
+   * @param  [type] $id_sscategorie [description]
+   * @return [type]                 [description]
+   */
+  function get_nb_topics_sscategorie($id_sscategorie){
+
+    global $bdd;
+    $nb_topics = $bdd->prepare("SELECT t_topic_top.top_id FROM t_topic_top INNER JOIN tj_topictheme_topth ON t_topic_top.top_id = tj_topictheme_topth.top_id WHERE tj_topictheme_topth.sscat_id = ?");
+
+    $nb_topics->execute(array($id_sscategorie));
+
+    return $nb_topics->rowCount();
+  }
+
+  /**
+   * [get_nb_posts_sscategorie description]
+   * @param  [type] $id_sscategorie [description]
+   * @return [type]                 [description]
+   */
+  function get_nb_posts_sscategorie($id_sscategorie){
+
+    global $bdd;
+    $nb_posts = $bdd->prepare("SELECT t_message_mess.mess_id FROM t_message_mess INNER JOIN t_topic_top ON t_message_mess.top_id = t_topic_top.top_id INNER JOIN tj_topictheme_topth ON t_topic_top.top_id = tj_topictheme_topth.top_id WHERE tj_topictheme_topth.sscat_id = ?");
+
+    $nb_posts->execute(array($id_sscategorie));
+
+    return $nb_posts->rowCount();
+  }
+
+  /**
+   * [get_dernier_topic_sscategorie description]
+   * @param  [type] $id_sscategorie [description]
+   * @return [type]                 [description]
+   */
+  function get_dernier_topic_sscategorie($id_sscategorie){
+
+    global $bdd;
+
+    $requete = $bdd->prepare("SELECT t_topic_top.top_sujet, t_topic_top.mem_id, t_topic_top.top_date_creation FROM t_topic_top INNER JOIN tj_topictheme_topth ON t_topic_top.top_id = tj_topictheme_topth.top_id WHERE tj_topictheme_topth.sscat_id = ? ORDER BY t_topic_top.top_date_creation DESC LIMIT 0,1");
+    $requete->execute(array($id_sscategorie));
+
+    if($requete->rowCount() > 0){
+
+      $requete = $requete->fetch();
+      $dernier_topic = "Re: ".$requete['top_sujet'];
+      $dernier_topic .= "<br/> par <b><a href=\"#\">".get_nom_prenom_membre($requete['mem_id'])."</a><b>";
+      $dernier_topic .= " ".date_format(date_create($requete['top_date_creation']), 'd/m/Y H:i:s');
+
+    } else {
+
+      $dernier_topic = "Aucun topic";
+    }
+
+    return $dernier_topic;
+  }
+
+  /**
+   * [get_derniers_topics_categorie description]
+   * @param  [type] $id_categorie [description]
+   * @return [type]               [description]
+   */
+  function get_derniers_topics_categorie($id_categorie){
+
+    global $bdd;
+    $requete = $bdd->prepare("SELECT * FROM t_topic_top INNER JOIN tj_topictheme_topth ON t_topic_top.top_id = tj_topictheme_topth.top_id WHERE tj_topictheme_topth.cat_id = ? ORDER BY t_topic_top.top_date_creation DESC LIMIT 0,3");
+    $requete->execute(array($id_categorie));
+
+    return $requete;
+  }
+
+  /**
+   * [get_nb_messages_topic description]
+   * @param  [type] $id_topic [description]
+   * @return [type]           [description]
+   */
+  function get_nb_messages_topic($id_topic){
+
+   global $bdd;
+   $requete = $bdd->prepare("SELECT t_message_mess.mess_id FROM t_message_mess LEFT JOIN t_topic_top ON t_message_mess.top_id = t_topic_top.top_id WHERE t_topic_top.top_id = ?");
+   $requete->execute(array($id_topic));
+
+   return $requete->rowCount();
+  }
+
+  /**
+   * [get_derniers_topics_sscategorie description]
+   * @param  [type] $id_sscategorie [description]
+   * @return [type]                 [description]
+   */
+  function get_derniers_topics_sscategorie($id_sscategorie){
+
+    global $bdd;
+    $requete = $bdd->prepare("SELECT * FROM t_topic_top INNER JOIN tj_topictheme_topth ON t_topic_top.top_id = tj_topictheme_topth.top_id WHERE tj_topictheme_topth.sscat_id = ? ORDER BY t_topic_top.top_date_creation DESC LIMIT 0,3");
+    $requete->execute(array($id_sscategorie));
+
+    return $requete;
+  }
+
+  /**
+   * [url_custom_encode description]
+   * @param  [type] $titre [description]
+   * @return [type]        [description]
+   */
+  function url_custom_encode($titre) {
+  	$titre = htmlspecialchars($titre);
+  	$find = array('À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'Æ', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ð', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø', 'Ù', 'Ú', 'Û', 'Ü', 'Ý', 'ß', 'à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', 'Œ', 'œ', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', 'Š', 'š', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', 'Ÿ', '?', '?', '?', '?', 'Ž', 'ž', '?', 'ƒ', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?');
+       $replace = array('A', 'A', 'A', 'A', 'A', 'A', 'AE', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'D', 'N', 'O', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y', 's', 'a', 'a', 'a', 'a', 'a', 'a', 'ae', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y', 'A', 'a', 'A', 'a', 'A', 'a', 'C', 'c', 'C', 'c', 'C', 'c', 'C', 'c', 'D', 'd', 'D', 'd', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'G', 'g', 'G', 'g', 'G', 'g', 'G', 'g', 'H', 'h', 'H', 'h', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'IJ', 'ij', 'J', 'j', 'K', 'k', 'L', 'l', 'L', 'l', 'L', 'l', 'L', 'l', 'l', 'l', 'N', 'n', 'N', 'n', 'N', 'n', 'n', 'O', 'o', 'O', 'o', 'O', 'o', 'OE', 'oe', 'R', 'r', 'R', 'r', 'R', 'r', 'S', 's', 'S', 's', 'S', 's', 'S', 's', 'T', 't', 'T', 't', 'T', 't', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'W', 'w', 'Y', 'y', 'Y', 'Z', 'z', 'Z', 'z', 'Z', 'z', 's', 'f', 'O', 'o', 'U', 'u', 'A', 'a', 'I', 'i', 'O', 'o', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'A', 'a', 'AE', 'ae', 'O', 'o', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?');
+       $titre = str_replace($find, $replace, $titre);
+       $titre = strtolower($titre);
+     	 $mots = preg_split('/[^A-Z^a-z^0-9]+/', $titre);
+       $encoded = "";
+       foreach($mots as $mot) {
+
+       	if(strlen($mot) >= 3 OR str_replace(['0','1','2','3','4','5','6','7','8','9'], '', $mot) != $mot) {
+           $encoded .= $mot.'-';
+        }
+      }
+
+     $encoded = substr($encoded, 0, -1);
+
+     return $encoded;
+  }
+
+  /**
+   * [get_categorie_topic description]
+   * @param  [type] $id_topic [description]
+   * @return [type]           [description]
+   */
+  function get_categorie_topic($id_topic){
+
+    global $bdd;
+    $categorie = $bdd->prepare("SELECT cat_nom FROM t_categorie_cat INNER JOIN tj_topictheme_topth ON t_categorie_cat.cat_id = tj_topictheme_topth.cat_id
+    INNER JOIN t_topic_top ON tj_topictheme_topth.top_id = t_topic_top.top_id WHERE t_topic_top.top_id = ?");
+    $categorie->execute(array($id_topic));
+
+    $categorie = $categorie->fetch()['cat_nom'];
+
+    return $categorie;
+  }
+
+  /**
+   * [get_sscategorie_topic description]
+   * @param  [type] $id_topic [description]
+   * @return [type]           [description]
+   */
+  function get_sscategorie_topic($id_topic){
+
+    global $bdd;
+    $sscategorie = $bdd->prepare("SELECT sscat_nom FROM t_souscategorie_sscat INNER JOIN tj_topictheme_topth ON t_souscategorie_sscat.sscat_id = tj_topictheme_topth.sscat_id
+    INNER JOIN t_topic_top ON tj_topictheme_topth.top_id = t_topic_top.top_id WHERE t_topic_top.top_id = ?");
+    $sscategorie->execute(array($id_topic));
+
+    $sscategorie = $sscategorie->fetch()['sscat_nom'];
+
+    return $sscategorie;
+  }
 ?>

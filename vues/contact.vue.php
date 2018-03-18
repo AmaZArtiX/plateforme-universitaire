@@ -64,11 +64,16 @@
             <div class="form-group">
               <label for="form_message">Message</label>
               <textarea id="form_message" onkeyup="reste(this.value);" name="message" class="form-control" placeholder="Décrivez vos remarques ici ..." rows="4" required></textarea>
-              <span id="caracteres">200</span> caractères restants
+              <span id="caracteres"></span>
               <script type="text/javascript">
                 function reste(texte) {
                     var restants=200-texte.length;
-                    document.getElementById('caracteres').innerHTML=restants;
+                    if (restants >= 0) {
+                      document.getElementById('caracteres').innerHTML=restants + " caractères restants";
+                    } else {
+
+                      document.getElementById('caracteres').style.visibility = 'hidden';
+                    }
                 }
               </script>
             </div>
