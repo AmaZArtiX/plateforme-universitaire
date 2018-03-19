@@ -17,6 +17,7 @@
   <body>
     <!-- Header -->
     <?php
+      $header = "accueil";
       require("header.vue.php");
     ?>
     <!-- Fin header -->

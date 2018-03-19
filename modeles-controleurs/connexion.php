@@ -24,6 +24,8 @@
         $_SESSION['mem_prenom'] = $mem_infos['mem_prenom'];
         $_SESSION['mem_mail'] = $mem_infos['mem_mail'];
         $_SESSION['mem_administrateur'] = $mem_infos['mem_administrateur'];
+        $_SESSION['mem_date_inscription'] = $mem_infos['mem_date_inscription'];
+        
         // Redirection vers la page d'accueil
         header("Location: ../index.php");
 

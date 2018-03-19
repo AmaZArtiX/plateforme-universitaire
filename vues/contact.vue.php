@@ -20,7 +20,7 @@
     ?>
     <!-- Fin header -->
 
-    <div class="container bg-light py-3" style="margin-top: 100px; margin-bottom:50px;">
+    <div class="container bg-light py-3" style="margin-top:5rem; margin-bottom:50px;">
       <form id="contact-form" method="post" action="" role="form">
         <div class="messages">
           <?php

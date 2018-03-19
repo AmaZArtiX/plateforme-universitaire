@@ -16,12 +16,13 @@
   <body>
     <!-- Header -->
     <?php
+      $header = "utilisateur";
       require("header.vue.php");
     ?>
     <!-- Fin header -->
 
     <!-- Formulaire -->
-    <div class="container" style="margin-top: 100px; margin-bottom: 50px;">
+    <div class="container" style="margin-top:5rem; margin-bottom:50px;">
       <div class="row justify-content-center">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
           <form role="form" method="post" action="">

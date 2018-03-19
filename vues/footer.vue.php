@@ -13,6 +13,10 @@
                     ?>
                     <li><a href="connexion.vue.php">Se connecter</a></li>
                     <?php
+                      } else {
+                    ?>
+                    <li><a href="compte.vue.php">Mon compte</a></li>
+                    <?php
                       }
                     ?>
                     <li><a href="inscription.vue.php">S'inscrire</a></li>
@@ -29,7 +33,7 @@
             <div class="col-sm-2">
                 <h5>Support</h5>
                 <ul>
-                    <li><a href="#">FAQ</a></li>
+                    <li><a href="faq.vue.php">FAQ</a></li>
                     <li><a href="#">Aide</a></li>
                     <li><a href="forum.vue.php">Forum</a></li>
                 </ul>

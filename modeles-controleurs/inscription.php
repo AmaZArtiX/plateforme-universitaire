@@ -23,10 +23,10 @@
       if(!empty($prenom) && !empty($nom) && !empty($email) && !empty($mot_de_passe) && !empty($mot_de_passe_confirmation)){
 
         // Vérification de la taille du nom
-        if(strlen($prenom) <= 36){
+        if(strlen($prenom) <= 32){
 
           // Vérification de la taille du prénom
-          if(strlen($nom) <= 32){
+          if(strlen($nom) <= 36){
 
             // Vérification de la taille de l'adresse e-mail
             if(strlen($email) <= 320){

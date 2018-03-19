@@ -16,6 +16,7 @@
   <body>
     <!-- Header -->
     <?php
+      $header = "utilisateur";
       require("header.vue.php");
     ?>
     <!-- Fin Header -->
