@@ -11,13 +11,13 @@
         if(!isset($_SESSION['mem_id'])) {
       ?>
           <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-            <li class="nav-item active">
+            <li class="nav-item <?php if($header == "accueil") {echo 'active';} ?>">
               <a class="nav-link" href="index.vue.php">Accueil</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <?php if($header == "forum") {echo 'active';} ?>">
               <a class="nav-link" href="forum.vue.php">Forum</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <?php if($header == "utilisateur") {echo 'active';} ?>">
               <a class="nav-link" href="connexion.vue.php">Se connecter</a>
             </li>
           </ul>
@@ -25,18 +25,18 @@
         } else {
       ?>
           <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-            <li class="nav-item active">
+            <li class="nav-item <?php if($header == "accueil") {echo 'active';} ?>">
               <a class="nav-link" href="index.vue.php">Accueil</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <?php if($header == "forum") {echo 'active';} ?>">
               <a class="nav-link" href="forum.vue.php">Forum</a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown <?php if($header == "utilisateur") {echo 'active';} ?>">
               <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <?= $_SESSION['mem_prenom'] ?>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Mon compte</a>
+                <a class="dropdown-item" href="compte.vue.php">Mon compte</a>
                 <?php
                   if($_SESSION['mem_administrateur'] == 1) {
                 ?>
