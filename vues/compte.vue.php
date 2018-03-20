@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/forum.css">
+    <link rel="stylesheet" href="../css/compte.css">
   </head>
   <body>
     <!-- Header -->
@@ -28,9 +28,9 @@
         <div class="col-md-8">
           <div class="card text-center">
             <div class="card-header">
-              <ul class="nav nav-tabs card-header-tabs">
+              <ul class="nav nav-pills card-header-pills">
                 <li class="nav-item">
-                  <a class="nav-link active" href="./compte.vue.php">Résumé</a>
+                  <a class="nav-link active" href="./compte.vue.php" style="background-color:#8CB75B; border-color:#8CB75B;">Résumé</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link text-muted" href="./compte.topics.vue.php">Topics Postés</a>
@@ -93,6 +93,5 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/inscription.js"></script>
   </body>
 </html>

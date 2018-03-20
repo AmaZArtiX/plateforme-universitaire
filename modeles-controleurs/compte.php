@@ -12,9 +12,8 @@
 	  $membre = $requete->fetch();
 
     // Redirection vers compte si tout les champs sont vides
-    if ((isset($_POST['mem_prenom']) && empty($_POST['mem_prenom'])) && (isset($_POST['mem_nom']) && empty($_POST['mem_nom'])) && (isset($_POST['mem_mail']) && empty($_POST['mem_mail']))) {
-      // Redirection vers page du compte
-      header('Location: ./compte.vue.php');
+    if ((isset($_POST['mem_prenom']) && empty($_POST['mem_prenom'])) && (isset($_POST['mem_nom']) && empty($_POST['mem_nom'])) && (isset($_POST['mem_mail']) && empty($_POST['mem_mail'])) && (isset($_POST['mem_pwd']) && empty($_POST['mem_pwd'])) && (isset($_POST['mem_pwd_conf']) && empty($_POST['mem_pwd_conf']))) {
+      $erreur = "Veuillez entrer une valeur à modifier";
     }
 
     // Modification du prenom si existant et valide
@@ -34,13 +33,14 @@
 
 				  $requete_insertion_prenom = $bdd->prepare("UPDATE t_membre_mem SET mem_prenom = ? WHERE mem_id = ?");
 				  $requete_insertion_prenom->execute(array($prenom, $_SESSION['mem_id']));
+          $succes = "Le prenom a bien été changé";
           $_SESSION['mem_prenom'] = $prenom;
 
 			  } else
-				  $message = "Prénom déjà existant";
+				  $erreur = "Prénom déjà existant";
 
 		  } else
-			  $message = "Votre prenom ne doit pas dépasser 32 caractères";
+			  $erreur = "Votre prenom ne doit pas dépasser 32 caractères";
 	  }
 
     // Modification du nom si existant et valide
@@ -60,13 +60,14 @@
 
 				  $requete_insertion_nom = $bdd->prepare("UPDATE t_membre_mem SET mem_nom = ? WHERE mem_id = ?");
 				  $requete_insertion_nom->execute(array($nom, $_SESSION['mem_id']));
+          $succes = "Le nom a bien été changé";
           $_SESSION['mem_nom'] = $nom;
 
 			  } else
-				  $message = "Nom déjà existant";
+				  $erreur = "Nom déjà existant";
 
 		  } else
-			  $message = "Votre nom ne doit pas dépasser 36 caractères";
+			  $erreur = "Votre nom ne doit pas dépasser 36 caractères";
 	  }
 
     // Modification du mail si existant et valide
@@ -86,15 +87,36 @@
 
 				  $requete_insertion_mail = $bdd->prepare("UPDATE t_membre_mem SET mem_mail = ? WHERE mem_id = ?");
 				  $requete_insertion_mail->execute(array($mail, $_SESSION['mem_id']));
+          $succes = "L'adresse mail a bien été changée";
           $_SESSION['mem_mail'] = $mail;
 
 			  } else
-				  $message = "Adresse e-mail déjà existante";
+				  $erreur = "Adresse e-mail déjà existante";
 
 		  } else
-			  $message = "Votre adresse e-mail ne doit pas dépasser 320 caractères";
+			  $erreur = "Votre adresse e-mail ne doit pas dépasser 320 caractères";
 	  }
 
+    // Modification du mdp si existant et valide
+    if (isset($_POST['mem_pwd']) && !empty($_POST['mem_pwd'])) {
+
+      if(isset($_POST['mem_pwd_conf']) && !empty($_POST['mem_pwd_conf'])) {
+
+        $mdp = sha1($_POST['mem_pwd']);
+  		  $mdp_confirmation = sha1($_POST['mem_pwd_conf']);
+
+  		  if ($mdp == $mdp_confirmation) {
+
+  		  	$requete_insertion_mdp = $bdd->prepare("UPDATE t_membre_mem SET mem_pwd = ? WHERE mem_id = ?");
+  		  	$requete_insertion_mdp->execute(array($mdp, $_SESSION['mem_id']));
+          $succes = "Le mot de passe a bien été changé";
+
+  		  } else
+  			  $erreur = "Le mot de passe et la confirmation doivent être identiques";
+      } else
+			  $erreur = "Le champ Confirmation doit être rempli pour modifier le mot de passe";
+
+	  }
   }
 
 ?>

@@ -46,7 +46,7 @@
     <!-- Fin Header -->
 
     <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb" class="container" style="margin-bottom: 25px;">
+    <nav aria-label="breadcrumb" class="container" style="margin-bottom:25px;">
       <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page">Administration</li>
       </ol>
@@ -169,6 +169,5 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/inscription.js"></script>
   </body>
 </html>
