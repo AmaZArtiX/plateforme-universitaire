@@ -1,5 +1,19 @@
 <?php
   require("../modeles-controleurs/forum.topic.php");
+
+  require("../jbbcode/parser.php");
+
+  $parser = new JBBCode\Parser();
+  $parser->addCodeDefinitionSet(new JBBCode\DefaultCodeDefinitionSet());
+  $parser->addBBCode("quote", '<blockquote>{param}</blockquote>');
+  $parser->addBBCode("list", '<ul>{param}</ul>');
+  $parser->addBBCode("*", '<li>{param}</li>');
+  $parser->addBBCode("codec", "<div><pre><code class=\"language-c\">{param}</code></pre></div>");
+  $parser->addBBCode("codecpp", '<div><pre><code class="language-cpp">{param}</code></pre></div>');
+  $parser->addBBCode("codejava", '<div><pre><code class="language-java">{param}</code></pre></div>');
+  $parser->addBBCode("codephp", '<div><pre><code class="language-php">{param}</code></pre></div>');
+  $parser->addBBCode("codepython", '<div><pre><code class="language-python">{param}</code></pre></div>');
+  $parser->addBBCode("codesql", '<div><pre><code class="language-sql">{param}</code></pre></div>');
 ?>
 
 <!DOCTYPE html>
@@ -7,11 +21,18 @@
   <head>
     <meta charset="utf-8">
     <title>Forum étudiant</title>
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">-->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/forum.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="../js/jquery.wysibb.min.js"></script>
+    <script src="../js/fr.js"></script>
+    <link rel="stylesheet" href="../css/wbbtheme.css"/>
+    <link rel="stylesheet" href="../css/prism.css"/>
+    <script src="../js/wysibb-options.js"></script>
+    <script src="../js/prism.js"></script>
   </head>
   <body>
     <!-- Header -->
@@ -62,8 +83,11 @@
                       </div>
                     </div>
                   </tr>
-                <?php } ?>
-                <?php while($reponse = $reponses->fetch()) { ?>
+                <?php }
+                 while($reponse = $reponses->fetch()) {
+
+                   $parser->parse($reponse['mess_contenu']);
+                   ?>
                   <tr class="align-middle">
 
                     <div class="card-group">
@@ -78,7 +102,7 @@
 
                       <div class="card border-secondary" style="border-top:0; border-right:0; border-left:0;">
                         <div class="card-body">
-                          <p class="text-muted font-weight-light"><?= $reponse['mess_contenu'] ?></p>
+                          <p class="text-muted font-weight-light"><?= $parser->getAsHtml() ?></p>
                         </div>
                         <div class="card-footer text-muted font-weight-light text-right">
                           <?= date_format(date_create($reponse['mess_date_post']), 'd/m/Y H:i') ?>
@@ -135,8 +159,10 @@
 
             echo $pagination;
           ?>
-
-          <button type="button" class="btn btn-secondary btn-lg btn-block" style="margin-bottom:25px; background-color:#8CB75B; border-color:#8CB75B;">Poster une réponse</button>
+          <form method="post" action="">
+            <textarea id="editor" name="reponse" rows="8"></textarea>
+            <button type="submit" name="btn_envoyer" class="btn btn-secondary btn-lg btn-block" style="margin-top: 25px;margin-bottom:25px; background-color:#8CB75B; border-color:#8CB75B;">Poster une réponse</button>
+          </form>
         </div>
         <div class="col-md-3">
 
@@ -182,9 +208,7 @@
       require("footer.vue.php");
     ?>
     <!-- Fin footer -->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  -->
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/inscription.js"></script>
   </body>
 </html>

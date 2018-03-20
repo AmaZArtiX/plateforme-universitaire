@@ -24,6 +24,26 @@
       $categorie_topic = get_categorie_topic($topic['top_id']);
       $sscategorie_topic = get_sscategorie_topic($topic['top_id']);
 
+      if(isset($_POST['btn_envoyer'], $_POST['reponse'])){
+
+        if (isset($_SESSION['mem_id'])) {
+
+          if(!empty($_POST['reponse'])){
+
+            $reponse = htmlspecialchars($_POST['reponse']);
+
+            $requete = $bdd->prepare("INSERT INTO t_message_mess(top_id, mem_id, mess_contenu, mess_date_post) VALUES (?, ?, ?, NOW())");
+            $requete->execute(array($get_id, $_SESSION['mem_id'], $reponse));
+          } else {
+
+            "Votre message ne peut pas être vide";
+          }
+        } else {
+
+          echo "Vous devez être connecté";
+        }
+      }
+
 			// if (isset($_POST['fsubmit'], $_POST['freponse'])) {
       //
 			// 	if (!empty($_POST['freponse'])) {
