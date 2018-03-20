@@ -44,6 +44,8 @@
                     // Vérification de l'égalité des mots de passe
                     if($mot_de_passe == $mot_de_passe_confirmation){
 
+                      // TODO: bloquer insultes
+
                       // Insertion du nouveau membre dans la bdd
                       if(inserer_membre($prenom, $nom, $email, $mot_de_passe)){
 
