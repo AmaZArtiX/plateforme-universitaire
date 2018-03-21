@@ -144,7 +144,7 @@ ALTER TABLE `tj_topictheme_topth`
   ADD PRIMARY KEY (`topth_id`),
   ADD KEY `fk_topictheme_top_id` (`top_id`),
   ADD KEY `fk_topictheme_cat_id` (`cat_id`),
-  ADD KEY `fk_topictheme_sscat_id` (`sscat`);
+  ADD KEY `fk_topictheme_sscat_id` (`sscat_id`);
 
 --
 -- Indexes for table `t_categorie_cat`
@@ -236,7 +236,7 @@ ALTER TABLE `t_topic_top`
 --
 ALTER TABLE `tj_topictheme_topth`
   ADD CONSTRAINT `fk_topictheme_cat_id` FOREIGN KEY (`cat_id`) REFERENCES `t_categorie_cat` (`cat_id`),
-  ADD CONSTRAINT `fk_topictheme_sscat_id` FOREIGN KEY (`sscat`) REFERENCES `t_souscategorie_sscat` (`sscat_id`),
+  ADD CONSTRAINT `fk_topictheme_sscat_id` FOREIGN KEY (`sscat_id`) REFERENCES `t_souscategorie_sscat` (`sscat_id`),
   ADD CONSTRAINT `fk_topictheme_top_id` FOREIGN KEY (`top_id`) REFERENCES `t_topic_top` (`top_id`);
 
 --

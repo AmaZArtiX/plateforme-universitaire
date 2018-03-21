@@ -16,6 +16,7 @@
   <body>
     <!-- Header -->
     <?php
+      $header = "forum";
       require("header.vue.php");
     ?>
     <!-- Fin header -->
