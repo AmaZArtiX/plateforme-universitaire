@@ -167,7 +167,7 @@
           ?>
           <form method="post" action="">
             <textarea id="editor" name="reponse" rows="8"></textarea>
-            <button type="submit" name="btn_envoyer" class="btn btn-secondary btn-lg btn-block" style="margin-top: 25px;margin-bottom:25px; background-color:#8CB75B; border-color:#8CB75B;">Poster une réponse</button>
+            <button type="submit" name="btn_envoyer" class="btn btn-secondary btn-lg btn-block" style="margin-top:25px; margin-bottom:25px; background-color:#8CB75B; border-color:#8CB75B;">Poster une réponse</button>
           </form>
         </div>
         <div class="col-md-3">

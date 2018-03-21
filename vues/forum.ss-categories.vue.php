@@ -52,6 +52,7 @@
               </table>
             </div>
           </div>
+          <a href="./forum.nouveau-topic.vue.php" class="btn btn-outline-secondary btn-lg btn-block" role="button" style="margin-bottom:25px;">Créer un Topic</a>
         </div>
         <div class="col-md-3">
 
