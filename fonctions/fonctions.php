@@ -159,7 +159,7 @@
 
       $requete = $requete->fetch();
       $dernier_topic = "Re: ".$requete['top_sujet'];
-      $dernier_topic .= "<br/> par <b><a href=\"#\">".get_nom_prenom_membre($requete['mem_id'])."</a><b>";
+      $dernier_topic .= "<br/> par <b><a href=\"./compte.vue.php?mem_id=".$requete['mem_id']."\">".get_nom_prenom_membre($requete['mem_id'])."</a><b>";
       $dernier_topic .= " ".date_format(date_create($requete['top_date_creation']), 'd/m/Y H:i:s');
 
     } else {
@@ -244,7 +244,7 @@
 
       $requete = $requete->fetch();
       $dernier_topic = "Re: ".$requete['top_sujet'];
-      $dernier_topic .= "<br/> par <b><a href=\"#\">".get_nom_prenom_membre($requete['mem_id'])."</a><b>";
+      $dernier_topic .= "<br/> par <b><a href=\"./compte.vue.php?mem_id=".$requete['mem_id']."\">".get_nom_prenom_membre($requete['mem_id'])."</a><b>";
       $dernier_topic .= " ".date_format(date_create($requete['top_date_creation']), 'd/m/Y H:i:s');
 
     } else {

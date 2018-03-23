@@ -1,5 +1,5 @@
 <?php
-  require("../modeles-controleurs/compte.php");
+  require("../modeles-controleurs/compte.edit.php");
 ?>
 
 <!DOCTYPE html>

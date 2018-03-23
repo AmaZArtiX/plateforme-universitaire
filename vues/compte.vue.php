@@ -30,14 +30,16 @@
             <div class="card-header">
               <ul class="nav nav-pills card-header-pills">
                 <li class="nav-item">
-                  <a class="nav-link active" href="./compte.vue.php" style="background-color:#8CB75B; border-color:#8CB75B;">Résumé</a>
+                  <a class="nav-link active" href="./compte.vue.php<?php if(isset($_GET['mem_id']) && !empty($_GET['mem_id'])) { echo '?id=' . $_GET['mem_id']; } ?>" style="background-color:#8CB75B; border-color:#8CB75B;">Résumé</a>
                 </li>
+                <?php if(!isset($_GET['mem_id'])) { ?>
                 <li class="nav-item">
                   <a class="nav-link text-muted" href="./compte.topics.vue.php">Topics Postés</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link text-muted" href="./compte.res.vue.php">Résultats des Tests</a>
                 </li>
+                <?php } ?>
               </ul>
             </div>
             <div class="card-body">
@@ -46,7 +48,17 @@
                   <figure class="figure">
                     <img class="img-thumbnail" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="90" height="90" style="border-color:#8CB75B;">
                     <figcaption class="figure-caption"><br/>
-                      <?php if($_SESSION['mem_administrateur'] == 1) { ?><span class="badge badge-warning">Administrateur</span><?php } ?>
+                      <?php
+                        if(isset($_GET['mem_id']) && !empty($_GET['mem_id'])) {
+                          if($membre['mem_administrateur'] == 1) {
+                      ?>
+                      <span class="badge badge-warning">Administrateur</span>
+                      <?php
+                          }
+                        } elseif($_SESSION['mem_administrateur'] == 1) {
+                      ?>
+                      <span class="badge badge-warning">Administrateur</span>
+                      <?php } ?>
                       <span class="badge badge-info">Utilisateur</span>
                     </figcaption>
                   </figure>
@@ -56,28 +68,62 @@
                     <table class="table table-striped mb-0 font-weight-light">
                       <tr class="text-left">
                         <td class="align-middle">Prénom</td>
-                        <td class="align-middle"><?php echo $_SESSION['mem_prenom']; ?></td>
+                        <td class="align-middle">
+                          <?php
+                            if(isset($_GET['mem_id']) && !empty($_GET['mem_id'])) {
+                              echo $membre['mem_prenom'];
+                            } else {
+                              echo $_SESSION['mem_prenom'];
+                            }
+                          ?>
+                        </td>
                       </tr>
                       <tr class="text-left">
                         <td class="align-middle">Nom</td>
-                        <td class="align-middle"><?php echo $_SESSION['mem_nom']; ?></td>
+                        <td class="align-middle">
+                          <?php
+                            if(isset($_GET['mem_id']) && !empty($_GET['mem_id'])) {
+                              echo $membre['mem_nom'];
+                            } else {
+                              echo $_SESSION['mem_nom'];
+                            }
+                          ?>
+                        </td>
                       </tr>
                       <tr class="text-left">
                         <td class="align-middle">E-mail</td>
-                        <td class="align-middle"><?php echo $_SESSION['mem_mail']; ?></td>
+                        <td class="align-middle">
+                          <?php
+                            if(isset($_GET['mem_id']) && !empty($_GET['mem_id'])) {
+                              echo $membre['mem_mail'];
+                            } else {
+                              echo $_SESSION['mem_mail'];
+                            }
+                          ?>
+                        </td>
                       </tr>
                       <tr class="text-left">
                         <td class="align-middle">Date d'inscription</td>
-                        <td class="align-middle"><?php echo $_SESSION['mem_date_inscription']; ?></td>
+                        <td class="align-middle">
+                          <?php
+                            if(isset($_GET['mem_id']) && !empty($_GET['mem_id'])) {
+                              echo $membre['mem_date_inscription'];
+                            } else {
+                              echo $_SESSION['mem_date_inscription'];
+                            }
+                          ?>
+                        </td>
                       </tr>
                     </table>
                   </div>
                 </div>
               </div>
             </div>
+            <?php if(!isset($_GET['mem_id'])) { ?>
             <div class="card-footer">
               <a href="./compte.edit.vue.php" class="btn btn-light btn-lg btn-block" style="background-color:#8CB75B; border-color:#8CB75B; color:white;">Modifier le profil</a>
             </div>
+            <?php } ?>
           </div>
         </div>
         <div class="col-md-2"></div>
