@@ -22,7 +22,7 @@
 
     <!-- Principal -->
     <div class="container" style="margin-top:5rem; margin-bottom:25px;">
-      
+
     </div>
     <!-- Fin -->
 
@@ -34,6 +34,5 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/inscription.js"></script>
   </body>
 </html>

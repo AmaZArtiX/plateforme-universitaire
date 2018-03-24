@@ -16,6 +16,7 @@
   <body>
     <!-- Header -->
     <?php
+      $header = "forum";
       require("header.vue.php");
     ?>
     <!-- Fin header -->
@@ -45,12 +46,13 @@
                     <td class="align-middle">¤</td>
                     <td class="align-middle"><b><?= $t['top_sujet'] ?></b> <br/> <small class="text-muted">@Tout ce qu'il y a à savoir.</small></td>
                     <td class="text-center text-muted align-middle"><?= get_nb_messages_topic($t['top_id']) ?><br/> Posts</td>
-                    <td class="align-middle" style="text-align:right;">par <b><a href=""><?= $t['mem_prenom']." ".$t['mem_nom'] ?></a></b> <?= date_format(date_create($t['top_date_creation']), 'd/m/Y H:i') ?></td>
+                    <td class="align-middle" style="text-align:right;">par <b><a href="./compte.vue.php?mem_id=<?php echo $t['mem_id']; ?>"><?= $t['mem_prenom']." ".$t['mem_nom'] ?></a></b> <?= date_format(date_create($t['top_date_creation']), 'd/m/Y H:i') ?></td>
                   </tr>
                 <?php } ?>
               </table>
             </div>
           </div>
+          <a href="./forum.nouveau-topic.vue.php" class="btn btn-outline-secondary btn-lg btn-block" role="button" style="margin-bottom:25px;">Créer un Topic</a>
         </div>
         <div class="col-md-3">
 
@@ -66,7 +68,7 @@
                   while($dpssc = $dernieres_publis_sscat->fetch()) {
                 ?>
                   <tr class="lien align-middle" onclick="location.href = './forum.topic.vue.php?titre=<?= url_custom_encode($dpssc['top_sujet']) ?>&id=<?= $dpssc['top_id'] ?>&page=1'">
-                    <td class="align-middle"><b>Re: <a href="./forum.topic.vue.php?titre=<?= url_custom_encode($dpssc['top_sujet']) ?>&id=<?= $dpssc['top_id'] ?>&page=1"><?= $dpssc['top_sujet'] ?></a></b> <br/> <small class="text-muted">par <b><a href=""><?= get_nom_prenom_membre($dpssc['mem_id']) ?></a></b></small></td>
+                    <td class="align-middle"><b>Re: <a href="./forum.topic.vue.php?titre=<?= url_custom_encode($dpssc['top_sujet']) ?>&id=<?= $dpssc['top_id'] ?>&page=1"><?= $dpssc['top_sujet'] ?></a></b> <br/> <small class="text-muted">par <b><a href="./compte.vue.php?mem_id=<?php echo $dpssc['mem_id']; ?>"><?= get_nom_prenom_membre($dpssc['mem_id']) ?></a></b></small></td>
                   </tr>
                 <?php } ?>
               </table>
@@ -148,6 +150,5 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/inscription.js"></script>
   </body>
 </html>

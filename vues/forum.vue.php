@@ -16,6 +16,7 @@
   <body>
     <!-- Header -->
     <?php
+      $header = "forum";
       require("header.vue.php");
     ?>
     <!-- Fin header -->
@@ -72,7 +73,7 @@
 
                 ?>
                   <tr class="lien align-middle" onclick="location.href='./forum.topic.vue.php?titre=<?= url_custom_encode($dp['top_sujet']) ?>&id=<?= $dp['top_id'] ?>&page=1'">
-                    <td class="align-middle"><b>Re: <a href="./forum.topic.vue.php?titre=<?= url_custom_encode($dp['top_sujet']) ?>&id=<?= $dp['top_id'] ?>&page=1"><?= $dp['top_sujet'] ?></a></b> <br/> <small class="text-muted">par <b><a href="#"><?= get_nom_prenom_membre($dp['mem_id']) ?></a></b></small></td>
+                    <td class="align-middle"><b>Re: <a href="./forum.topic.vue.php?titre=<?= url_custom_encode($dp['top_sujet']) ?>&id=<?= $dp['top_id'] ?>&page=1"><?= $dp['top_sujet'] ?></a></b> <br/> <small class="text-muted">par <b><a href="./compte.vue.php?mem_id=<?php echo $dp['mem_id']; ?>"><?= get_nom_prenom_membre($dp['mem_id']) ?></a></b></small></td>
                   </tr>
                 <?php } ?>
               </table>
@@ -109,6 +110,5 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/inscription.js"></script>
   </body>
 </html>

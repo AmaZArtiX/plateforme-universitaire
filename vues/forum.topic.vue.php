@@ -26,17 +26,13 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/forum.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="../js/jquery.wysibb.min.js"></script>
-    <script src="../js/fr.js"></script>
     <link rel="stylesheet" href="../css/wbbtheme.css"/>
     <link rel="stylesheet" href="../css/prism.css"/>
-    <script src="../js/wysibb-options.js"></script>
-    <script src="../js/prism.js"></script>
   </head>
   <body>
     <!-- Header -->
     <?php
+      $header = "forum";
       require("header.vue.php");
     ?>
     <!-- Fin header -->
@@ -67,9 +63,14 @@
                   <tr class="align-middle">
                     <div class="card-group">
                       <div class="card border-secondary" style="max-width:25% !important; border-top:0; border-right:0; border-left:0;">
-                        <div class="card-body">
-                          <h6 class="card-title"><a href=""><?= get_nom_prenom_membre($topic['mem_id']) ?></a></h6>
-                          <p class="text-muted font-weight-light">@Informations<br/><br/>@Licence Informatique</p>
+                        <div class="card-body text-center">
+                          <figure class="figure">
+                            <img class="img-thumbnail" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="90" height="90" style="border-color:#8CB75B;">
+                            <figcaption class="figure-caption">
+                              <h6 class="card-title"><a href=""><?= get_nom_prenom_membre($topic['mem_id']) ?></a></h6>
+                              <span class="badge badge-info">Utilisateur</span>
+                            </figcaption>
+                          </figure>
                         </div>
                         <div class="card-footer">&nbsp </div>
                       </div>
@@ -93,9 +94,14 @@
                     <div class="card-group">
 
                       <div class="card border-secondary" style="max-width:25% !important; border-top:0; border-right:0; border-left:0;">
-                        <div class="card-body">
-                          <h6 class="card-title"><a href=""><?= get_nom_prenom_membre($reponse['mem_id']) ?></a></h6>
-                          <p class="text-muted font-weight-light">@Informations<br/><br/>@Licence Informatique</p>
+                        <div class="card-body text-center">
+                          <figure class="figure">
+                            <img class="img-thumbnail" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="90" height="90" style="border-color:#8CB75B;">
+                            <figcaption class="figure-caption">
+                              <h6 class="card-title"><a href=""><?= get_nom_prenom_membre($reponse['mem_id']) ?></a></h6>
+                              <span class="badge badge-info">Utilisateur</span>
+                            </figcaption>
+                          </figure>
                         </div>
                         <div class="card-footer">&nbsp </div>
                       </div>
@@ -168,7 +174,7 @@
           ?>
           <form method="post" action="">
             <textarea id="editor" name="reponse" rows="8"></textarea>
-            <button type="submit" name="btn_envoyer" class="btn btn-secondary btn-lg btn-block" style="margin-top: 25px;margin-bottom:25px; background-color:#8CB75B; border-color:#8CB75B;">Poster une réponse</button>
+            <button type="submit" name="btn_envoyer" class="btn btn-secondary btn-lg btn-block" style="margin-top:25px; margin-bottom:25px; background-color:#8CB75B; border-color:#8CB75B;">Poster une réponse</button>
           </form>
         </div>
         <div class="col-md-3">
@@ -216,6 +222,11 @@
     ?>
     <!-- Fin footer -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="../js/jquery.wysibb.min.js"></script>
+    <script src="../js/fr.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/wysibb-options.js"></script>
+    <script src="../js/prism.js"></script>
   </body>
 </html>
