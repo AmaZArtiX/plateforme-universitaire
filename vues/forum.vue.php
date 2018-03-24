@@ -22,11 +22,25 @@
     <!-- Fin header -->
 
     <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb" class="container" style="margin-top:5rem; margin-bottom: 25px;">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Accueil</li>
-      </ol>
-    </nav>
+    <div class="container" style="margin-top:5rem; margin-bottom: 25px;">
+      <div class="row">
+        <div class="col-md-8">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item active" aria-current="page">Accueil</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="input-group col-md-4">
+          <form class="form-inline" action="../vues/forum.topics.vue.php" method="get">
+            <input class="form-control" type="search" name="recherche" placeholder="Rechercher un topic" aria-label="Search">
+            <span class="input-group-append">
+              <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
+            </span>
+          </form>
+        </div>
+      </div>
+    </div>
     <!-- Fin Breadcrumb -->
 
     <!-- Principal -->
@@ -73,7 +87,7 @@
 
                 ?>
                   <tr class="lien align-middle" onclick="location.href='./forum.topic.vue.php?titre=<?= url_custom_encode($dp['top_sujet']) ?>&id=<?= $dp['top_id'] ?>&page=1'">
-                    <td class="align-middle"><b>Re: <a href="./forum.topic.vue.php?titre=<?= url_custom_encode($dp['top_sujet']) ?>&id=<?= $dp['top_id'] ?>&page=1"><?= $dp['top_sujet'] ?></a></b> <br/> <small class="text-muted">par <b><a href="./compte.vue.php?mem_id=<?php echo $dp['mem_id']; ?>"><?= get_nom_prenom_membre($dp['mem_id']) ?></a></b></small></td>
+                    <td class="align-middle"><b><a href="./forum.topic.vue.php?titre=<?= url_custom_encode($dp['top_sujet']) ?>&id=<?= $dp['top_id'] ?>&page=1"><?= $dp['top_sujet'] ?></a></b> <br/> <small class="text-muted">par <b><a href="./compte.vue.php?mem_id=<?= $dp['mem_id'] ?>"><?= get_nom_prenom_membre($dp['mem_id']) ?></a></b></small></td>
                   </tr>
                 <?php } ?>
               </table>
@@ -85,12 +99,22 @@
           ?>
           <!-- Activités récentes relatives à l'utilisateur -->
           <div class="card" style="margin-bottom:25px">
-            <h6 class="card-header">Réponses à vos publications</h6>
-            <div class="card-body">
-              <p class="card-text text-muted">@Aucune réponse à afficher.</p>
-            </div>
-            <div class="card-footer text-muted text-center">
-              Dernière activité : @Jamais.
+            <h6 class="card-header">Dernières réponses à vos topics</h6>
+            <div class="table-responsive">
+              <table class="table table-striped table-hover mb-0">
+                <?php
+
+                  $dernieres_reponses = get_dernieres_reponses($_SESSION['mem_id']);
+
+                  while ($dr = $dernieres_reponses->fetch()) {
+
+                ?>
+                  <tr class="lien align-middle" onclick="location.href='./forum.topic.vue.php?titre=<?= url_custom_encode(get_sujet_topic($dr['top_id'])) ?>&id=<?= $dr['top_id'] ?>&page=1'">
+                    <td class="align-middle"><b><a href="./forum.topic.vue.php?titre=<?= url_custom_encode(get_sujet_topic($dr['top_id'])) ?>&id=<?= $dr['top_id'] ?>&page=1"><?= get_sujet_topic($dr['top_id']) ?></a></b>
+                    <br/><small class="text-muted">par <b><a href="./compte.vue.php?mem_id=<?= $dr['mem_id'] ?>"><?= get_nom_prenom_membre($dr['mem_id']) ?></a></b></small></td>
+                  </tr>
+                <?php } ?>
+              </table>
             </div>
           </div>
           <!-- Fin -->

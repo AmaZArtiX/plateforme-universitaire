@@ -23,6 +23,7 @@
 
       $categorie_topic = get_categorie_topic($topic['top_id']);
       $sscategorie_topic = get_sscategorie_topic($topic['top_id']);
+      $id_sscategorie_topic = get_id_sscategorie_topic($topic['top_id']);
 
       if(isset($_POST['btn_envoyer'], $_POST['reponse'])){
 
@@ -30,7 +31,7 @@
 
           if(!empty($_POST['reponse'])){
 
-            $reponse = htmlspecialchars($_POST['reponse']);
+            $reponse = htmlspecialchars(filtrerMots($_POST['reponse']));
 
             $requete = $bdd->prepare("INSERT INTO t_message_mess(top_id, mem_id, mess_contenu, mess_date_post) VALUES (?, ?, ?, NOW())");
             $requete->execute(array($get_id, $_SESSION['mem_id'], $reponse));

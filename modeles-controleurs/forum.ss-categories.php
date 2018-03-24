@@ -25,8 +25,6 @@
   		}
   	}
 
-    var_dump($id_categorie);
-
   	if (@$id_categorie) {
 
   		if (isset($_GET['ss-categorie']) AND !empty($_GET['ss-categorie'])) {

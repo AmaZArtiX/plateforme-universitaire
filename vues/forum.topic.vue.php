@@ -38,14 +38,30 @@
     <!-- Fin header -->
 
     <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb" class="container" style="margin-top:5rem; margin-bottom: 25px;">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="./forum.vue.php">Accueil</a></li>
-        <li class="breadcrumb-item"><a href="./forum.categories.vue.php?categorie=<?= $categorie_topic ?>"><?= $categorie_topic ?></a></li>
-        <li class="breadcrumb-item"><a href="./forum.ss-categories.vue.php?categorie=<?= $categorie_topic ?>&ss-categorie=<?= $sscategorie_topic ?>&page=1"><?= $sscategorie_topic ?></a></li>
-        <li class="breadcrumb-item active" aria-current="page"><?= $topic['top_sujet'] ?></a></li>
-      </ol>
-    </nav>
+    <div class="container" style="margin-top:5rem; margin-bottom: 25px;">
+      <div class="row">
+        <div class="col-md-8">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="./forum.vue.php">Accueil</a></li>
+              <li class="breadcrumb-item"><a href="./forum.categories.vue.php?categorie=<?= $categorie_topic ?>"><?= $categorie_topic ?></a></li>
+              <li class="breadcrumb-item"><a href="./forum.ss-categories.vue.php?categorie=<?= $categorie_topic ?>&ss-categorie=<?= $sscategorie_topic ?>&page=1"><?= $sscategorie_topic ?></a></li>
+              <li class="breadcrumb-item active" aria-current="page"><?= $topic['top_sujet'] ?></a></li>
+            </ol>
+          </nav>
+        </div>
+        <div class="input-group col-md-4">
+          <form class="form-inline" action="../vues/forum.topics.vue.php" method="get">
+            <input class="form-control" type="search" name="recherche" placeholder="Rechercher un topic" aria-label="Search">
+            <span class="input-group-append">
+              <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
+            </span>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
     <!-- Fin Breadcrumb -->
 
     <!-- Principal -->
@@ -59,7 +75,11 @@
             </h6>
             <div class="table-responsive">
               <table class="table table-striped mb-0">
-                <?php if($pageCourante == 1) { ?>
+                <?php if($pageCourante == 1) {
+
+                        $parser->parse($topic['top_contenu']);
+
+                  ?>
                   <tr class="align-middle">
                     <div class="card-group">
                       <div class="card border-secondary" style="max-width:25% !important; border-top:0; border-right:0; border-left:0;">
@@ -76,7 +96,7 @@
                       </div>
                       <div class="card border-secondary" style="border-top:0; border-right:0; border-left:0;">
                         <div class="card-body">
-                          <p class="text-muted font-weight-light"><?= $topic['top_contenu'] ?></p>
+                          <p class="text-muted font-weight-light"><?= $parser->getAsHtml() ?></p>
                         </div>
                         <div class="card-footer text-muted font-weight-light text-right">
                           <?= date_format(date_create($topic['top_date_creation']), 'd/m/Y H:i') ?>
@@ -184,12 +204,16 @@
             <h6 class="card-header">Dernières publications</h6>
             <div class="table-responsive">
               <table class="table table-striped table-hover mb-0">
-                <tr class="lien align-middle" onclick="location.href = '#'">
-                  <td class="align-middle"><b>Re: <a href="./forum.topic.vue.php?categorie=Catégorie&ss-categorie=Sous-catégorie">@Informations</a></b> <br/> <small class="text-muted">par <b><a href="">@Toto</a></b></small> <br/> @Réponse...</td>
-                </tr>
-                <tr class="lien align-middle" onclick="location.href = '#'">
-                  <td class="align-middle"><b>Re: <a href="./forum.topic.vue.php?categorie=Catégorie&ss-categorie=Sous-catégorie">@Généralités</a></b> <br/> <small class="text-muted">par <b><a href="">@Titi</a></b></small> <br/> @Réponse...</td>
-                </tr>
+                <?php
+
+                  $dernieres_publis_sscat = get_derniers_topics_sscategorie($id_sscategorie_topic);
+
+                  while($dpssc = $dernieres_publis_sscat->fetch()) {
+                ?>
+                  <tr class="lien align-middle" onclick="location.href = './forum.topic.vue.php?titre=<?= url_custom_encode($dpssc['top_sujet']) ?>&id=<?= $dpssc['top_id'] ?>&page=1'">
+                    <td class="align-middle"><b><a href="./forum.topic.vue.php?titre=<?= url_custom_encode($dpssc['top_sujet']) ?>&id=<?= $dpssc['top_id'] ?>&page=1"><?= $dpssc['top_sujet'] ?></a></b> <br/> <small class="text-muted">par <b><a href="./compte.vue.php?mem_id=<?php echo $dpssc['mem_id']; ?>"><?= get_nom_prenom_membre($dpssc['mem_id']) ?></a></b></small></td>
+                  </tr>
+                <?php } ?>
               </table>
             </div>
           </div>
@@ -199,12 +223,22 @@
           ?>
           <!-- Activités récentes relatives à l'utilisateur -->
           <div class="card" style="margin-bottom:25px">
-            <h6 class="card-header">Réponses à vos publications</h6>
-            <div class="card-body">
-              <p class="card-text text-muted">@Aucune réponse à afficher.</p>
-            </div>
-            <div class="card-footer text-muted text-center">
-              Dernière activité : @Jamais.
+            <h6 class="card-header">Dernières réponses à vos topics</h6>
+            <div class="table-responsive">
+              <table class="table table-striped table-hover mb-0">
+                <?php
+
+                  $dernieres_reponses = get_dernieres_reponses($_SESSION['mem_id']);
+
+                  while ($dr = $dernieres_reponses->fetch()) {
+
+                ?>
+                  <tr class="lien align-middle" onclick="location.href='./forum.topic.vue.php?titre=<?= url_custom_encode(get_sujet_topic($dr['top_id'])) ?>&id=<?= $dr['top_id'] ?>&page=1'">
+                    <td class="align-middle"><b><a href="./forum.topic.vue.php?titre=<?= url_custom_encode(get_sujet_topic($dr['top_id'])) ?>&id=<?= $dr['top_id'] ?>&page=1"><?= get_sujet_topic($dr['top_id']) ?></a></b>
+                    <br/><small class="text-muted">par <b><a href="./compte.vue.php?mem_id=<?= $dr['mem_id'] ?>"><?= get_nom_prenom_membre($dr['mem_id']) ?></a></b></small></td>
+                  </tr>
+                <?php } ?>
+              </table>
             </div>
           </div>
           <!-- Fin -->
@@ -218,7 +252,7 @@
 
     <!-- Footer -->
     <?php
-      //require("footer.vue.php");
+      require("footer.vue.php");
     ?>
     <!-- Fin footer -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  -->
