@@ -159,6 +159,13 @@
 
             echo $pagination;
           ?>
+          <?php
+
+            if (isset($erreur)) {
+
+              afficherAlerte("", $erreur, "danger");
+            }
+          ?>
           <form method="post" action="">
             <textarea id="editor" name="reponse" rows="8"></textarea>
             <button type="submit" name="btn_envoyer" class="btn btn-secondary btn-lg btn-block" style="margin-top: 25px;margin-bottom:25px; background-color:#8CB75B; border-color:#8CB75B;">Poster une réponse</button>
@@ -205,7 +212,7 @@
 
     <!-- Footer -->
     <?php
-      require("footer.vue.php");
+      //require("footer.vue.php");
     ?>
     <!-- Fin footer -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  -->

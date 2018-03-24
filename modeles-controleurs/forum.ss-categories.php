@@ -63,7 +63,7 @@
   		$total_topics->execute(array($id_categorie, $id_sous_categorie));
 
       $nb_topics = $total_topics->rowCount();
-      $topicsParPage = 3;
+      $topicsParPage = 10;
       $pagesTotales = ceil($nb_topics/$topicsParPage);
 
       if (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0) {

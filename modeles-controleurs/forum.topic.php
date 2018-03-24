@@ -36,11 +36,11 @@
             $requete->execute(array($get_id, $_SESSION['mem_id'], $reponse));
           } else {
 
-            "Votre message ne peut pas être vide";
+            $erreur = "Votre message ne peut pas être vide";
           }
         } else {
 
-          echo "Vous devez être connecté";
+          $erreur = "Vous devez être connecté pour poster un message. Cliquez <a href=\"../vues/connexion.vue.php\">ici</a> pour vous connecter.";
         }
       }
 
