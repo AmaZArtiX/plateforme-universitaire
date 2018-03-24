@@ -40,14 +40,26 @@
     <!-- Formulaire -->
     <div class="container" style="margin-top:5rem; margin-bottom:50px;">
       <div class="row justify-content-center">
-        <div class="col-md-9">
+        <div class="col-md-12">
           <form role="form" method="post" action="" style="margin-bottom:25px">
             <h2>Créez un nouveau topic !</h2>
             <hr/>
+            <?php
+
+              if(isset($erreur)){
+
+                afficherAlerte("", $erreur, "danger");
+
+              } else if(isset($succes)){
+
+                afficherAlerte("Votre topic a bien été créé ! ", $succes, "success");
+              }
+
+            ?>
             <div class="form-row">
               <div class="form-group col-md-12">
                 <label for="inputSujet">Sujet :</label>
-                <input type="text" class="form-control" placeholder="Exemple: Les livres de programmation">
+                <input type="text" name="top_sujet" class="form-control" placeholder="Exemple: Les livres de programmation">
               </div>
             </div>
             <div class="form-row">
@@ -55,11 +67,12 @@
                 <label>Sous-catégorie :</label>
                 <div class="input-group mb-2">
                   <div class="input-group-prepend">
-                    <div class="input-group-text">@Catégorie</div>
+                    <div class="input-group-text"><?= $categorie ?></div>
                   </div>
-                  <select class="form-control">
-                    <option value="@Sous-catégorie 1" selected>@Sous-catégorie 1</option>
-                    <option value="@Sous-catégorie 2">@Sous-catégorie 2</option>
+                  <select class="form-control" name="top_sscat">
+                    <?php while($sc = $souscategorie->fetch()) { ?>
+        						<option value="<?= $sc['sscat_id'] ?>"><?= $sc['sscat_nom'] ?></option>
+        						<?php } ?>
                   </select>
                 </div>
               </div>
@@ -67,74 +80,18 @@
             <div class="form-row">
               <div class="form-group col-md-12">
                 <label>Message :</label>
-                <textarea id="editor" name="reponse" rows="8"></textarea>
+                <textarea id="editor" name="top_contenu" rows="8"></textarea>
               </div>
             </div>
             <div class="form-inline">
               <div class="custom-control custom-checkbox mr-sm-2">
-                <input type="checkbox" class="custom-control-input" id="notif-mail">
+                <input type="checkbox" name="top_notif" class="custom-control-input" id="notif-mail">
                 <label class="custom-control-label" for="notif-mail">Me notifier par email</label>
               </div>
-              <button type="submit" class="btn btn-secondary mr-sm-2" style="background-color:#8CB75B; border-color:#8CB75B;">Poster le nouveau topic</button>
+              <button type="submit" name="btn_envoyer" class="btn btn-secondary mr-sm-2" style="background-color:#8CB75B; border-color:#8CB75B;">Poster le nouveau topic</button>
               <button type="reset" class="btn btn-secondary">Annuler</button>
             </div>
           </form>
-        </div>
-
-        <div class="col-md-3">
-          <!-- Activités récentes -->
-          <div class="card" style="margin-bottom:25px">
-            <h6 class="card-header">Dernières publications</h6>
-            <div class="table-responsive">
-              <table class="table table-striped table-hover mb-0">
-                <?php
-                  $dernieres_publis_categorie = get_derniers_topics_categorie($id_categorie);
-
-                  while($dpc = $dernieres_publis_categorie->fetch()) {
-                ?>
-                  <tr class="lien align-middle" onclick="location.href = './forum.topic.vue.php?titre=<?= url_custom_encode($dpc['top_sujet']) ?>&id=<?= $dpc['top_id'] ?>&page=1'">
-                    <td class="align-middle"><b>Re: <a href="./forum.topic.vue.php?titre=<?= url_custom_encode($dpc['top_sujet']) ?>&id=<?= $dpc['top_id'] ?>&page=1"><?= $dpc['top_sujet'] ?></a></b> <br/> <small class="text-muted">par <b><a href=""><?= get_nom_prenom_membre($dpc['mem_id']) ?></a></b></small></td>
-                  </tr>
-                <?php } ?>
-              </table>
-            </div>
-          </div>
-
-          <?php
-            if (isset($_SESSION['mem_id'])) {
-          ?>
-          <!-- Activités récentes relatives à l'utilisateur -->
-          <div class="card" style="margin-bottom:25px">
-            <h6 class="card-header">Réponses à vos publications</h6>
-            <div class="card-body">
-              <p class="card-text text-muted">@Aucune réponse à afficher.</p>
-            </div>
-            <div class="card-footer text-muted text-center">
-              Dernière activité : @Jamais.
-            </div>
-          </div>
-          <!-- Fin -->
-          <?php
-            }
-          ?>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-          <?php
-
-            if(isset($erreur)){
-
-              afficherAlerte("", $erreur, "danger");
-
-            } else if(isset($succes)){
-
-              afficherAlerte("Félicitations ! ", $succes, "success");
-            }
-
-          ?>
         </div>
       </div>
     </div>

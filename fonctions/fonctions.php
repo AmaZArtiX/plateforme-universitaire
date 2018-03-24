@@ -100,9 +100,9 @@
     $rp = []; //tableau de remplaçants
 
     while($m = $requete->fetch()) {
-      array_push($mots, $m['mot']); //empile les valeurs dans le tableau
+      array_push($mots, $m['gross_mot']); //empile les valeurs dans le tableau
       $r = '';
-      for($i=0;$i<strlen($m['mot']);$i++){ //nombre d'* en fonction du nombre de caractères du mot filtré
+      for($i=0;$i<strlen($m['gross_mot']);$i++){ //nombre d'* en fonction du nombre de caractères du mot filtré
         $r .= '*'; //concaténation
       }
       array_push($rp, $r);
@@ -158,9 +158,9 @@
     if($requete->rowCount() > 0){
 
       $requete = $requete->fetch();
-      $dernier_topic = "Re: ".$requete['top_sujet'];
+      $dernier_topic = "".$requete['top_sujet'];
       $dernier_topic .= "<br/> par <b><a href=\"./compte.vue.php?mem_id=".$requete['mem_id']."\">".get_nom_prenom_membre($requete['mem_id'])."</a><b>";
-      $dernier_topic .= " ".date_format(date_create($requete['top_date_creation']), 'd/m/Y H:i:s');
+      $dernier_topic .= " ".date_format(date_create($requete['top_date_creation']), 'd/m/Y H:i');
 
     } else {
 
@@ -243,9 +243,9 @@
     if($requete->rowCount() > 0){
 
       $requete = $requete->fetch();
-      $dernier_topic = "Re: ".$requete['top_sujet'];
+      $dernier_topic = "".$requete['top_sujet'];
       $dernier_topic .= "<br/> par <b><a href=\"./compte.vue.php?mem_id=".$requete['mem_id']."\">".get_nom_prenom_membre($requete['mem_id'])."</a><b>";
-      $dernier_topic .= " ".date_format(date_create($requete['top_date_creation']), 'd/m/Y H:i:s');
+      $dernier_topic .= " ".date_format(date_create($requete['top_date_creation']), 'd/m/Y H:i');
 
     } else {
 
@@ -394,5 +394,65 @@
     $sscategorie = $sscategorie->fetch()['sscat_nom'];
 
     return $sscategorie;
+  }
+
+  /**
+   * [get_dernieres_reponses description]
+   * @param  [type] $id_membre [description]
+   * @return [type]            [description]
+   */
+  function get_dernieres_reponses($id_membre){
+
+    global $bdd;
+
+    $requete = "SELECT *
+                FROM (
+                      SELECT t_message_mess.top_id, t_message_mess.mem_id, t_message_mess.mess_contenu, t_message_mess.mess_date_post
+                      FROM t_message_mess WHERE t_message_mess.mem_id <> ?
+                      HAVING t_message_mess.mess_date_post
+                      IN (SELECT MAX(t_message_mess.mess_date_post) FROM t_message_mess
+                      GROUP BY t_message_mess.top_id)
+                      ORDER BY t_message_mess.mess_date_post) d
+                WHERE d.top_id
+                IN (SELECT t_topic_top.top_id
+                    FROM t_topic_top
+                    WHERE t_topic_top.mem_id = ?)";
+
+    $messages = $bdd->prepare($requete);
+    $messages->execute(array($id_membre, $id_membre));
+
+    return $messages;
+  }
+
+  /**
+   * [get_sujet_topic description]
+   * @param  [type] $id_topic [description]
+   * @return [type]           [description]
+   */
+  function get_sujet_topic($id_topic){
+
+    global $bdd;
+
+    $sujet = $bdd->prepare("SELECT t_topic_top.top_sujet FROM t_topic_top WHERE t_topic_top.top_id = ?");
+    $sujet->execute(array($id_topic));
+    $sujet = $sujet->fetch()['top_sujet'];
+
+    return $sujet;
+  }
+
+  /**
+   * [get_id_sscategorie_topic description]
+   * @param  [type] $id_topic [description]
+   * @return [type]           [description]
+   */
+  function get_id_sscategorie_topic($id_topic){
+
+    global $bdd;
+
+    $id = $bdd->prepare("SELECT tj_topictheme_topth.sscat_id FROM tj_topictheme_topth WHERE tj_topictheme_topth.top_id = ?");
+    $id->execute(array($id_topic));
+    $id = $id->fetch()['sscat_id'];
+
+    return $id;
   }
 ?>
