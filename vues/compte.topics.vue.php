@@ -43,13 +43,16 @@
               </ul>
             </div>
             <div class="table-responsive">
+              <form action="" method="post">
               <table class="table table-striped table-hover mb-0">
                 <thead>
                   <tr style="background-color:#8CB75B; color:white;">
                     <th scope="col">Sujet</th>
-                    <th scope="col">Contenu</th>
                     <th scope="col">Date de création</th>
                     <th scope="col">Dernier message</th>
+                    <?php if(!isset($_GET['mem_id'])) { ?>
+                      <th scope="col">Marqué comme résolu</th>
+                    <?php } ?>
                   </tr>
                 </thead>
                 <tbody>
@@ -62,29 +65,49 @@
 
                   while($dpm = $dernieres_publis_membre->fetch()) {
                 ?>
-                  <tr class="lien align-middle" onclick="location.href = './forum.topic.vue.php?titre=<?= url_custom_encode($dpm['top_sujet']) ?>&id=<?= $dpm['top_id'] ?>&page=1'">
+                  <tr class="lien align-middle">
                     <td class="align-middle text-left">
                       <b><a href="./forum.topic.vue.php?titre=<?= url_custom_encode($dpm['top_sujet']) ?>&id=<?= $dpm['top_id'] ?>&page=1"><?= $dpm['top_sujet'] ?></a></b>
                     </td>
-                    <td class="align-middle text-left">
-                      <?= $dpm['top_contenu'] ?>
-                    </td>
                     <td class="align-middle">
-                      <?= $dpm['top_date_creation'] ?>
+                      <?= date_format(date_create($dpm['top_date_creation']), 'd/m/Y H:i') ?>
                     </td>
                     <td class="align-middle">
                       <?= get_derniere_rep_topic($dpm['top_id']); ?>
                     </td>
+                    <?php
+                      if(!isset($_GET['mem_id'])){
+
+                        if ($dpm['top_resolu'] != 1) {
+                    ?>
+                          <td class="align-middle"><input type="checkbox" name="resolu[]" value="<?= $dpm['top_id'] ?>"/></td>
+                    <?php } else { ?>
+                            <td class="align-middle"></td>
+                    <?php
+                        }
+                      }
+                     ?>
                   </tr>
                 <?php } ?>
                 </tbody>
               </table>
+              <input type="submit" name="envoyer" value="Sauvegarder"/>
+            </form>
             </div>
           </div>
         </div>
         <div class="col-md-2"></div>
       </div>
     </div>
+    <?php
+
+      if (isset($string)) {
+
+        echo $string;
+      }
+
+
+    ?>
     <!-- Fin -->
 
     <!-- Footer -->

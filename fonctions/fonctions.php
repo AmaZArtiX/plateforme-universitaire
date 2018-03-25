@@ -271,7 +271,7 @@
 
       $requete = $requete->fetch();
       $dernier_topic = "par <b><a href=\"./compte.vue.php?mem_id=".$requete['mem_id']."\">".get_nom_prenom_membre($requete['mem_id'])."</a></b><br/>";
-      $dernier_topic .= " ".date_format(date_create($requete['mess_date_post']), 'd/m/Y H:i:s');
+      $dernier_topic .= " ".date_format(date_create($requete['mess_date_post']), 'd/m/Y H:i');
 
     } else {
 

@@ -36,9 +36,19 @@
       require("header.vue.php");
     ?>
     <!-- Fin header -->
+    <div class="container" style="margin-top:5rem; margin-bottom: 25px;">
+      <?php
+
+        if($topic['top_resolu'] == 1){
+
+          afficherAlerte("", "Ce topic est résolu", "success");
+        }
+
+       ?>
+     </div>
 
     <!-- Breadcrumb -->
-    <div class="container" style="margin-top:5rem; margin-bottom: 25px;">
+    <div class="container" style="margin-bottom: 25px;">
       <div class="row">
         <div class="col-md-8">
           <nav aria-label="breadcrumb">
