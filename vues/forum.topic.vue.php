@@ -21,7 +21,7 @@
   <head>
     <meta charset="utf-8">
     <title>Forum étudiant</title>
-    <!-- <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">-->
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
@@ -37,10 +37,10 @@
     ?>
     <!-- Fin header -->
 
-    <!-- Breadcrumb -->
-    <div class="container" style="margin-top:5rem; margin-bottom: 25px;">
+    <!-- Principal -->
+    <div class="container" style="margin-top:5rem; margin-bottom:1rem;">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-9">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./forum.vue.php">Accueil</a></li>
@@ -49,27 +49,8 @@
               <li class="breadcrumb-item active" aria-current="page"><?= $topic['top_sujet'] ?></a></li>
             </ol>
           </nav>
-        </div>
-        <div class="input-group col-md-4">
-          <form class="form-inline" action="../vues/forum.topics.vue.php" method="get">
-            <input class="form-control" type="search" name="recherche" placeholder="Rechercher un topic" aria-label="Search">
-            <span class="input-group-append">
-              <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
-            </span>
-          </form>
-        </div>
-      </div>
-    </div>
 
-
-    <!-- Fin Breadcrumb -->
-
-    <!-- Principal -->
-    <div class="container">
-      <div class="row">
-        <div class="col-md-9">
-
-          <div class="card" style="margin-bottom:25px;">
+          <div class="card" style="margin-bottom:1rem;">
             <h6 class="card-header" style="color:white; background-color:#8CB75B; border-color:#8CB75B;">
               <b>• <?= $topic['top_sujet'] ?> - <?= date_format(date_create($topic['top_date_creation']), 'd/m/Y H:i') ?></b>
             </h6>
@@ -87,7 +68,10 @@
                           <figure class="figure">
                             <img class="img-thumbnail" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="90" height="90" style="border-color:#8CB75B;">
                             <figcaption class="figure-caption">
-                              <h6 class="card-title"><a href=""><?= get_nom_prenom_membre($topic['mem_id']) ?></a></h6>
+                              <h6 class="card-title"><a href="./compte.vue.php?mem_id=<?php echo $topic['mem_id']; ?>"><?= get_nom_prenom_membre($topic['mem_id']) ?></a></h6>
+                              <?php if(get_admin_membre($topic['mem_id']) == 1) { ?>
+                              <span class="badge badge-warning">Administrateur</span>
+                              <?php } ?>
                               <span class="badge badge-info">Utilisateur</span>
                             </figcaption>
                           </figure>
@@ -118,7 +102,10 @@
                           <figure class="figure">
                             <img class="img-thumbnail" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="90" height="90" style="border-color:#8CB75B;">
                             <figcaption class="figure-caption">
-                              <h6 class="card-title"><a href=""><?= get_nom_prenom_membre($reponse['mem_id']) ?></a></h6>
+                              <h6 class="card-title"><a href="./compte.vue.php?mem_id=<?php echo $reponse['mem_id']; ?>"><?= get_nom_prenom_membre($reponse['mem_id']) ?></a></h6>
+                              <?php if(get_admin_membre($reponse['mem_id']) == 1) { ?>
+                              <span class="badge badge-warning">Administrateur</span>
+                              <?php } ?>
                               <span class="badge badge-info">Utilisateur</span>
                             </figcaption>
                           </figure>
@@ -194,13 +181,17 @@
           ?>
           <form method="post" action="">
             <textarea id="editor" name="reponse" rows="8"></textarea>
-            <button type="submit" name="btn_envoyer" class="btn btn-secondary btn-lg btn-block" style="margin-top:25px; margin-bottom:25px; background-color:#8CB75B; border-color:#8CB75B;">Poster une réponse</button>
+            <button type="submit" name="btn_envoyer" class="btn btn-secondary btn-lg btn-block" style="margin-top:1rem; margin-bottom:1rem; background-color:#8CB75B; border-color:#8CB75B;">Poster une réponse</button>
           </form>
         </div>
         <div class="col-md-3">
+          <form class="input-group" action="../vues/forum.topics.vue.php" method="get" style="margin-bottom:1rem;">
+            <input class="form-control" type="search" id="recherche" name="recherche" placeholder="Rechercher un topic" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit" for="recherche"><i class="fa fa-search"></i></button>
+          </form>
 
           <!-- Activités récentes -->
-          <div class="card" style="margin-bottom:25px">
+          <div class="card" style="margin-bottom:1rem">
             <h6 class="card-header">Dernières publications</h6>
             <div class="table-responsive">
               <table class="table table-striped table-hover mb-0">
@@ -222,7 +213,7 @@
             if (isset($_SESSION['mem_id'])) {
           ?>
           <!-- Activités récentes relatives à l'utilisateur -->
-          <div class="card" style="margin-bottom:25px">
+          <div class="card" style="margin-bottom:1rem">
             <h6 class="card-header">Dernières réponses à vos topics</h6>
             <div class="table-responsive">
               <table class="table table-striped table-hover mb-0">
@@ -230,13 +221,18 @@
 
                   $dernieres_reponses = get_dernieres_reponses($_SESSION['mem_id']);
 
-                  while ($dr = $dernieres_reponses->fetch()) {
+                  if($dernieres_reponses->rowCount() > 0) {
+                    while ($dr = $dernieres_reponses->fetch()) {
 
                 ?>
-                  <tr class="lien align-middle" onclick="location.href='./forum.topic.vue.php?titre=<?= url_custom_encode(get_sujet_topic($dr['top_id'])) ?>&id=<?= $dr['top_id'] ?>&page=1'">
-                    <td class="align-middle"><b><a href="./forum.topic.vue.php?titre=<?= url_custom_encode(get_sujet_topic($dr['top_id'])) ?>&id=<?= $dr['top_id'] ?>&page=1"><?= get_sujet_topic($dr['top_id']) ?></a></b>
-                    <br/><small class="text-muted">par <b><a href="./compte.vue.php?mem_id=<?= $dr['mem_id'] ?>"><?= get_nom_prenom_membre($dr['mem_id']) ?></a></b></small></td>
-                  </tr>
+                <tr class="lien align-middle" onclick="location.href='./forum.topic.vue.php?titre=<?= url_custom_encode(get_sujet_topic($dr['top_id'])) ?>&id=<?= $dr['top_id'] ?>&page=1'">
+                  <td class="align-middle"><b><a href="./forum.topic.vue.php?titre=<?= url_custom_encode(get_sujet_topic($dr['top_id'])) ?>&id=<?= $dr['top_id'] ?>&page=1"><?= get_sujet_topic($dr['top_id']) ?></a></b>
+                  <br/><small class="text-muted">par <b><a href="./compte.vue.php?mem_id=<?= $dr['mem_id'] ?>"><?= get_nom_prenom_membre($dr['mem_id']) ?></a></b></small></td>
+                </tr>
+                <?php } } else { ?>
+                <tr>
+                  <td class="align-middle">Aucune réponse n'a été trouvée.</td>
+                </tr>
                 <?php } ?>
               </table>
             </div>

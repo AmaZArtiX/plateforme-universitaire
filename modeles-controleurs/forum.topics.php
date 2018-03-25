@@ -32,8 +32,6 @@
 
     $requete .= " ORDER BY top_id DESC";
 
-    var_dump($requete);
-
     $topics = $bdd->query($requete);
 
     if($topics->rowCount() == 0){

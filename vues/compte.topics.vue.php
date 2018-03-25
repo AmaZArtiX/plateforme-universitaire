@@ -46,22 +46,23 @@
               <table class="table table-striped table-hover mb-0">
                 <thead>
                   <tr style="background-color:#8CB75B; color:white;">
-                    <th scope="col">Sujet</th>
-                    <th scope="col">Contenu</th>
-                    <th scope="col">Date de création</th>
-                    <th scope="col">Dernier message</th>
+                    <th class="align-middle" scope="col">Sujet</th>
+                    <th class="align-middle" scope="col">Contenu</th>
+                    <th class="align-middle" scope="col">Date de création</th>
+                    <th class="align-middle" scope="col">Dernier message</th>
                   </tr>
                 </thead>
                 <tbody>
-                <?php
-                  if(isset($_GET['mem_id']) && !empty($_GET['mem_id'])) {
-                    $dernieres_publis_membre = get_derniers_topics_membre($_GET['mem_id']);
-                  } else {
-                    $dernieres_publis_membre = get_derniers_topics_membre($_SESSION['mem_id']);
-                  }
+                  <?php
+                    if(isset($_GET['mem_id']) && !empty($_GET['mem_id'])) {
+                      $dernieres_publis_membre = get_derniers_topics_membre($_GET['mem_id']);
+                    } else {
+                      $dernieres_publis_membre = get_derniers_topics_membre($_SESSION['mem_id']);
+                    }
 
-                  while($dpm = $dernieres_publis_membre->fetch()) {
-                ?>
+                    if($dernieres_publis_membre->rowCount() > 0) {
+                      while($dpm = $dernieres_publis_membre->fetch()) {
+                  ?>
                   <tr class="lien align-middle" onclick="location.href = './forum.topic.vue.php?titre=<?= url_custom_encode($dpm['top_sujet']) ?>&id=<?= $dpm['top_id'] ?>&page=1'">
                     <td class="align-middle text-left">
                       <b><a href="./forum.topic.vue.php?titre=<?= url_custom_encode($dpm['top_sujet']) ?>&id=<?= $dpm['top_id'] ?>&page=1"><?= $dpm['top_sujet'] ?></a></b>
@@ -76,7 +77,11 @@
                       <?= get_derniere_rep_topic($dpm['top_id']); ?>
                     </td>
                   </tr>
-                <?php } ?>
+                  <?php } } else { ?>
+                  <tr>
+                    <td class="align-middle" colspan="4">Aucune publication n'a été trouvée.</td>
+                  </tr>
+                  <?php } ?>
                 </tbody>
               </table>
             </div>
