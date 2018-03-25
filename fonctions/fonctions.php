@@ -256,6 +256,32 @@
   }
 
   /**
+   * [get_derniere_rep_topic description]
+   * @param  [type] $top_id [description]
+   * @return [type]         [description]
+   */
+  function get_derniere_rep_topic($top_id) {
+
+    global $bdd;
+
+    $requete = $bdd->prepare("SELECT mem_id, mess_date_post FROM t_message_mess WHERE top_id = ? ORDER BY mess_date_post DESC LIMIT 0,1");
+    $requete->execute(array($top_id));
+
+    if($requete->rowCount() > 0){
+
+      $requete = $requete->fetch();
+      $dernier_topic = "par <b><a href=\"./compte.vue.php?mem_id=".$requete['mem_id']."\">".get_nom_prenom_membre($requete['mem_id'])."</a></b><br/>";
+      $dernier_topic .= " ".date_format(date_create($requete['mess_date_post']), 'd/m/Y H:i:s');
+
+    } else {
+
+      $dernier_topic = "Aucune réponse";
+    }
+
+    return $dernier_topic;
+  }
+
+  /**
    * [get_derniers_topics_categorie description]
    * @param  [type] $id_categorie [description]
    * @return [type]               [description]
@@ -293,6 +319,20 @@
     global $bdd;
     $requete = $bdd->prepare("SELECT * FROM t_topic_top INNER JOIN tj_topictheme_topth ON t_topic_top.top_id = tj_topictheme_topth.top_id WHERE tj_topictheme_topth.sscat_id = ? ORDER BY t_topic_top.top_date_creation DESC LIMIT 0,3");
     $requete->execute(array($id_sscategorie));
+
+    return $requete;
+  }
+
+  /**
+   * [get_derniers_topics_membre description]
+   * @param  [type] $mem_id [description]
+   * @return [type]                 [description]
+   */
+  function get_derniers_topics_membre($mem_id){
+
+    global $bdd;
+    $requete = $bdd->prepare("SELECT * FROM t_topic_top WHERE mem_id = ? ORDER BY top_date_creation DESC");
+    $requete->execute(array($mem_id));
 
     return $requete;
   }

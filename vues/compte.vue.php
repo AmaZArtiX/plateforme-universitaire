@@ -30,12 +30,12 @@
             <div class="card-header">
               <ul class="nav nav-pills card-header-pills">
                 <li class="nav-item">
-                  <a class="nav-link active" href="./compte.vue.php<?php if(isset($_GET['mem_id']) && !empty($_GET['mem_id'])) { echo '?id=' . $_GET['mem_id']; } ?>" style="background-color:#8CB75B; border-color:#8CB75B;">Résumé</a>
+                  <a class="nav-link active" href="./compte.vue.php<?php if(isset($_GET['mem_id']) && !empty($_GET['mem_id'])) { echo '?mem_id=' . $_GET['mem_id']; } ?>" style="background-color:#8CB75B; border-color:#8CB75B;">Résumé</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-muted" href="./compte.topics.vue.php<?php if(isset($_GET['mem_id']) && !empty($_GET['mem_id'])) { echo '?mem_id=' . $_GET['mem_id']; } ?>">Topics Postés</a>
                 </li>
                 <?php if(!isset($_GET['mem_id'])) { ?>
-                <li class="nav-item">
-                  <a class="nav-link text-muted" href="./compte.topics.vue.php">Topics Postés</a>
-                </li>
                 <li class="nav-item">
                   <a class="nav-link text-muted" href="./compte.res.vue.php">Résultats des Tests</a>
                 </li>

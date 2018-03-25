@@ -131,21 +131,30 @@
         <!-- Trois colonnes -->
         <div class="row">
           <div class="col-lg-4">
-            <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+            <img class="rounded-circle" src="../assets/ronan.png" width="140" height="140">
             <h2>Ronan</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <blockquote class="blockquote">
+              <p>Ancien stagiaire à la <i>SNCF</i>, je travaille désormais en tant que stagiaire développeur web pour la <i>DIRECCTE</i>.</p>
+              <footer class="blockquote-footer"><cite>L'informatique a toujours été une passion pour moi, si celle-ci était une voiture, la curiosité en serait le moteur.</cite></footer>
+            </blockquote>
             <p><a class="btn btn-secondary" href="https://github.com/Aklugua" role="button">Voir &raquo;</a></p>
           </div>
           <div class="col-lg-4">
-            <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+            <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="140" height="140">
             <h2>Simon</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <blockquote class="blockquote">
+              <p>En étroite collaboration avec la <i>CCI</i> des Hauts-de-France, je renouvelle mon contrat pour me tourner vers la sécurité</p>
+              <footer class="blockquote-footer"><cite>Notre service informatique possède plus de virus qu'une prostitué à $10 !</cite></footer>
+            </blockquote>
             <p><a class="btn btn-secondary" href="https://github.com/AmaZArtiX" role="button">Voir &raquo;</a></p>
           </div>
           <div class="col-lg-4">
-            <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+            <img class="rounded-circle" src="../assets/yacine.jpg" width="140" height="140">
             <h2>Yacine</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum..</p>
+            <blockquote class="blockquote">
+              <p>Après avoir récemment travaillé au sein d'une équipe IT, je me dirige vers le monde de l'automobile aux côtés de <i>Toyota</i>.</p>
+              <footer class="blockquote-footer"><cite>L'informatique, ça fait gagner beaucoup de temps... à condition d'en avoir beaucoup devant soi !</cite></footer>
+            </blockquote>
             <p><a class="btn btn-secondary" href="https://github.com/thechocoboy" role="button">Voir &raquo;</a></p>
           </div>
         </div>

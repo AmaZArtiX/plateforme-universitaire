@@ -1,5 +1,5 @@
 <?php
-  require("../modeles-controleurs/compte.php");
+  require("../modeles-controleurs/compte.topics.php");
 ?>
 
 <!DOCTYPE html>
@@ -30,18 +30,55 @@
             <div class="card-header">
               <ul class="nav nav-pills card-header-pills">
                 <li class="nav-item">
-                  <a class="nav-link text-muted" href="./compte.vue.php">Résumé</a>
+                  <a class="nav-link text-muted" href="./compte.vue.php<?php if(isset($_GET['mem_id']) && !empty($_GET['mem_id'])) { echo '?mem_id=' . $_GET['mem_id']; } ?>">Résumé</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" href="./compte.topics.vue.php" style="background-color:#8CB75B; border-color:#8CB75B;">Topics Postés</a>
+                  <a class="nav-link active" href="./compte.topics.vue.php<?php if(isset($_GET['mem_id']) && !empty($_GET['mem_id'])) { echo '?mem_id=' . $_GET['mem_id']; } ?>" style="background-color:#8CB75B; border-color:#8CB75B;">Topics Postés</a>
                 </li>
+                <?php if(!isset($_GET['mem_id'])) { ?>
                 <li class="nav-item">
                   <a class="nav-link text-muted" href="./compte.res.vue.php">Résultats des Tests</a>
                 </li>
+                <?php } ?>
               </ul>
             </div>
-            <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-hover mb-0">
+                <thead>
+                  <tr style="background-color:#8CB75B; color:white;">
+                    <th scope="col">Sujet</th>
+                    <th scope="col">Contenu</th>
+                    <th scope="col">Date de création</th>
+                    <th scope="col">Dernier message</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <?php
+                  if(isset($_GET['mem_id']) && !empty($_GET['mem_id'])) {
+                    $dernieres_publis_membre = get_derniers_topics_membre($_GET['mem_id']);
+                  } else {
+                    $dernieres_publis_membre = get_derniers_topics_membre($_SESSION['mem_id']);
+                  }
 
+                  while($dpm = $dernieres_publis_membre->fetch()) {
+                ?>
+                  <tr class="lien align-middle" onclick="location.href = './forum.topic.vue.php?titre=<?= url_custom_encode($dpm['top_sujet']) ?>&id=<?= $dpm['top_id'] ?>&page=1'">
+                    <td class="align-middle text-left">
+                      <b><a href="./forum.topic.vue.php?titre=<?= url_custom_encode($dpm['top_sujet']) ?>&id=<?= $dpm['top_id'] ?>&page=1"><?= $dpm['top_sujet'] ?></a></b>
+                    </td>
+                    <td class="align-middle text-left">
+                      <?= $dpm['top_contenu'] ?>
+                    </td>
+                    <td class="align-middle">
+                      <?= $dpm['top_date_creation'] ?>
+                    </td>
+                    <td class="align-middle">
+                      <?= get_derniere_rep_topic($dpm['top_id']); ?>
+                    </td>
+                  </tr>
+                <?php } ?>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
