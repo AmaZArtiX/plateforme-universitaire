@@ -21,61 +21,57 @@
     ?>
     <!-- Fin header -->
 
-    <!-- Breadcrumb -->
-    <div class="container" style="margin-top:5rem; margin-bottom: 25px;">
+    <!-- Principal -->
+    <div class="container" style="margin-top:5rem; margin-bottom:1rem;">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-9">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item active" aria-current="page">Accueil</li>
             </ol>
           </nav>
-        </div>
-        <div class="input-group col-md-4">
-          <form class="form-inline" action="../vues/forum.topics.vue.php" method="get">
-            <input class="form-control" type="search" name="recherche" placeholder="Rechercher un topic" aria-label="Search">
-            <span class="input-group-append">
-              <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
-            </span>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- Fin Breadcrumb -->
-
-    <!-- Principal -->
-    <div class="container">
-      <div class="row">
-        <div class="col-md-9">
-          <?php while ($f = $forums->fetch()) {
+          <?php
+            if($forums->rowCount() > 0) {
+              while ($f = $forums->fetch()) {
 
             $categories->execute(array($f['for_id']));
 
           ?>
-            <div class="card" style="margin-bottom:25px;">
+            <div class="card" style="margin-bottom:1rem;">
               <h6 class="card-header" style="color:white; background-color:#8CB75B; border-color:#8CB75B;">
                 <b>▲ <a href="#" style="color:white;"><?= $f['for_nom'] ?></a></b>
               </h6>
               <div class="table-responsive">
                 <table class="table table-striped table-hover mb-0">
-                  <?php while ($c = $categories->fetch()) { ?>
-                    <tr class="lien align-middle" onclick="location.href = './forum.categories.vue.php?categorie=<?= $c['cat_nom'] ?>'">
-                      <td class="align-middle">►</td>
-                      <td class="align-middle"><b><?= $c['cat_nom'] ?></b> <br/> <small class="text-muted"><?= $c['cat_description'] ?></small></td>
-                      <td class="text-center text-muted align-middle"><?= get_nb_topics_categorie($c['cat_id']) ?><br/> Topics</td>
-                      <td class="text-center text-muted align-middle"><?= get_nb_posts_categorie($c['cat_id']) ?><br/> Posts</td>
-                      <td class="align-middle" style="text-align:right;"><?= get_dernier_topic_categorie($c['cat_id']) ?></td>
-                    </tr>
+                  <?php
+                    if($categories->rowCount() > 0) {
+                      while ($c = $categories->fetch()) {
+                  ?>
+                  <tr class="lien align-middle" onclick="location.href = './forum.categories.vue.php?categorie=<?= $c['cat_nom'] ?>'">
+                    <td class="align-middle">►</td>
+                    <td class="align-middle"><b><?= $c['cat_nom'] ?></b> <br/> <small class="text-muted"><?= $c['cat_description'] ?></small></td>
+                    <td class="text-center text-muted align-middle"><?= get_nb_topics_categorie($c['cat_id']) ?><br/> Topics</td>
+                    <td class="text-center text-muted align-middle"><?= get_nb_posts_categorie($c['cat_id']) ?><br/> Posts</td>
+                    <td class="align-middle" style="text-align:right;"><?= get_dernier_topic_categorie($c['cat_id']) ?></td>
+                  </tr>
+                  <?php } } else { ?>
+                  <tr>
+                    <td class="align-middle">Aucune catégorie n'a été trouvée.</td>
+                  </tr>
                   <?php } ?>
                 </table>
               </div>
             </div>
-          <?php } ?>
+          <?php } } else { echo "<div class=\"alert alert-light\" role=\"alert\">Aucun forum n'a été trouvée.</div>"; } ?>
         </div>
         <div class="col-md-3">
+          <form class="input-group" action="../vues/forum.topics.vue.php" method="get" style="margin-bottom:1rem;">
+            <input class="form-control" type="search" id="recherche" name="recherche" placeholder="Rechercher un topic" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit" for="recherche"><i class="fa fa-search"></i></button>
+          </form>
 
           <!-- Activités récentes -->
-          <div class="card" style="margin-bottom:25px">
+          <div class="card" style="margin-bottom:1rem;">
             <h6 class="card-header">Dernières publications</h6>
             <div class="table-responsive">
               <table class="table table-striped table-hover mb-0">
@@ -83,12 +79,17 @@
 
                   $dernieres_publis = get_derniers_topics();
 
-                  while ($dp = $dernieres_publis->fetch()) {
+                  if($dernieres_publis->rowCount() > 0) {
+                    while ($dp = $dernieres_publis->fetch()) {
 
                 ?>
                   <tr class="lien align-middle" onclick="location.href='./forum.topic.vue.php?titre=<?= url_custom_encode($dp['top_sujet']) ?>&id=<?= $dp['top_id'] ?>&page=1'">
                     <td class="align-middle"><b><a href="./forum.topic.vue.php?titre=<?= url_custom_encode($dp['top_sujet']) ?>&id=<?= $dp['top_id'] ?>&page=1"><?= $dp['top_sujet'] ?></a></b> <br/> <small class="text-muted">par <b><a href="./compte.vue.php?mem_id=<?= $dp['mem_id'] ?>"><?= get_nom_prenom_membre($dp['mem_id']) ?></a></b></small></td>
                   </tr>
+                <?php } } else { ?>
+                <tr>
+                  <td class="align-middle">Aucune publication n'a été trouvée.</td>
+                </tr>
                 <?php } ?>
               </table>
             </div>
@@ -98,7 +99,7 @@
             if (isset($_SESSION['mem_id'])) {
           ?>
           <!-- Activités récentes relatives à l'utilisateur -->
-          <div class="card" style="margin-bottom:25px">
+          <div class="card" style="margin-bottom:1rem;">
             <h6 class="card-header">Dernières réponses à vos topics</h6>
             <div class="table-responsive">
               <table class="table table-striped table-hover mb-0">
@@ -106,13 +107,18 @@
 
                   $dernieres_reponses = get_dernieres_reponses($_SESSION['mem_id']);
 
-                  while ($dr = $dernieres_reponses->fetch()) {
+                  if($dernieres_reponses->rowCount() > 0) {
+                    while ($dr = $dernieres_reponses->fetch()) {
 
                 ?>
-                  <tr class="lien align-middle" onclick="location.href='./forum.topic.vue.php?titre=<?= url_custom_encode(get_sujet_topic($dr['top_id'])) ?>&id=<?= $dr['top_id'] ?>&page=1'">
-                    <td class="align-middle"><b><a href="./forum.topic.vue.php?titre=<?= url_custom_encode(get_sujet_topic($dr['top_id'])) ?>&id=<?= $dr['top_id'] ?>&page=1"><?= get_sujet_topic($dr['top_id']) ?></a></b>
-                    <br/><small class="text-muted">par <b><a href="./compte.vue.php?mem_id=<?= $dr['mem_id'] ?>"><?= get_nom_prenom_membre($dr['mem_id']) ?></a></b></small></td>
-                  </tr>
+                <tr class="lien align-middle" onclick="location.href='./forum.topic.vue.php?titre=<?= url_custom_encode(get_sujet_topic($dr['top_id'])) ?>&id=<?= $dr['top_id'] ?>&page=1'">
+                  <td class="align-middle"><b><a href="./forum.topic.vue.php?titre=<?= url_custom_encode(get_sujet_topic($dr['top_id'])) ?>&id=<?= $dr['top_id'] ?>&page=1"><?= get_sujet_topic($dr['top_id']) ?></a></b>
+                  <br/><small class="text-muted">par <b><a href="./compte.vue.php?mem_id=<?= $dr['mem_id'] ?>"><?= get_nom_prenom_membre($dr['mem_id']) ?></a></b></small></td>
+                </tr>
+                <?php } } else { ?>
+                <tr>
+                  <td class="align-middle">Aucune réponse n'a été trouvée.</td>
+                </tr>
                 <?php } ?>
               </table>
             </div>

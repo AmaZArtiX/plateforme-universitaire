@@ -37,10 +37,10 @@
     ?>
     <!-- Fin header -->
 
-    <!-- Breadcrumb -->
-    <div class="container" style="margin-top:5rem; margin-bottom: 25px;">
+    <!-- Principal -->
+    <div class="container" style="margin-top:5rem; margin-bottom:1rem;">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-9">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="../vues/forum.vue.php">Accueil</a></li>
@@ -48,50 +48,36 @@
               <li class="breadcrumb-item active" aria-current="page"><?= $recherche ?></li>
             </ol>
           </nav>
-        </div>
-        <div class="input-group col-md-4">
-          <form class="form-inline" action="../vues/forum.topics.vue.php" method="get">
-            <input class="form-control" type="search" name="recherche" placeholder="Rechercher un topic" aria-label="Search">
-            <span class="input-group-append">
-              <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
-            </span>
-          </form>
-        </div>
-      </div>
-    </div>
 
-    <!-- Fin Breadcrumb -->
+          <?php
+            if($topics->rowCount() > 0) {
+              while ($t = $topics->fetch()) {
 
-    <!-- Principal -->
-    <div class="container">
-      <div class="row">
-        <div class="col-md-9">
-          <?php if($topics->rowCount() > 0) { ?>
-          <?php   while ($t = $topics->fetch()) {
-
-                    $parser->parse($t['top_contenu']);
-
-            ?>
-            <div class="card" style="margin-bottom:25px;">
-              <h6 class="card-header" style="color:white; background-color:#8CB75B; border-color:#8CB75B;">
-                <b>¤ <a href="./forum.topic.vue.php?titre=<?= url_custom_encode($t['top_sujet'])?>&id=<?= $t['top_id'] ?>&page=1" style="color:white;"><?= $t['top_sujet']?> - <?= get_nom_prenom_membre($t['mem_id']) ?></a></b>
-              </h6>
-              <div class="card-body">
-                <?=  $parser->getAsHtml(); ?>
-              </div>
-              <div class="card-footer text-muted text-center">
-                <?= date_format(date_create($t['top_date_creation']), 'd/m/Y H:i') ?>
-              </div>
+                $parser->parse($t['top_contenu']);
+          ?>
+          <div class="card" style="margin-bottom:1rem;">
+            <h6 class="card-header" style="color:white; background-color:#8CB75B; border-color:#8CB75B;">
+              <b>¤ <a href="./forum.topic.vue.php?titre=<?= url_custom_encode($t['top_sujet'])?>&id=<?= $t['top_id'] ?>&page=1" style="color:white;"><?= $t['top_sujet']?> - <?= get_nom_prenom_membre($t['mem_id']) ?></a></b>
+            </h6>
+            <div class="card-body">
+              <?=  $parser->getAsHtml(); ?>
             </div>
-          <?php } ?>
-        <?php } else {
-          echo "Aucun résultat à afficher pour votre recherche";
+            <div class="card-footer text-muted text-center">
+              <?= date_format(date_create($t['top_date_creation']), 'd/m/Y H:i') ?>
+            </div>
+          </div>
+          <?php } } else {
+            echo "<div class=\"alert alert-light\" role=\"alert\">Aucun résultat à afficher pour votre recherche.</div>";
         } ?>
         </div>
         <div class="col-md-3">
+          <form class="input-group" action="../vues/forum.topics.vue.php" method="get" style="margin-bottom:1rem;">
+            <input class="form-control" type="search" id="recherche" name="recherche" placeholder="Rechercher un topic" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit" for="recherche"><i class="fa fa-search"></i></button>
+          </form>
 
           <!-- Activités récentes -->
-          <div class="card" style="margin-bottom:25px">
+          <div class="card" style="margin-bottom:1rem">
             <h6 class="card-header">Dernières publications</h6>
             <div class="table-responsive">
               <table class="table table-striped table-hover mb-0">
@@ -111,7 +97,7 @@
             if (isset($_SESSION['mem_id'])) {
           ?>
           <!-- Activités récentes relatives à l'utilisateur -->
-          <div class="card" style="margin-bottom:25px">
+          <div class="card" style="margin-bottom:1rem">
             <h6 class="card-header">Dernières réponses à vos topics</h6>
             <div class="table-responsive">
               <table class="table table-striped table-hover mb-0">
@@ -119,13 +105,18 @@
 
                   $dernieres_reponses = get_dernieres_reponses($_SESSION['mem_id']);
 
-                  while ($dr = $dernieres_reponses->fetch()) {
+                  if($dernieres_reponses->rowCount() > 0) {
+                    while ($dr = $dernieres_reponses->fetch()) {
 
                 ?>
-                  <tr class="lien align-middle" onclick="location.href='./forum.topic.vue.php?titre=<?= url_custom_encode(get_sujet_topic($dr['top_id'])) ?>&id=<?= $dr['top_id'] ?>&page=1'">
-                    <td class="align-middle"><b><a href="./forum.topic.vue.php?titre=<?= url_custom_encode(get_sujet_topic($dr['top_id'])) ?>&id=<?= $dr['top_id'] ?>&page=1"><?= get_sujet_topic($dr['top_id']) ?></a></b>
-                    <br/><small class="text-muted">par <b><a href="./compte.vue.php?mem_id=<?= $dr['mem_id'] ?>"><?= get_nom_prenom_membre($dr['mem_id']) ?></a></b></small></td>
-                  </tr>
+                <tr class="lien align-middle" onclick="location.href='./forum.topic.vue.php?titre=<?= url_custom_encode(get_sujet_topic($dr['top_id'])) ?>&id=<?= $dr['top_id'] ?>&page=1'">
+                  <td class="align-middle"><b><a href="./forum.topic.vue.php?titre=<?= url_custom_encode(get_sujet_topic($dr['top_id'])) ?>&id=<?= $dr['top_id'] ?>&page=1"><?= get_sujet_topic($dr['top_id']) ?></a></b>
+                  <br/><small class="text-muted">par <b><a href="./compte.vue.php?mem_id=<?= $dr['mem_id'] ?>"><?= get_nom_prenom_membre($dr['mem_id']) ?></a></b></small></td>
+                </tr>
+                <?php } } else { ?>
+                <tr>
+                  <td class="align-middle">Aucune réponse n'a été trouvée.</td>
+                </tr>
                 <?php } ?>
               </table>
             </div>

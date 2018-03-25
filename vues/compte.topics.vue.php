@@ -56,16 +56,18 @@
                   </tr>
                 </thead>
                 <tbody>
-                <?php
-                  if(isset($_GET['mem_id']) && !empty($_GET['mem_id'])) {
-                    $dernieres_publis_membre = get_derniers_topics_membre($_GET['mem_id']);
-                  } else {
-                    $dernieres_publis_membre = get_derniers_topics_membre($_SESSION['mem_id']);
-                  }
+                  <?php
+                    if(isset($_GET['mem_id']) && !empty($_GET['mem_id'])) {
+                      $dernieres_publis_membre = get_derniers_topics_membre($_GET['mem_id']);
+                    } else {
+                      $dernieres_publis_membre = get_derniers_topics_membre($_SESSION['mem_id']);
+                    }
 
-                  while($dpm = $dernieres_publis_membre->fetch()) {
-                ?>
+                    if($dernieres_publis_membre->rowCount() > 0) {
+                      while($dpm = $dernieres_publis_membre->fetch()) {
+                  ?>
                   <tr class="lien align-middle">
+
                     <td class="align-middle text-left">
                       <b><a href="./forum.topic.vue.php?titre=<?= url_custom_encode($dpm['top_sujet']) ?>&id=<?= $dpm['top_id'] ?>&page=1"><?= $dpm['top_sujet'] ?></a></b>
                     </td>
@@ -88,10 +90,16 @@
                       }
                      ?>
                   </tr>
-                <?php } ?>
+                  <?php } } else { ?>
+                  <tr>
+                    <td class="align-middle" colspan="4">Aucune publication n'a été trouvée.</td>
+                  </tr>
+                  <?php } ?>
                 </tbody>
               </table>
-              <input type="submit" name="envoyer" value="Sauvegarder"/>
+              <?php if(!isset($_GET['mem_id'])) { ?>
+                <input type="submit" name="envoyer" value="Sauvegarder"/>
+              <?php } ?>
             </form>
             </div>
           </div>
@@ -99,15 +107,6 @@
         <div class="col-md-2"></div>
       </div>
     </div>
-    <?php
-
-      if (isset($string)) {
-
-        echo $string;
-      }
-
-
-    ?>
     <!-- Fin -->
 
     <!-- Footer -->

@@ -1,5 +1,5 @@
 <?php
-  require("../modeles-controleurs/compte.php");
+  require("../modeles-controleurs/faq.php");
 ?>
 
 <!DOCTYPE html>
@@ -21,8 +21,33 @@
     <!-- Fin header -->
 
     <!-- Principal -->
-    <div class="container" style="margin-top:5rem; margin-bottom:25px;">
-
+    <div class="container" style="margin-top:5rem; margin-bottom:1rem;">
+      <div class="card">
+        <div class="card-header" style="color:white; background-color:#8CB75B; border-color:#8CB75B;">
+          Questions Fréquemment Posées
+        </div>
+        <div id="accordion">
+          <?php
+            if($requete->rowCount() > 0) {
+              while ($qr = $requete->fetch()) {
+          ?>
+          <div class="card">
+            <div class="card-header" id="heading<?= $qr['qr_id'] ?>">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<?= $qr['qr_id'] ?>" aria-expanded="false" aria-controls="collapse<?= $qr['qr_id'] ?>" style="color:#8CB75B;">
+                  <?= $qr['qr_question'] ?>
+                </button>
+              </h5>
+            </div>
+            <div id="collapse<?= $qr['qr_id'] ?>" class="collapse" aria-labelledby="heading<?= $qr['qr_id'] ?>" data-parent="#accordion">
+              <div class="card-body">
+                <?= $qr['qr_reponse'] ?>
+              </div>
+            </div>
+          </div>
+          <?php } } else { echo "<div class=\"alert alert-light\" role=\"alert\">Aucune question/réponse n'a été trouvée.</div>"; } ?>
+        </div>
+      </div>
     </div>
     <!-- Fin -->
 

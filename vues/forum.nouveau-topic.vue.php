@@ -59,7 +59,7 @@
             <div class="form-row">
               <div class="form-group col-md-12">
                 <label for="inputSujet">Sujet :</label>
-                <input type="text" name="top_sujet" class="form-control" placeholder="Exemple: Les livres de programmation">
+                <input type="text" name="top_sujet" class="form-control" placeholder="Exemple: Les livres de programmation" required>
               </div>
             </div>
             <div class="form-row">
@@ -67,7 +67,7 @@
                 <label>Sous-catégorie :</label>
                 <div class="input-group mb-2">
                   <div class="input-group-prepend">
-                    <div class="input-group-text"><?= $categorie ?></div>
+                    <div class="input-group-text" required><?= $categorie ?></div>
                   </div>
                   <select class="form-control" name="top_sscat">
                     <?php while($sc = $souscategorie->fetch()) { ?>

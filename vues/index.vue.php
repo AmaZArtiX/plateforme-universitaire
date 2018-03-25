@@ -140,7 +140,7 @@
             <p><a class="btn btn-secondary" href="https://github.com/Aklugua" role="button">Voir &raquo;</a></p>
           </div>
           <div class="col-lg-4">
-            <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="140" height="140">
+            <img class="rounded-circle" src="../assets/simon.jpg" width="140" height="140">
             <h2>Simon</h2>
             <blockquote class="blockquote">
               <p>En étroite collaboration avec la <i>CCI</i> des Hauts-de-France, je renouvelle mon contrat pour me tourner vers la sécurité</p>

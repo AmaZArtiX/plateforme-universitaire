@@ -187,6 +187,22 @@
   }
 
   /**
+   * [get_admin_membre description]
+   * @param  [type] $id_membre [description]
+   * @return [type]            [description]
+   */
+  function get_admin_membre($id_membre){
+
+    global $bdd;
+
+    $requete = $bdd->prepare("SELECT * FROM t_membre_mem WHERE t_membre_mem.mem_id = ?");
+    $requete->execute(array($id_membre));
+    $requete = $requete->fetch();
+
+    return $requete['mem_administrateur'];
+  }
+
+  /**
    * [get_dernier_topics description]
    * @return [type] [description]
    */
