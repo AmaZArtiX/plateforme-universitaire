@@ -4,7 +4,7 @@
 
   if(isset($_GET['domaine']) && !empty($_GET['domaine'])) {
 
-    $idDomaine = $_GET['domaine'];
+    $idDomaine = intval($_GET['domaine']);
 
     $requete =  $bdd->prepare("SELECT * FROM t_matiere_mat WHERE dom_id = ?");
     $requete->execute(array($idDomaine));

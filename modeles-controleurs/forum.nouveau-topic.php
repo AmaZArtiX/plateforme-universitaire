@@ -7,7 +7,7 @@
 
   if (isset($_GET['categorie'])) {
 
-  	$get_categorie = htmlspecialchars($_GET['categorie']);
+  	$get_categorie = addslashes($_GET['categorie']);
   	$categorie = $bdd->prepare("SELECT * FROM t_categorie_cat WHERE cat_id = ?");
   	$categorie->execute(array($get_categorie));
   	$categorie_existe = $categorie->rowCount();

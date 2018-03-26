@@ -7,7 +7,7 @@
 
   if(isset($_GET['categorie']) && !empty($_GET['categorie'])){
 
-    $get_categorie = htmlspecialchars($_GET['categorie']);
+    $get_categorie = addslashes($_GET['categorie']);
     $categories = array();
     $req_categories = $bdd->query("SELECT * FROM t_categorie_cat");
 
@@ -31,7 +31,7 @@
 
     } else {
 
-      header("Location: ../vues/erreur.vue.php");
+      //header("Location: ../vues/erreur.vue.php");
     }
 
   } else {

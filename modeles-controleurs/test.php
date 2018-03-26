@@ -8,8 +8,6 @@
       $matiere = htmlspecialchars($_POST['matiere']);
       $niveau = htmlspecialchars($_POST['niveau']);
 
-      
-
     } else {
 
       $erreur = "Vous devez choisir un domaine, une matière et un niveau de formation";
