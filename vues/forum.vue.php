@@ -66,8 +66,8 @@
         </div>
         <div class="col-md-3">
           <form class="input-group" action="../vues/forum.topics.vue.php" method="get" style="margin-bottom:1rem;">
-            <input class="form-control" type="search" id="recherche" name="recherche" placeholder="Rechercher un topic" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit" for="recherche"><i class="fa fa-search"></i></button>
+            <input class="form-control" type="search" id="recherche" name="recherche" onkeyup="activerRecherche(this.value);" placeholder="Rechercher un topic" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit" for="recherche" id="btn_recherche" disabled><i class="fa fa-search"></i></button>
           </form>
 
           <!-- Activités récentes -->
@@ -140,5 +140,16 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      function activerRecherche(texte) {
+          var tailleRecherche = texte.length;
+          if (tailleRecherche > 3) {
+            document.getElementById('btn_recherche').disabled = false;
+          } else {
+
+            document.getElementById('btn_recherche').disabled = true;
+          }
+      }
+    </script>
   </body>
 </html>

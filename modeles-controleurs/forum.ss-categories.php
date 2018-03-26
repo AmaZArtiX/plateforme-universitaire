@@ -7,7 +7,7 @@
 
   if (isset($_GET['categorie']) AND !empty($_GET['categorie'])) {
 
-  	$get_categorie = htmlspecialchars($_GET['categorie']);
+  	$get_categorie = addslashes($_GET['categorie']);
 
   	$categories = array();
   	$req_categories = $bdd->query("SELECT * FROM t_categorie_cat");
@@ -30,7 +30,7 @@
   		if (isset($_GET['ss-categorie']) AND !empty($_GET['ss-categorie'])) {
 
 
-  			$get_souscategorie = htmlspecialchars($_GET['ss-categorie']);
+  			$get_souscategorie = addslashes($_GET['ss-categorie']);
   			$souscategories = array();
   			$req_souscategories = $bdd->prepare("SELECT * FROM t_souscategorie_sscat WHERE cat_id = ?");
   			$req_souscategories->execute(array($id_categorie));
@@ -66,8 +66,7 @@
 
       if (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0) {
 
-				$_GET['page'] = intval($_GET['page']);
-				$pageCourante = $_GET['page'];
+				$pageCourante = intval($_GET['page']);
 			}
 
       $depart = ($pageCourante-1)*$topicsParPage;

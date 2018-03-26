@@ -36,9 +36,19 @@
       require("header.vue.php");
     ?>
     <!-- Fin header -->
+    <div class="container" style="margin-top:5rem; margin-bottom: 25px;">
+      <?php
+
+        if($topic['top_resolu'] == 1){
+
+          afficherAlerte("", "Ce topic est résolu", "success");
+        }
+
+       ?>
+     </div>
 
     <!-- Principal -->
-    <div class="container" style="margin-top:5rem; margin-bottom:1rem;">
+    <div class="container" style="margin-bottom: 25px;">
       <div class="row">
         <div class="col-md-9">
           <nav aria-label="breadcrumb">
@@ -186,8 +196,8 @@
         </div>
         <div class="col-md-3">
           <form class="input-group" action="../vues/forum.topics.vue.php" method="get" style="margin-bottom:1rem;">
-            <input class="form-control" type="search" id="recherche" name="recherche" placeholder="Rechercher un topic" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit" for="recherche"><i class="fa fa-search"></i></button>
+            <input class="form-control" type="search" id="recherche" name="recherche" onkeyup="activerRecherche(this.value);" placeholder="Rechercher un topic" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit" for="recherche" id="btn_recherche" disabled><i class="fa fa-search"></i></button>
           </form>
 
           <!-- Activités récentes -->
@@ -258,5 +268,16 @@
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/wysibb-options.js"></script>
     <script src="../js/prism.js"></script>
+    <script type="text/javascript">
+      function activerRecherche(texte) {
+          var tailleRecherche = texte.length;
+          if (tailleRecherche > 3) {
+            document.getElementById('btn_recherche').disabled = false;
+          } else {
+
+            document.getElementById('btn_recherche').disabled = true;
+          }
+      }
+    </script>
   </body>
 </html>

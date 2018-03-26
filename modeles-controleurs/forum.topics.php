@@ -7,7 +7,7 @@
 
   if(isset($_GET['recherche']) && !empty($_GET['recherche'])){
 
-    $recherche = htmlspecialchars($_GET['recherche']);
+    $recherche = addslashes($_GET['recherche']);
     $tab_recherche = explode(' ', $recherche);
 
     $requete = "SELECT * FROM t_topic_top";

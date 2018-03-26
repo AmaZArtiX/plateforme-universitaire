@@ -7,8 +7,8 @@
 
   if (isset($_GET['titre'], $_GET['id']) && !empty($_GET['titre']) && !empty($_GET['id']) && isset($_GET['page']) && $_GET['page'] > 0) {
 
-		$get_titre = htmlspecialchars($_GET['titre']);
-		$get_id = htmlspecialchars($_GET['id']);
+		$get_titre = addslashes($_GET['titre']);
+		$get_id = intval($_GET['id']);
 
 		$titre_original = $bdd->prepare("SELECT top_sujet FROM t_topic_top WHERE top_id = ?");
 		$titre_original->execute(array($get_id));
@@ -104,8 +104,7 @@
 
 			if (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0) {
 
-				$_GET['page'] = intval($_GET['page']);
-				$pageCourante = $_GET['page'];
+				$pageCourante = intval($_GET['page']);
 			}
 
 			$depart = ($pageCourante-1)*$reponsesParPage;
