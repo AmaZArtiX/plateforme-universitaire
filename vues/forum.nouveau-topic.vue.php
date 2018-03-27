@@ -89,7 +89,7 @@
                 <label class="custom-control-label" for="notif-mail">Me notifier par email</label>
               </div>
               <button type="submit" name="btn_envoyer" class="btn btn-secondary mr-sm-2" style="background-color:#8CB75B; border-color:#8CB75B;">Poster le nouveau topic</button>
-              <button type="reset" class="btn btn-secondary">Annuler</button>
+              <button type="reset" class="btn btn-secondary">Reset</button>
             </div>
           </form>
         </div>

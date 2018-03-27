@@ -56,7 +56,7 @@
                   </tr>
                   <?php } } else { ?>
                   <tr>
-                    <td class="align-middle">Aucune catégorie n'a été trouvée.</td>
+                    <td class="align-middle text-muted">Aucune catégorie n'a été trouvée.</td>
                   </tr>
                   <?php } ?>
                 </table>
@@ -88,7 +88,7 @@
                   </tr>
                 <?php } } else { ?>
                 <tr>
-                  <td class="align-middle">Aucune publication n'a été trouvée.</td>
+                  <td class="align-middle text-muted">Aucune publication n'a été trouvée.</td>
                 </tr>
                 <?php } ?>
               </table>
@@ -117,7 +117,7 @@
                 </tr>
                 <?php } } else { ?>
                 <tr>
-                  <td class="align-middle">Aucune réponse n'a été trouvée.</td>
+                  <td class="align-middle text-muted">Aucune réponse n'a été trouvée.</td>
                 </tr>
                 <?php } ?>
               </table>

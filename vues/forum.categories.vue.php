@@ -6,7 +6,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Forum étudiant</title>
+    <title>Forum étudiant - <?= $_GET['categorie']?></title>
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -50,7 +50,7 @@
                 </tr>
                 <?php } } else { ?>
                 <tr>
-                  <td class="align-middle">Aucune sous-catégorie n'a été trouvée.</td>
+                  <td class="align-middle text-muted">Aucune sous-catégorie n'a été trouvée.</td>
                 </tr>
                 <?php } ?>
               </table>
@@ -80,7 +80,7 @@
                   </tr>
                 <?php } } else { ?>
                 <tr>
-                  <td class="align-middle">Aucune publication n'a été trouvée.</td>
+                  <td class="align-middle text-muted">Aucune publication n'a été trouvée.</td>
                 </tr>
                 <?php } ?>
               </table>
@@ -109,7 +109,7 @@
                 </tr>
                 <?php } } else { ?>
                 <tr>
-                  <td class="align-middle">Aucune réponse n'a été trouvée.</td>
+                  <td class="align-middle text-muted">Aucune réponse n'a été trouvée.</td>
                 </tr>
                 <?php } ?>
               </table>

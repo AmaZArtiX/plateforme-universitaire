@@ -21,7 +21,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Forum étudiant</title>
+    <title>Forum étudiant - Recherche - <?= $recherche ?></title>
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -44,8 +44,7 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="../vues/forum.vue.php">Accueil</a></li>
-              <li class="breadcrumb-item">Recherche</li>
-              <li class="breadcrumb-item active" aria-current="page"><?= $recherche ?></li>
+              <li class="breadcrumb-item active">Recherche "<?= $recherche ?>"</li>
             </ol>
           </nav>
 
@@ -83,11 +82,16 @@
               <table class="table table-striped table-hover mb-0">
                 <?php
                   $dernieres_publis = get_derniers_topics();
-                  while($dp = $dernieres_publis->fetch()){
+                  if($dernieres_publis->rowCount() > 0) {
+                    while($dp = $dernieres_publis->fetch()){
                 ?>
                   <tr class="lien align-middle" onclick="location.href='./forum.topic.vue.php?titre=<?= url_custom_encode($dp['top_sujet']) ?>&id=<?= $dp['top_id'] ?>&page=1'">
                     <td class="align-middle"><b><a href="./forum.topic.vue.php?titre=<?= url_custom_encode($dp['top_sujet']) ?>&id=<?= $dp['top_id'] ?>&page=1"><?= $dp['top_sujet'] ?></a></b> <br/> <small class="text-muted">par <b><a href="./compte.vue.php?mem_id=<?= $dp['mem_id'] ?>"><?= get_nom_prenom_membre($dp['mem_id']) ?></a></b></small></td>
                   </tr>
+                <?php } } else { ?>
+                <tr>
+                  <td class="align-middle text-muted">Aucune publication n'a été trouvée.</td>
+                </tr>
                 <?php } ?>
               </table>
             </div>
@@ -115,7 +119,7 @@
                 </tr>
                 <?php } } else { ?>
                 <tr>
-                  <td class="align-middle">Aucune réponse n'a été trouvée.</td>
+                  <td class="align-middle text-muted">Aucune réponse n'a été trouvée.</td>
                 </tr>
                 <?php } ?>
               </table>

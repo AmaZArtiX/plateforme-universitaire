@@ -63,7 +63,7 @@
                 Tableau de bord
               </a>
               <a href="administration.messagerie.vue.php" class="list-group-item d-flex justify-content-between align-items-center" style="color:#8CB75B;"> Messagerie <span class="badge badge-secondary">12</span></a>
-              <a href="administration.topic.vue.php" class="list-group-item d-flex justify-content-between align-items-center" style="color:#8CB75B;"> Topics <span class="badge badge-secondary">33</span></a>
+              <a href="administration.forum.vue.php" class="list-group-item d-flex justify-content-between align-items-center" style="color:#8CB75B;"> Forum <span class="badge badge-secondary">33</span></a>
               <a href="administration.utilisateur.vue.php" class="list-group-item d-flex justify-content-between align-items-center" style="color:#8CB75B;"> Utilisateurs <span class="badge badge-secondary">203</span></a>
               <a href="#" class="list-group-item d-flex justify-content-between align-items-center" style="color:#8CB75B;"> Autres <span class="badge badge-secondary">+999</span></a>
             </div>
@@ -94,7 +94,7 @@
                     <div class="card text-center">
                       <div class="card-body">
                         <h2 class="card-title"><span class="badge badge-secondary">33</span></h2>
-                        <p class="card-text">Topics</p>
+                        <p class="card-text">Forum</p>
                       </div>
                     </div>
                   </div>
@@ -112,7 +112,7 @@
 
             <!-- Derniers Utilisateurs -->
             <div class="card">
-              <h5 class="card-header" style="color:white; background-color:#8CB75B; border-color:#8CB75B;">Derniers topics</h5>
+              <h5 class="card-header" style="color:white; background-color:#8CB75B; border-color:#8CB75B;">Forum étudiant - Derniers topics</h5>
               <table class="table table-striped table-hover mb-0">
                 <tr>
                   <th>Titre</th>
@@ -152,7 +152,7 @@
                 </tr>
               </table>
               <div class="card-footer text-center text-muted">
-                Attention : Contenu non pertinent !
+                Dernière mise à jour : <?php echo date('d-m-Y H:i:s'); ?>
               </div>
             </div>
           </div>
