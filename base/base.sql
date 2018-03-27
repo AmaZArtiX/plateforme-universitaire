@@ -1,22 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 25 mars 2018 à 22:18
--- Version du serveur :  5.7.19
--- Version de PHP :  7.1.9
+-- Hôte : localhost:8889
+-- Généré le :  mar. 27 mars 2018 à 21:36
+-- Version du serveur :  5.6.38
+-- Version de PHP :  7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de données :  `bd_platuniv`
@@ -28,13 +20,31 @@ SET time_zone = "+00:00";
 -- Structure de la table `tj_appartenance_app`
 --
 
-DROP TABLE IF EXISTS `tj_appartenance_app`;
-CREATE TABLE IF NOT EXISTS `tj_appartenance_app` (
+CREATE TABLE `tj_appartenance_app` (
   `gr_id` int(11) NOT NULL,
-  `mem_id` int(11) NOT NULL,
-  PRIMARY KEY (`gr_id`,`mem_id`),
-  KEY `fk_appartenance_mem_id` (`mem_id`)
+  `mem_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `tj_evaluation_eval`
+--
+
+CREATE TABLE `tj_evaluation_eval` (
+  `mat_id` int(11) NOT NULL,
+  `form_id` int(11) NOT NULL,
+  `mem_id` int(11) NOT NULL,
+  `eval_resultat` int(3) NOT NULL,
+  `eval_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `tj_evaluation_eval`
+--
+
+INSERT INTO `tj_evaluation_eval` (`mat_id`, `form_id`, `mem_id`, `eval_resultat`, `eval_date`) VALUES
+(1, 1, 2, 0, '2018-03-27');
 
 -- --------------------------------------------------------
 
@@ -42,17 +52,12 @@ CREATE TABLE IF NOT EXISTS `tj_appartenance_app` (
 -- Structure de la table `tj_topictheme_topth`
 --
 
-DROP TABLE IF EXISTS `tj_topictheme_topth`;
-CREATE TABLE IF NOT EXISTS `tj_topictheme_topth` (
-  `topth_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tj_topictheme_topth` (
+  `topth_id` int(11) NOT NULL,
   `top_id` int(11) NOT NULL,
   `cat_id` int(11) NOT NULL,
-  `sscat_id` int(11) NOT NULL,
-  PRIMARY KEY (`topth_id`),
-  KEY `fk_topictheme_top_id` (`top_id`),
-  KEY `fk_topictheme_cat_id` (`cat_id`),
-  KEY `fk_topictheme_sscat_id` (`sscat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+  `sscat_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `tj_topictheme_topth`
@@ -70,12 +75,7 @@ INSERT INTO `tj_topictheme_topth` (`topth_id`, `top_id`, `cat_id`, `sscat_id`) V
 (9, 9, 1, 1),
 (10, 10, 1, 1),
 (11, 11, 1, 1),
-(12, 12, 1, 1),
-(13, 12, 1, 1),
-(14, 12, 1, 1),
-(15, 12, 1, 1),
-(16, 12, 1, 1),
-(17, 13, 1, 1);
+(12, 12, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -83,15 +83,12 @@ INSERT INTO `tj_topictheme_topth` (`topth_id`, `top_id`, `cat_id`, `sscat_id`) V
 -- Structure de la table `t_categorie_cat`
 --
 
-DROP TABLE IF EXISTS `t_categorie_cat`;
-CREATE TABLE IF NOT EXISTS `t_categorie_cat` (
-  `cat_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `t_categorie_cat` (
+  `cat_id` int(11) NOT NULL,
   `for_id` int(11) NOT NULL,
   `cat_nom` varchar(32) NOT NULL,
-  `cat_description` varchar(255) NOT NULL,
-  PRIMARY KEY (`cat_id`),
-  KEY `fk_categorie_for_id` (`for_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+  `cat_description` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `t_categorie_cat`
@@ -114,12 +111,10 @@ INSERT INTO `t_categorie_cat` (`cat_id`, `for_id`, `cat_nom`, `cat_description`)
 -- Structure de la table `t_domaine_dom`
 --
 
-DROP TABLE IF EXISTS `t_domaine_dom`;
-CREATE TABLE IF NOT EXISTS `t_domaine_dom` (
-  `dom_id` int(11) NOT NULL AUTO_INCREMENT,
-  `dom_nom` varchar(255) NOT NULL,
-  PRIMARY KEY (`dom_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+CREATE TABLE `t_domaine_dom` (
+  `dom_id` int(11) NOT NULL,
+  `dom_nom` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `t_domaine_dom`
@@ -139,12 +134,10 @@ INSERT INTO `t_domaine_dom` (`dom_id`, `dom_nom`) VALUES
 -- Structure de la table `t_formation_form`
 --
 
-DROP TABLE IF EXISTS `t_formation_form`;
-CREATE TABLE IF NOT EXISTS `t_formation_form` (
-  `form_id` int(11) NOT NULL AUTO_INCREMENT,
-  `form_nom` varchar(255) NOT NULL,
-  PRIMARY KEY (`form_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+CREATE TABLE `t_formation_form` (
+  `form_id` int(11) NOT NULL,
+  `form_nom` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `t_formation_form`
@@ -164,13 +157,11 @@ INSERT INTO `t_formation_form` (`form_id`, `form_nom`) VALUES
 -- Structure de la table `t_forum_for`
 --
 
-DROP TABLE IF EXISTS `t_forum_for`;
-CREATE TABLE IF NOT EXISTS `t_forum_for` (
-  `for_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `t_forum_for` (
+  `for_id` int(11) NOT NULL,
   `for_nom` varchar(32) NOT NULL,
-  `for_priorite` int(11) NOT NULL,
-  PRIMARY KEY (`for_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `for_priorite` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `t_forum_for`
@@ -185,12 +176,10 @@ INSERT INTO `t_forum_for` (`for_id`, `for_nom`, `for_priorite`) VALUES
 -- Structure de la table `t_grossierete_gross`
 --
 
-DROP TABLE IF EXISTS `t_grossierete_gross`;
-CREATE TABLE IF NOT EXISTS `t_grossierete_gross` (
-  `gross_id` int(11) NOT NULL AUTO_INCREMENT,
-  `gross_mot` text NOT NULL,
-  PRIMARY KEY (`gross_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+CREATE TABLE `t_grossierete_gross` (
+  `gross_id` int(11) NOT NULL,
+  `gross_mot` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `t_grossierete_gross`
@@ -206,14 +195,10 @@ INSERT INTO `t_grossierete_gross` (`gross_id`, `gross_mot`) VALUES
 -- Structure de la table `t_groupe_gr`
 --
 
-DROP TABLE IF EXISTS `t_groupe_gr`;
-CREATE TABLE IF NOT EXISTS `t_groupe_gr` (
-  `gr_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `t_groupe_gr` (
+  `gr_id` int(11) NOT NULL,
   `form_id` int(11) NOT NULL,
-  `mat_id` int(11) NOT NULL,
-  PRIMARY KEY (`gr_id`),
-  KEY `fk_groupe_form_id` (`form_id`),
-  KEY `fk_groupe_mat_id` (`mat_id`)
+  `mat_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -222,14 +207,19 @@ CREATE TABLE IF NOT EXISTS `t_groupe_gr` (
 -- Structure de la table `t_matiere_mat`
 --
 
-DROP TABLE IF EXISTS `t_matiere_mat`;
-CREATE TABLE IF NOT EXISTS `t_matiere_mat` (
-  `mat_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `t_matiere_mat` (
+  `mat_id` int(11) NOT NULL,
   `mat_nom` varchar(255) NOT NULL,
-  `dom_id` int(11) NOT NULL,
-  PRIMARY KEY (`mat_id`),
-  KEY `fk_matiere_dom_id` (`dom_id`)
+  `dom_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `t_matiere_mat`
+--
+
+INSERT INTO `t_matiere_mat` (`mat_id`, `mat_nom`, `dom_id`) VALUES
+(1, 'Anglais', 1),
+(2, 'Maths', 5);
 
 -- --------------------------------------------------------
 
@@ -237,17 +227,15 @@ CREATE TABLE IF NOT EXISTS `t_matiere_mat` (
 -- Structure de la table `t_membre_mem`
 --
 
-DROP TABLE IF EXISTS `t_membre_mem`;
-CREATE TABLE IF NOT EXISTS `t_membre_mem` (
-  `mem_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `t_membre_mem` (
+  `mem_id` int(11) NOT NULL,
   `mem_nom` varchar(36) NOT NULL,
   `mem_prenom` varchar(32) NOT NULL,
   `mem_mail` varchar(320) NOT NULL,
   `mem_pwd` char(40) NOT NULL,
   `mem_administrateur` int(1) NOT NULL,
-  `mem_date_inscription` date NOT NULL,
-  PRIMARY KEY (`mem_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  `mem_date_inscription` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `t_membre_mem`
@@ -256,8 +244,7 @@ CREATE TABLE IF NOT EXISTS `t_membre_mem` (
 INSERT INTO `t_membre_mem` (`mem_id`, `mem_nom`, `mem_prenom`, `mem_mail`, `mem_pwd`, `mem_administrateur`, `mem_date_inscription`) VALUES
 (1, 'pute', 'salope', 'salope@pute.com', '28ea55d6c22578e7a26e3a7769dcc3a74a1e34f1', 0, '2018-03-13'),
 (2, 'Bacquet', 'Simon', 'simon.bacquet@mail.fr', '28ea55d6c22578e7a26e3a7769dcc3a74a1e34f1', 0, '2018-03-18'),
-(3, 'Test', 'Test', 'test@test.fr', '51abb9636078defbf888d8457a7c76f85c8f114c', 0, '2018-03-24'),
-(4, 'Lampe', 'Ronan', 'lampe.ronan@outlook.fr', '57698a857060b48a65ed5eee25bca82cc3d3e586', 1, '2018-03-25');
+(3, 'Test', 'Test', 'test@test.fr', '51abb9636078defbf888d8457a7c76f85c8f114c', 0, '2018-03-24');
 
 -- --------------------------------------------------------
 
@@ -265,18 +252,14 @@ INSERT INTO `t_membre_mem` (`mem_id`, `mem_nom`, `mem_prenom`, `mem_mail`, `mem_
 -- Structure de la table `t_message_mess`
 --
 
-DROP TABLE IF EXISTS `t_message_mess`;
-CREATE TABLE IF NOT EXISTS `t_message_mess` (
-  `mess_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `t_message_mess` (
+  `mess_id` int(11) NOT NULL,
   `top_id` int(11) NOT NULL,
   `mem_id` int(11) NOT NULL,
   `mess_contenu` text NOT NULL,
   `mess_date_post` datetime NOT NULL,
-  `mess_date_edition` datetime DEFAULT NULL,
-  PRIMARY KEY (`mess_id`),
-  KEY `fk_message_top_id` (`top_id`),
-  KEY `fk_message_mem_id` (`mem_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
+  `mess_date_edition` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `t_message_mess`
@@ -351,9 +334,7 @@ INSERT INTO `t_message_mess` (`mess_id`, `top_id`, `mem_id`, `mess_contenu`, `me
 (66, 6, 3, '[codec]void main(){\r\n\r\n}[/codec]', '2018-03-24 12:59:22', '0000-00-00 00:00:00'),
 (67, 9, 2, 'toto', '2018-03-24 14:05:42', '0000-00-00 00:00:00'),
 (68, 9, 2, '[u]php[/u]', '2018-03-24 14:05:55', '0000-00-00 00:00:00'),
-(69, 9, 2, '[u]php[/u]', '2018-03-24 14:08:02', '0000-00-00 00:00:00'),
-(70, 13, 4, 'Ceci est une réponse !', '2018-03-25 20:17:13', NULL),
-(71, 13, 3, 'Ceci est une autre réponse ! :D', '2018-03-25 20:55:03', NULL);
+(69, 9, 2, '[u]php[/u]', '2018-03-24 14:08:02', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -361,21 +342,11 @@ INSERT INTO `t_message_mess` (`mess_id`, `top_id`, `mem_id`, `mess_contenu`, `me
 -- Structure de la table `t_questionreponse_qr`
 --
 
-DROP TABLE IF EXISTS `t_questionreponse_qr`;
-CREATE TABLE IF NOT EXISTS `t_questionreponse_qr` (
-  `qr_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `t_questionreponse_qr` (
+  `qr_id` int(11) NOT NULL,
   `qr_question` text NOT NULL,
-  `qr_reponse` text NOT NULL,
-  PRIMARY KEY (`qr_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `t_questionreponse_qr`
---
-
-INSERT INTO `t_questionreponse_qr` (`qr_id`, `qr_question`, `qr_reponse`) VALUES
-(1, 'Bite de sang ou de chair ?', 'Sang !'),
-(2, 'Est-ce que le projet se terminera un jour ?', 'Bien sûr (que non).');
+  `qr_reponse` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -383,9 +354,8 @@ INSERT INTO `t_questionreponse_qr` (`qr_id`, `qr_question`, `qr_reponse`) VALUES
 -- Structure de la table `t_question_quest`
 --
 
-DROP TABLE IF EXISTS `t_question_quest`;
-CREATE TABLE IF NOT EXISTS `t_question_quest` (
-  `quest_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `t_question_quest` (
+  `quest_id` int(11) NOT NULL,
   `mat_id` int(11) NOT NULL,
   `quest_intitule` text NOT NULL,
   `quest_reponse1` text NOT NULL,
@@ -393,22 +363,25 @@ CREATE TABLE IF NOT EXISTS `t_question_quest` (
   `quest_reponse3` text NOT NULL,
   `quest_reponse4` text NOT NULL,
   `quest_reponse5` text NOT NULL,
-  `quest_score1` int(3) NOT NULL,
-  `quest_score2` int(3) NOT NULL,
-  `quest_score3` int(3) NOT NULL,
-  `quest_score4` int(3) NOT NULL,
-  `quest_score5` int(3) NOT NULL,
-  `quest_bonne_reponse1` text NOT NULL,
-  `quest_bonne_reponse2` text NOT NULL,
-  `quest_bonne_reponse3` text NOT NULL,
-  `quest_bonne_reponse4` text NOT NULL,
-  `quest_bonne_reponse5` text NOT NULL,
+  `quest_bonne_reponse1` tinyint(1) NOT NULL,
+  `quest_bonne_reponse2` tinyint(1) NOT NULL,
+  `quest_bonne_reponse3` tinyint(1) NOT NULL,
+  `quest_bonne_reponse4` tinyint(1) NOT NULL,
+  `quest_bonne_reponse5` tinyint(1) NOT NULL,
   `quest_type` varchar(8) NOT NULL,
-  `form_id` int(11) NOT NULL,
-  PRIMARY KEY (`quest_id`),
-  KEY `fk_question_mat_id` (`mat_id`),
-  KEY `fk_question_form_id` (`form_id`)
+  `form_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `t_question_quest`
+--
+
+INSERT INTO `t_question_quest` (`quest_id`, `mat_id`, `quest_intitule`, `quest_reponse1`, `quest_reponse2`, `quest_reponse3`, `quest_reponse4`, `quest_reponse5`, `quest_bonne_reponse1`, `quest_bonne_reponse2`, `quest_bonne_reponse3`, `quest_bonne_reponse4`, `quest_bonne_reponse5`, `quest_type`, `form_id`) VALUES
+(1, 1, 'Question1', 'Reponse1', 'Reponse2', 'Reponse3', 'Reponse4', 'Reponse5', 0, 1, 0, 0, 0, 'QCU', 1),
+(2, 1, 'Question2', 'Reponse1', 'Reponse2', 'Reponse3', 'Reponse4', 'Reponse5', 1, 0, 0, 1, 0, 'QCM', 1),
+(4, 1, 'Question3', 'Reponse1', 'Reponse2', 'Reponse3', 'Reponse4', 'Reponse5', 0, 1, 0, 0, 0, 'QCU', 1),
+(6, 1, 'Question4', 'Reponse1', 'Reponse2', 'Reponse3', 'Reponse4', 'Reponse5', 1, 1, 0, 0, 1, 'QCM', 1),
+(7, 1, 'Question 5', 'Reponse1', 'Reponse2', 'Reponse3', 'Reponse4', 'Reponse5', 0, 0, 0, 0, 1, 'QCU', 1);
 
 -- --------------------------------------------------------
 
@@ -416,16 +389,23 @@ CREATE TABLE IF NOT EXISTS `t_question_quest` (
 -- Structure de la table `t_reponse_rep`
 --
 
-DROP TABLE IF EXISTS `t_reponse_rep`;
-CREATE TABLE IF NOT EXISTS `t_reponse_rep` (
-  `rep_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `t_reponse_rep` (
+  `rep_id` int(11) NOT NULL,
   `quest_id` int(11) NOT NULL,
   `mem_id` int(11) NOT NULL,
-  `rep_resultat` int(11) NOT NULL,
-  PRIMARY KEY (`rep_id`),
-  KEY `fk_reponse_quest_id` (`quest_id`),
-  KEY `fk_reponse_mem_id` (`mem_id`)
+  `rep_resultat` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `t_reponse_rep`
+--
+
+INSERT INTO `t_reponse_rep` (`rep_id`, `quest_id`, `mem_id`, `rep_resultat`) VALUES
+(1, 1, 2, 0),
+(2, 6, 2, 0),
+(3, 7, 2, 0),
+(4, 4, 2, 0),
+(5, 2, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -433,13 +413,10 @@ CREATE TABLE IF NOT EXISTS `t_reponse_rep` (
 -- Structure de la table `t_souscategorie_sscat`
 --
 
-DROP TABLE IF EXISTS `t_souscategorie_sscat`;
-CREATE TABLE IF NOT EXISTS `t_souscategorie_sscat` (
+CREATE TABLE `t_souscategorie_sscat` (
   `sscat_id` int(11) NOT NULL,
   `cat_id` int(11) NOT NULL,
-  `sscat_nom` varchar(255) NOT NULL,
-  PRIMARY KEY (`sscat_id`),
-  KEY `fk_souscategorie_cat_id` (`cat_id`)
+  `sscat_nom` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -455,18 +432,15 @@ INSERT INTO `t_souscategorie_sscat` (`sscat_id`, `cat_id`, `sscat_nom`) VALUES
 -- Structure de la table `t_topic_top`
 --
 
-DROP TABLE IF EXISTS `t_topic_top`;
-CREATE TABLE IF NOT EXISTS `t_topic_top` (
-  `top_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `t_topic_top` (
+  `top_id` int(11) NOT NULL,
   `mem_id` int(11) NOT NULL,
   `top_sujet` text NOT NULL,
   `top_contenu` text NOT NULL,
   `top_date_creation` datetime NOT NULL,
-  `top_resolu` tinyint(1) NOT NULL DEFAULT '0',
-  `top_notification` tinyint(1) NOT NULL,
-  PRIMARY KEY (`top_id`),
-  KEY `fk_topic_mem_id` (`mem_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+  `top_resolu` tinyint(1) NOT NULL,
+  `top_notification` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `t_topic_top`
@@ -478,14 +452,225 @@ INSERT INTO `t_topic_top` (`top_id`, `mem_id`, `top_sujet`, `top_contenu`, `top_
 (3, 2, 'Je cherche une pute', 'detresse', '2018-03-20 00:00:00', 0, 0),
 (4, 2, 'Je cherche un poulet à enculer', 'balek', '2018-03-20 00:00:00', 0, 0),
 (5, 2, 'Couilles coincées dans un grille pain', 'eeerrrffff', '2018-03-14 00:00:00', 0, 0),
-(6, 2, 'Boule d\'escalier coincée dans le cul', 'hohfhfh', '2018-03-29 00:00:00', 0, 0),
+(6, 2, 'Boule d\'escalier coincée dans le cul', 'hohfhfh', '2018-03-29 00:00:00', 1, 0),
 (7, 2, 'hello', 'hello', '2018-03-24 14:03:50', 0, 0),
 (8, 2, 'hello', 'hello', '2018-03-24 14:04:24', 0, 0),
 (9, 2, 'sujet test', '[i]ceci [/i]est un [b]test[/b]\r\n\r\n[codephp]function toto(){\r\n\r\n}[/codephp]', '2018-03-24 14:04:55', 0, 0),
 (10, 2, 'test2', 'heloo', '2018-03-24 14:09:09', 0, 1),
 (11, 2, 'Hello j\'ai un pb', 'grosses couilles', '2018-03-24 14:24:24', 0, 0),
-(12, 2, 'totopic', 'tititatadgfmbzkjf', '2018-03-24 14:26:13', 0, 0),
-(13, 4, 'Remise des diplômes', 'blablablablabla', '2018-03-25 20:13:40', 0, 0);
+(12, 2, 'totopic', 'tititatadgfmbzkjf', '2018-03-24 14:26:13', 1, 0);
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `tj_appartenance_app`
+--
+ALTER TABLE `tj_appartenance_app`
+  ADD PRIMARY KEY (`gr_id`,`mem_id`),
+  ADD KEY `fk_appartenance_mem_id` (`mem_id`);
+
+--
+-- Index pour la table `tj_evaluation_eval`
+--
+ALTER TABLE `tj_evaluation_eval`
+  ADD PRIMARY KEY (`mat_id`,`form_id`,`mem_id`),
+  ADD KEY `fk_evaluation_form_id` (`form_id`),
+  ADD KEY `fk_evaluation_mem_id` (`mem_id`);
+
+--
+-- Index pour la table `tj_topictheme_topth`
+--
+ALTER TABLE `tj_topictheme_topth`
+  ADD PRIMARY KEY (`topth_id`),
+  ADD KEY `fk_topictheme_top_id` (`top_id`),
+  ADD KEY `fk_topictheme_cat_id` (`cat_id`),
+  ADD KEY `fk_topictheme_sscat_id` (`sscat_id`);
+
+--
+-- Index pour la table `t_categorie_cat`
+--
+ALTER TABLE `t_categorie_cat`
+  ADD PRIMARY KEY (`cat_id`),
+  ADD KEY `fk_categorie_for_id` (`for_id`);
+
+--
+-- Index pour la table `t_domaine_dom`
+--
+ALTER TABLE `t_domaine_dom`
+  ADD PRIMARY KEY (`dom_id`);
+
+--
+-- Index pour la table `t_formation_form`
+--
+ALTER TABLE `t_formation_form`
+  ADD PRIMARY KEY (`form_id`);
+
+--
+-- Index pour la table `t_forum_for`
+--
+ALTER TABLE `t_forum_for`
+  ADD PRIMARY KEY (`for_id`);
+
+--
+-- Index pour la table `t_grossierete_gross`
+--
+ALTER TABLE `t_grossierete_gross`
+  ADD PRIMARY KEY (`gross_id`);
+
+--
+-- Index pour la table `t_groupe_gr`
+--
+ALTER TABLE `t_groupe_gr`
+  ADD PRIMARY KEY (`gr_id`),
+  ADD KEY `fk_groupe_form_id` (`form_id`),
+  ADD KEY `fk_groupe_mat_id` (`mat_id`);
+
+--
+-- Index pour la table `t_matiere_mat`
+--
+ALTER TABLE `t_matiere_mat`
+  ADD PRIMARY KEY (`mat_id`),
+  ADD KEY `fk_matiere_dom_id` (`dom_id`);
+
+--
+-- Index pour la table `t_membre_mem`
+--
+ALTER TABLE `t_membre_mem`
+  ADD PRIMARY KEY (`mem_id`);
+
+--
+-- Index pour la table `t_message_mess`
+--
+ALTER TABLE `t_message_mess`
+  ADD PRIMARY KEY (`mess_id`),
+  ADD KEY `fk_message_top_id` (`top_id`),
+  ADD KEY `fk_message_mem_id` (`mem_id`);
+
+--
+-- Index pour la table `t_questionreponse_qr`
+--
+ALTER TABLE `t_questionreponse_qr`
+  ADD PRIMARY KEY (`qr_id`);
+
+--
+-- Index pour la table `t_question_quest`
+--
+ALTER TABLE `t_question_quest`
+  ADD PRIMARY KEY (`quest_id`),
+  ADD KEY `fk_question_mat_id` (`mat_id`),
+  ADD KEY `fk_question_form_id` (`form_id`);
+
+--
+-- Index pour la table `t_reponse_rep`
+--
+ALTER TABLE `t_reponse_rep`
+  ADD PRIMARY KEY (`rep_id`),
+  ADD KEY `fk_reponse_quest_id` (`quest_id`),
+  ADD KEY `fk_reponse_mem_id` (`mem_id`);
+
+--
+-- Index pour la table `t_souscategorie_sscat`
+--
+ALTER TABLE `t_souscategorie_sscat`
+  ADD PRIMARY KEY (`sscat_id`),
+  ADD KEY `fk_souscategorie_cat_id` (`cat_id`);
+
+--
+-- Index pour la table `t_topic_top`
+--
+ALTER TABLE `t_topic_top`
+  ADD PRIMARY KEY (`top_id`),
+  ADD KEY `fk_topic_mem_id` (`mem_id`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `tj_topictheme_topth`
+--
+ALTER TABLE `tj_topictheme_topth`
+  MODIFY `topth_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT pour la table `t_categorie_cat`
+--
+ALTER TABLE `t_categorie_cat`
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT pour la table `t_domaine_dom`
+--
+ALTER TABLE `t_domaine_dom`
+  MODIFY `dom_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT pour la table `t_formation_form`
+--
+ALTER TABLE `t_formation_form`
+  MODIFY `form_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT pour la table `t_forum_for`
+--
+ALTER TABLE `t_forum_for`
+  MODIFY `for_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `t_grossierete_gross`
+--
+ALTER TABLE `t_grossierete_gross`
+  MODIFY `gross_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `t_groupe_gr`
+--
+ALTER TABLE `t_groupe_gr`
+  MODIFY `gr_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `t_matiere_mat`
+--
+ALTER TABLE `t_matiere_mat`
+  MODIFY `mat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `t_membre_mem`
+--
+ALTER TABLE `t_membre_mem`
+  MODIFY `mem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `t_message_mess`
+--
+ALTER TABLE `t_message_mess`
+  MODIFY `mess_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+
+--
+-- AUTO_INCREMENT pour la table `t_questionreponse_qr`
+--
+ALTER TABLE `t_questionreponse_qr`
+  MODIFY `qr_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `t_question_quest`
+--
+ALTER TABLE `t_question_quest`
+  MODIFY `quest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT pour la table `t_reponse_rep`
+--
+ALTER TABLE `t_reponse_rep`
+  MODIFY `rep_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT pour la table `t_topic_top`
+--
+ALTER TABLE `t_topic_top`
+  MODIFY `top_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Contraintes pour les tables déchargées
@@ -497,6 +682,14 @@ INSERT INTO `t_topic_top` (`top_id`, `mem_id`, `top_sujet`, `top_contenu`, `top_
 ALTER TABLE `tj_appartenance_app`
   ADD CONSTRAINT `fk_appartenance_gr_id` FOREIGN KEY (`gr_id`) REFERENCES `t_groupe_gr` (`gr_id`),
   ADD CONSTRAINT `fk_appartenance_mem_id` FOREIGN KEY (`mem_id`) REFERENCES `t_membre_mem` (`mem_id`);
+
+--
+-- Contraintes pour la table `tj_evaluation_eval`
+--
+ALTER TABLE `tj_evaluation_eval`
+  ADD CONSTRAINT `fk_evaluation_form_id` FOREIGN KEY (`form_id`) REFERENCES `t_formation_form` (`form_id`),
+  ADD CONSTRAINT `fk_evaluation_mat_id` FOREIGN KEY (`mat_id`) REFERENCES `t_matiere_mat` (`mat_id`),
+  ADD CONSTRAINT `fk_evaluation_mem_id` FOREIGN KEY (`mem_id`) REFERENCES `t_membre_mem` (`mem_id`);
 
 --
 -- Contraintes pour la table `tj_topictheme_topth`
@@ -557,8 +750,3 @@ ALTER TABLE `t_souscategorie_sscat`
 --
 ALTER TABLE `t_topic_top`
   ADD CONSTRAINT `fk_topic_mem_id` FOREIGN KEY (`mem_id`) REFERENCES `t_membre_mem` (`mem_id`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

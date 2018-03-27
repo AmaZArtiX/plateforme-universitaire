@@ -1,6 +1,6 @@
 <?php
 
-  require("../configuration/config.php");
+  require("../modeles-controleurs/selectionner-test.php");
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +32,8 @@
     </script>
   </head>
   <body>
-    <form action="../modeles-controleurs/test.php" method="post">
+    <div><?php if(isset($erreur)){ afficherAlerte("", $erreur, "danger"); } ?></div>
+    <form action="<?=($_SERVER['PHP_SELF'])?>" method="post">
             <div>
                 <select name="domaine" id="domaine">
                     <option value="">Sélectionnez un domaine</option>
