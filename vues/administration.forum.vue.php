@@ -83,7 +83,7 @@
             </div>
           </div>
 
-          <div class="col-md-9">
+          <div class="col-md-9" id="forum">
 
             <?php
               if($forums->rowCount() > 0) {
@@ -106,7 +106,7 @@
                       <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_cat_<?= $c['cat_id'] ?>" aria-expanded="false" aria-controls="collapse_cat_<?= $c['cat_id'] ?>" style="color:#8CB75B;">
                         <?= $c['cat_nom'] ?>
                       </button>
-                      <button type="button" class="close del_data" aria-label="Close" data-type="catégorie" data="<?= $c['cat_nom'] ?>">
+                      <button type="button" class="close del_data" aria-label="Close" data-type="catégorie" data-id="<?= $c['cat_id'] ?>" data="<?= $c['cat_nom'] ?>">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </h5>
@@ -126,7 +126,7 @@
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_sscat_<?= $ssc['sscat_id'] ?>" aria-expanded="false" aria-controls="collapse_sscat_<?= $ssc['sscat_id'] ?>" style="color:#8CB75B;">
                               <?= $ssc['sscat_nom'] ?>
                             </button>
-                            <button type="button" class="close del_data" aria-label="Close" data-type="sous-catégorie" data="<?= $ssc['sscat_nom'] ?>">
+                            <button type="button" class="close del_data" aria-label="Close" data-type="sous-catégorie" data-id="<?= $ssc['sscat_id'] ?>" data="<?= $ssc['sscat_nom'] ?>">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </h5>
@@ -146,7 +146,7 @@
                                   <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_top_<?= $t['top_id'] ?>" aria-expanded="false" aria-controls="collapse_top_<?= $t['top_id'] ?>" style="color:#8CB75B;">
                                     <?= $t['top_sujet'] ?>
                                   </button>
-                                  <button type="button" class="close del_data" aria-label="Close" data-type="topic" data="<?= $t['top_sujet'] ?>">
+                                  <button type="button" class="close del_data" aria-label="Close" data-type="topic" data-id="<?= $t['top_id'] ?>" data="<?= $t['top_sujet'] ?>">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                 </h5>
@@ -237,7 +237,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-            <button type="button" class="btn btn-primary">Confirmer</button>
+            <button type="button" class="btn btn-primary conf_del" data-type="data_type" data-id="data_id">Confirmer</button>
           </div>
         </div>
       </div>

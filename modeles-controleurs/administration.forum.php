@@ -5,7 +5,7 @@
   require("../configuration/config.php");
   require("../fonctions/fonctions.php");
 
-  // Préparation requete des forums
+  // Requete des forums
   $forums = $bdd->query("SELECT * FROM t_forum_for ORDER BY for_priorite");
 
   // Préparation requete des catégories
