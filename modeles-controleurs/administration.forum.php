@@ -5,6 +5,14 @@
   require("../configuration/config.php");
   require("../fonctions/fonctions.php");
 
+  // Requete des membres
+  $membres = $bdd->query("SELECT mem_id FROM t_membre_mem");
+  $nb_mem = $membres->rowCount();
+
+  // Requete des forums
+  $forums = $bdd->query("SELECT for_id FROM t_forum_for");
+  $nb_for = $forums->rowCount();
+
   // Requete des forums
   $forums = $bdd->query("SELECT * FROM t_forum_for ORDER BY for_priorite");
 
