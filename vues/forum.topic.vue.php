@@ -20,7 +20,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Forum étudiant</title>
+    <title>Forum étudiant - <?= $categorie_topic ?> - <?= $sscategorie_topic ?> - <?= $topic['top_sujet'] ?></title>
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -209,11 +209,16 @@
 
                   $dernieres_publis_sscat = get_derniers_topics_sscategorie($id_sscategorie_topic);
 
-                  while($dpssc = $dernieres_publis_sscat->fetch()) {
+                  if($dernieres_publis_sscat->rowCount() > 0) {
+                    while($dpssc = $dernieres_publis_sscat->fetch()) {
                 ?>
                   <tr class="lien align-middle" onclick="location.href = './forum.topic.vue.php?titre=<?= url_custom_encode($dpssc['top_sujet']) ?>&id=<?= $dpssc['top_id'] ?>&page=1'">
                     <td class="align-middle"><b><a href="./forum.topic.vue.php?titre=<?= url_custom_encode($dpssc['top_sujet']) ?>&id=<?= $dpssc['top_id'] ?>&page=1"><?= $dpssc['top_sujet'] ?></a></b> <br/> <small class="text-muted">par <b><a href="./compte.vue.php?mem_id=<?php echo $dpssc['mem_id']; ?>"><?= get_nom_prenom_membre($dpssc['mem_id']) ?></a></b></small></td>
                   </tr>
+                <?php } } else { ?>
+                <tr>
+                  <td class="align-middle text-muted">Aucune publication n'a été trouvée.</td>
+                </tr>
                 <?php } ?>
               </table>
             </div>
@@ -241,7 +246,7 @@
                 </tr>
                 <?php } } else { ?>
                 <tr>
-                  <td class="align-middle">Aucune réponse n'a été trouvée.</td>
+                  <td class="align-middle text-muted">Aucune réponse n'a été trouvée.</td>
                 </tr>
                 <?php } ?>
               </table>

@@ -23,7 +23,7 @@
 
     <!-- Header Management-->
     <header>
-      <div class="container-fluid" style="margin-top:3.5rem; margin-bottom:25px; background-color:#8CB75B;">
+      <div class="container-fluid" style="margin-top:3.5rem; margin-bottom:1rem; background-color:#8CB75B;">
         <div class="row">
           <div class="col-md-10">
             <h1 style="color:white;"> Tableau de bord <small style="color:#C6DBAE;">Gérer les utilisateurs</small></h1>
@@ -46,7 +46,7 @@
     <!-- Fin Header -->
 
     <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb" class="container" style="margin-bottom: 25px;">
+    <nav aria-label="breadcrumb" class="container" style="margin-bottom:1rem;">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="administration.vue.php">Administration</a></li>
         <li class="breadcrumb-item active" aria-current="page">Utilisateurs</li>
@@ -59,13 +59,12 @@
       <div class="container">
         <div class="row">
           <div class="col-md-3">
-            <div class="list-group" style="margin-bottom:25px">
-              <a href="administration.vue.php" class="list-group-item active" style="background-color:#8CB75B; border-color:#8CB75B;">
+            <div class="list-group" style="margin-bottom:1rem">
+              <a href="administration.vue.php" class="list-group-item" style="color:#8CB75B;">
                 Tableau de bord
               </a>
-              <a href="administration.messagerie.vue.php" class="list-group-item d-flex justify-content-between align-items-center" style="color:#8CB75B;"> Messagerie <span class="badge badge-secondary">12</span></a>
-              <a href="administration.topic.vue.php" class="list-group-item d-flex justify-content-between align-items-center" style="color:#8CB75B;"> Topics <span class="badge badge-secondary">33</span></a>
-              <a href="administration.utilisateur.vue.php" class="list-group-item d-flex justify-content-between align-items-center" style="color:#8CB75B;"> Utilisateurs <span class="badge badge-secondary">203</span></a>
+              <a href="administration.forum.vue.php" class="list-group-item d-flex justify-content-between align-items-center" style="color:#8CB75B;"> Forum <span class="badge badge-secondary">33</span></a>
+              <a href="administration.utilisateur.vue.php" class="list-group-item active d-flex justify-content-between align-items-center" style="background-color:#8CB75B; border-color:#8CB75B;"> Utilisateurs <span class="badge badge-secondary">203</span></a>
               <a href="#" class="list-group-item d-flex justify-content-between align-items-center" style="color:#8CB75B;"> Autres <span class="badge badge-secondary">+999</span></a>
             </div>
           </div>

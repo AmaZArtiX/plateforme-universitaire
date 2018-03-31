@@ -215,6 +215,18 @@
   }
 
   /**
+   * [get_derniers_utilisateurs description]
+   * @return [type] [description]
+   */
+  function get_derniers_utilisateurs(){
+
+    global $bdd;
+    $requete = $bdd->query("SELECT mem_id, mem_nom, mem_prenom, mem_mail, mem_administrateur, mem_date_inscription FROM t_membre_mem ORDER BY t_membre_mem.mem_date_inscription DESC LIMIT 0,3");
+
+    return $requete;
+  }
+
+  /**
    * [get_nb_topics_sscategorie description]
    * @param  [type] $id_sscategorie [description]
    * @return [type]                 [description]
