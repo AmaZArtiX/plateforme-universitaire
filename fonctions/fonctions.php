@@ -471,4 +471,262 @@
 
     return $id;
   }
+
+  /**
+   * [existe_matiere description]
+   * @return [type] [description]
+   */
+  function existe_matiere ($id_matiere) {
+
+    global $bdd;
+
+    $requete = $bdd->prepare("SELECT * FROM t_matiere_mat WHERE mat_id = ?");
+    $requete->execute(array($id_matiere));
+
+    if($requete->rowCount() > 0)
+      return true;
+    else
+      return false;
+  }
+
+  /**
+   * [existe_formation description]
+   * @param  [type] $id_formation [description]
+   * @return [type]               [description]
+   */
+  function existe_formation($id_formation){
+
+    global $bdd;
+
+    $requete = $bdd->prepare("SELECT * FROM t_formation_form WHERE form_id = ?");
+    $requete->execute(array($id_formation));
+
+    if($requete->rowCount() > 0)
+      return true;
+    else
+      return false;
+  }
+
+  function getTypeQuestion($idQuestion){
+
+    global $bdd;
+
+    $type = $bdd->prepare("SELECT quest_type FROM t_question_quest WHERE quest_id = ?");
+    $type->execute(array($idQuestion));
+    $type = $type->fetch()['quest_type'];
+
+    return $type;
+  }
+
+  function existeReponse($idMembre, $idQuestion){
+
+    global $bdd;
+
+    $requete = $bdd->prepare("SELECT * FROM t_reponse_rep WHERE mem_id = ? AND quest_id = ?");
+    $requete->execute(array($idMembre, $idQuestion));
+
+    if($requete->rowCount() > 0)
+      return true;
+
+    return false;
+  }
+
+  function getBonneReponseQCU($idQuestion){
+
+    global $bdd;
+
+    $requete = $bdd->prepare("SELECT * FROM t_question_quest WHERE quest_id = ?");
+    $requete->execute(array($idQuestion));
+    $data = $requete->fetch();
+
+    if($data['quest_bonne_reponse1'] == 1)
+      return 1;
+    else if($data['quest_bonne_reponse2'] == 1)
+      return 2;
+    else if($data['quest_bonne_reponse3'] == 1)
+      return 3;
+    else if($data['quest_bonne_reponse4'] == 1)
+      return 4;
+    else if($data['quest_bonne_reponse5'] == 1)
+      return 5;
+  }
+
+  /**
+   * [getReponsesRadio description]
+   * @param  [type] $reponse [description]
+   * @return [type]          [description]
+   */
+  function getReponsesRadio ($reponse) {
+
+		$reponsesRadio = array();
+
+		switch ($reponse) {
+			case 1:
+				array_push($reponsesRadio, 1);
+				array_push($reponsesRadio, 0);
+				array_push($reponsesRadio, 0);
+				array_push($reponsesRadio, 0);
+				array_push($reponsesRadio, 0);
+				break;
+			case 2:
+				array_push($reponsesRadio, 0);
+				array_push($reponsesRadio, 1);
+				array_push($reponsesRadio, 0);
+				array_push($reponsesRadio, 0);
+				array_push($reponsesRadio, 0);
+				break;
+			case 3:
+				array_push($reponsesRadio, 0);
+				array_push($reponsesRadio, 0);
+				array_push($reponsesRadio, 1);
+				array_push($reponsesRadio, 0);
+				array_push($reponsesRadio, 0);
+				break;
+			case 4:
+				array_push($reponsesRadio, 0);
+				array_push($reponsesRadio, 0);
+				array_push($reponsesRadio, 0);
+				array_push($reponsesRadio, 1);
+				array_push($reponsesRadio, 0);
+				break;
+			case 5:
+				array_push($reponsesRadio, 0);
+				array_push($reponsesRadio, 0);
+				array_push($reponsesRadio, 0);
+				array_push($reponsesRadio, 0);
+				array_push($reponsesRadio, 1);
+				break;
+			default:
+				array_push($reponsesRadio, 0);
+				array_push($reponsesRadio, 0);
+				array_push($reponsesRadio, 0);
+				array_push($reponsesRadio, 0);
+				array_push($reponsesRadio, 0);
+				break;
+		}
+
+		return $reponsesRadio;
+	}
+
+  function getBonnesReponsesQCM($idQuestion){
+
+    global $bdd;
+    $requete = $bdd->prepare("SELECT * FROM t_question_quest WHERE quest_id = ?");
+    $requete->execute(array($idQuestion));
+    $data = $requete->fetch();
+
+    $bonnesReponses = array();
+
+    if($data['quest_bonne_reponse1'] == 1)
+      array_push($bonnesReponses, 1);
+    if($data['quest_bonne_reponse2'] == 1)
+      array_push($bonnesReponses, 2);
+    if($data['quest_bonne_reponse3'] == 1)
+      array_push($bonnesReponses, 3);
+    if($data['quest_bonne_reponse4'] == 1)
+      array_push($bonnesReponses, 4);
+    if($data['quest_bonne_reponse5'] == 1)
+      array_push($bonnesReponses, 5);
+
+    return $bonnesReponses;
+  }
+
+  /**
+   * [getReponsesCheckboxes description]
+   * @param  [type] $reponses [description]
+   * @return [type]           [description]
+   */
+  function getReponsesCheckboxes($reponses){
+
+    $reponsesCheckboxes = array(0, 0, 0, 0, 0);
+
+    foreach ($reponses as $r) {
+
+      $reponsesCheckboxes[$r-1] = 1;
+    }
+
+    return $reponsesCheckboxes;
+  }
+
+  /**
+   * [setScoreQuestion description]
+   * @param [type] $idMembre   [description]
+   * @param [type] $idQuestion [description]
+   * @param [type] $score      [description]
+   */
+  function setScoreQuestion($idMembre, $idQuestion, $score){
+
+    global $bdd;
+    $requete = $bdd->prepare("INSERT INTO t_reponse_rep(quest_id, mem_id, rep_resultat) VALUES (?, ?, ?)");
+    $requete->execute(array($idQuestion, $idMembre, $score));
+  }
+
+  /**
+   * [updateScoreQuestion description]
+   * @param  [type] $idMembre   [description]
+   * @param  [type] $idQuestion [description]
+   * @param  [type] $score      [description]
+   * @return [type]             [description]
+   */
+  function updateScoreQuestion($idMembre, $idQuestion, $score){
+
+    global $bdd;
+    $requete = $bdd->prepare("UPDATE t_reponse_rep SET rep_resultat = ? WHERE mem_id = ? AND quest_id = ?");
+    $requete->execute(array($score, $idMembre, $idQuestion));
+  }
+
+  function aReussiQuestion($idQuestion, $idMembre){
+
+    global $bdd;
+    $requete = $bdd->prepare("SELECT rep_resultat FROM t_reponse_rep WHERE quest_id = ? AND mem_id = ?");
+    $requete->execute(array($idQuestion, $idMembre));
+    $res = $requete->fetch()['rep_resultat'];
+
+    if($res == 1)
+      return true;
+
+    return false;
+  }
+
+
+  /**
+   * [getNomMatiere description]
+   * @param  [type] $idMatiere [description]
+   * @return [type]            [description]
+   */
+  function getNomMatiere($idMatiere){
+
+    global $bdd;
+    $nom = $bdd->prepare("SELECT mat_nom FROM t_matiere_mat WHERE mat_id = ?");
+    $nom->execute(array($idMatiere));
+    $nom = $nom->fetch()['mat_nom'];
+
+    return $nom;
+  }
+
+  /**
+   * [getNomFormation description]
+   * @param  [type] $idFormation [description]
+   * @return [type]              [description]
+   */
+  function getNomFormation($idFormation){
+
+    global $bdd;
+    $nom = $bdd->prepare("SELECT form_nom FROM t_formation_form WHERE form_id = ?");
+    $nom->execute(array($idFormation));
+    $nom = $nom->fetch()['form_nom'];
+
+    return $nom;
+  }
+
+  function getScoreEvaluation($idMembre, $idMatiere, $idFormation){
+
+    global $bdd;
+    $score = $bdd->prepare("SELECT eval_resultat FROM tj_evaluation_eval WHERE mem_id = ? AND mat_id = ? AND form_id = ?");
+    $score->execute(array($idMembre, $idMatiere, $idFormation));
+    $score = $score->fetch()['eval_resultat'];
+
+    return $score;
+  }
+
 ?>

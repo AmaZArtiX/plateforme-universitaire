@@ -18,7 +18,7 @@
 
     } else {
 
-      echo '<option>Aucune matière disponible</option>';
+      echo '<option value="">Aucune matière disponible</option>';
     }
 
   } else {
