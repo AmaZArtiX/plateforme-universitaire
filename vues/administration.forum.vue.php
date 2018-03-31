@@ -105,7 +105,7 @@
                       <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_cat_<?= $c['cat_id'] ?>" aria-expanded="false" aria-controls="collapse_cat_<?= $c['cat_id'] ?>" style="color:#8CB75B;">
                         <?= $c['cat_nom'] ?>
                       </button>
-                      <button type="button" class="close del_data" aria-label="Close" data-type="catégorie" data-id="<?= $c['cat_id'] ?>" data="<?= $c['cat_nom'] ?>">
+                      <button type="button" class="close del_data" aria-label="Close" data-type="e catégorie" data-id="<?= $c['cat_id'] ?>" data="<?= $c['cat_nom'] ?>">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </h5>
@@ -125,7 +125,7 @@
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_sscat_<?= $ssc['sscat_id'] ?>" aria-expanded="false" aria-controls="collapse_sscat_<?= $ssc['sscat_id'] ?>" style="color:#8CB75B;">
                               <?= $ssc['sscat_nom'] ?>
                             </button>
-                            <button type="button" class="close del_data" aria-label="Close" data-type="sous-catégorie" data-id="<?= $ssc['sscat_id'] ?>" data="<?= $ssc['sscat_nom'] ?>">
+                            <button type="button" class="close del_data" aria-label="Close" data-type="e sous-catégorie" data-id="<?= $ssc['sscat_id'] ?>" data="<?= $ssc['sscat_nom'] ?>">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </h5>
@@ -145,7 +145,7 @@
                                   <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_top_<?= $t['top_id'] ?>" aria-expanded="false" aria-controls="collapse_top_<?= $t['top_id'] ?>" style="color:#8CB75B;">
                                     <?= $t['top_sujet'] ?>
                                   </button>
-                                  <button type="button" class="close del_data" aria-label="Close" data-type="topic" data-id="<?= $t['top_id'] ?>" data="<?= $t['top_sujet'] ?>">
+                                  <button type="button" class="close del_data" aria-label="Close" data-type="e topic" data-id="<?= $t['top_id'] ?>" data="<?= $t['top_sujet'] ?>">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                 </h5>
@@ -222,7 +222,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="data_del_titre">Suppression de <label for="data_name" class="col-form-label" id="data_type"></label></h5>
+            <h5 class="modal-title" id="data_del_titre">Suppression d<label for="data_name" class="col-form-label" id="data_type"></label></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
