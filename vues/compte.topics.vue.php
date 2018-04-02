@@ -98,9 +98,11 @@
                   </tbody>
                 </table>
               </div>
+              <?php if(!isset($_GET['mem_id'])) { ?>
               <div class="card-footer">
                 <input class="btn btn-light btn-lg btn-block" style="background-color:#8CB75B; border-color:#8CB75B; color:white;" type="submit" name="envoyer" value="Sauvegarder"/>
               </div>
+            <?php } ?>
             </form>
           </div>
         </div>

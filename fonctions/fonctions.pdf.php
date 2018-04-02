@@ -7,15 +7,16 @@
 		var $widths;
 		var $aligns;
 		var $isFinished;
+    var $nbPage = 0;
 
 		// En-tête
 		function Header() {
 
-			//$this->Image('../images/logo-tertia.jpg',10,6,50);
+			$this->Image('../assets/UVHC-noir.jpg',10,0,50);
 			// Police Arial gras 16
 			$this->SetFont('Arial','B',16);
 			// Décalage à droite
-			$this->Cell(60);
+			$this->Cell(50);
 			// Titre
 			$titre = utf8_decode("Questionnaire de positionnement");
 			$this->Cell(100,10,$titre,1,1,'C');
@@ -28,10 +29,11 @@
 			// $this->Image('../images/fse_haut_de_france.png',10,280,25);
 			// $this->Image('../images/iso_9001.jpg',37,280,25);
 			// $this->Image('../images/iso14001.jpg',64,280,25);
+			$this->nbPage++;
 			$this->SetY(-15);
 			$this->SetFont('Arial', 'I', 8);
 			$this->SetTextColor(0, 0, 0);
-      $this->Cell(180, 6, 'Page n', 0, 0, 'R');
+      $this->Cell(180, 6, 'Page '.$this->nbPage.'', 0, 0, 'R');
 		}
 
 		function SetWidths($w) {
@@ -135,21 +137,21 @@
 
 
 	// Enregistre le PDF des résultats de l'évaluation des competences
-	function setPDFResultats($idMembre, $idMatiere, $idFormation, $questions, $reponses) {
+	function setPDFResultats($idMembre, $idMatiere, $idFormation, $groupe, $questions, $reponses) {
 
 		$pdf = new PDF();
 		$pdf->AliasNbPages();
 		$pdf->AddPage();
 
+    $pdf->Ln();
+    $pdf->SetFont('Arial', '', 12);
+    $pdf->SetWidths(array(40, 40, 40, 30, 30));
+    $pdf->SetAligns(array('L', 'L', 'L', 'L', 'L'));
+    $pdf->Row(array(get_nom_prenom_membre($idMembre), getNomMatiere($idMatiere), getNomFormation($idFormation), getScoreEvaluation($idMembre, $idMatiere, $idFormation)."%", "Groupe ".$groupe), false);
+    $pdf->Ln();
 		$pdf->SetFont('Arial','U',14);
 		$pdf->Cell(0, 6, utf8_decode("Résultats de l'évaluation selon l'intitulé de question"), 0, 1, 'C');
     $pdf->Ln();
-
-    $pdf->SetFont('Arial', '', 12);
-    $pdf->SetWidths(array(46, 46, 46, 46));
-    $pdf->SetAligns(array('L', 'L', 'L', 'L'));
-    $pdf->Row(array(get_nom_prenom_membre($idMembre), getNomMatiere($idMatiere), getNomFormation($idFormation), getScoreEvaluation($idMembre, $idMatiere, $idFormation)), false);
-
 
 		for ($i=0; $i < count($questions); $i++) {
 
@@ -157,17 +159,17 @@
 			$pdf->SetWidths(array(185));
 			$pdf->SetAligns(array('L'));
 			$pdf->Row(array(($i+1).". ".$questions[$i]['intitule']), false);
+      $pdf->Ln();
 			$pdf->SetFont('Arial', '', 12);
 			$pdf->SetAligns(array('L'));
 			$pdf->SetWidths(array(185));
 			$pdf->Row(array("Vous avez répondu :"), false);
-      $pdf->Ln();
 
       for($j = 0; $j < 5; $j++){
 
         if($reponses[$i][$j] == 1){
 
-          $pdf->Row(array($questions[$i]['reponse'.($j+1).'']), false);
+          $pdf->Row(array("* ".$questions[$i]['reponse'.($j+1).'']), false);
         }
       }
 
@@ -184,7 +186,7 @@
 
           if($questions[$i]['bonne_reponse'.($k+1).''] == 1){
 
-            $pdf->Row(array($questions[$i]['reponse'.($k+1).'']), false);
+            $pdf->Row(array("* ".$questions[$i]['reponse'.($k+1).'']), false);
           }
         }
       }
@@ -194,7 +196,7 @@
 
 		$pdf->isFinished = true;
 
-		$pdf->Output("F", "../resultats/resultats-".$idMembre."-".$idMatiere."-".$idFormation.".pdf", true);
+		$pdf->Output("F", "../resultats/resultats-".$idMembre."".$idMatiere."".$idFormation.".pdf", true);
 	}
 
  ?>

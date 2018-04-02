@@ -28,6 +28,11 @@
             <li class="nav-item <?php if($header == "accueil") {echo 'active';} ?>">
               <a class="nav-link" href="index.vue.php">Accueil</a>
             </li>
+            <?php if ($_SESSION['mem_administrateur'] == 0) { ?>
+            <li class="nav-item <?php if($header == "positionnement") {echo 'active';} ?>">
+              <a class="nav-link" href="selectionner-test.vue.php">Positionnement</a>
+            </li>
+          <?php } ?>
             <li class="nav-item <?php if($header == "forum") {echo 'active';} ?>">
               <a class="nav-link" href="forum.vue.php">Forum</a>
             </li>

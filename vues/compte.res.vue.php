@@ -1,5 +1,5 @@
 <?php
-  require("../modeles-controleurs/compte.php");
+  require("../modeles-controleurs/compte.res.php");
 ?>
 
 <!DOCTYPE html>
@@ -40,8 +40,44 @@
                 </li>
               </ul>
             </div>
-            <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-hover mb-0">
+                <thead>
+                  <tr style="background-color:#8CB75B; color:white;">
+                    <th class="align-middle" scope="col">Matière</th>
+                    <th class="align-middle" scope="col">Niveau</th>
+                    <th class="align-middle" scope="col">Date</th>
+                    <th class="align-middle" scope="col">Visualiser</th>
+                  </tr>
+                </thead>
+                <tbody>
+            <?php if($requete->rowCount() > 0) {
 
+                    while ($data = $requete->fetch()) {
+             ?>
+                      <tr class="lien align-middle">
+                        <td class="align-middle">
+                          <?= getNomMatiere($data['mat_id']) ?>
+                        </td>
+                        <td class="align-middle">
+                          <?= getNomFormation($data['form_id']) ?>
+                        </td>
+                        <td class="align-middle">
+                          <?= date_format(date_create($data['eval_date']), 'd/m/Y') ?>
+                        </td>
+                        <td class="align-middle">
+                          <a href="../resultats/resultats-<?= $data['mem_id'] ?><?= $data['mat_id'] ?><?= $data['form_id'] ?>.pdf" target="_blank"><li class="fa fa-file-pdf-o"></li></a>
+                        </td>
+                      </tr>
+              <?php
+                    }
+                  } else { ?>
+                      <tr>
+                        <td class="align-middle text-muted" colspan="4">Aucun test de positionnement a été réalisé</td>
+                      </tr>
+            <?php } ?>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
