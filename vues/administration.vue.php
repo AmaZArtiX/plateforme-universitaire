@@ -29,7 +29,7 @@
             <h1 style="color:white;"> Tableau de bord <small style="color:#C6DBAE;">Gérer le site</small></h1>
           </div>
           <div class="col-md-2">
-            <div class="dropdown">
+            <!--<div class="dropdown">
               <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:white; color:#8CB75B;">
                 Créer du contenu
               </a>
@@ -38,7 +38,7 @@
                 <a class="dropdown-item" href="#">Ajouter topic</a>
                 <a class="dropdown-item" href="#">Ajouter utilisateur</a>
               </div>
-            </div>
+            </div>-->
           </div>
         </div>
       </div>

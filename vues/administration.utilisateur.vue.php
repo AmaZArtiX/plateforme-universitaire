@@ -31,12 +31,10 @@
           <div class="col-md-2">
             <div class="dropdown">
               <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:white; color:#8CB75B;">
-                Créer du contenu
+                Modifier les droits
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Ajouter page</a>
-                <a class="dropdown-item" href="#">Ajouter topic</a>
-                <a class="dropdown-item" href="#">Ajouter utilisateur</a>
+                <a class="dropdown-item mod_data" href="#" data-type="'utilisateur">Administrateur</a>
               </div>
             </div>
           </div>
@@ -78,6 +76,8 @@
                 <div id="utilisateurs">
 
                   <?php
+                    $membres = $bdd->query("SELECT mem_id, mem_nom, mem_prenom, mem_mail, mem_administrateur, mem_date_inscription FROM t_membre_mem ORDER BY t_membre_mem.mem_date_inscription DESC");
+                    $nb_mem = $membres->rowCount();
                     if($nb_mem > 0) {
                       while ($m = $membres->fetch()) {
                   ?>
@@ -87,7 +87,7 @@
                         <button class="btn btn-link" data-toggle="collapse" data-target="#collapse_<?= $m['mem_id'] ?>" aria-expanded="true" aria-controls="collapse_<?= $m['mem_id'] ?>" style="color:#8CB75B;">
                           <?= $m['mem_id'] ?> - <?= $m['mem_prenom'] ?> - <?= $m['mem_nom'] ?>
                         </button>
-                        <button type="button" class="close del_data" aria-label="Close" data-type="'utilisateur" data-id="<?= $m['mem_id'] ?>" data="<?= $m['mem_prenom'] ?> <?= $m['mem_nom'] ?>">
+                        <button type="button" class="close del_data" aria-label="Close" data-type="'utilisateur" data-id="<?= $m['mem_id'] ?>" data="<?= $m['mem_prenom'] ?> <?= $m['mem_nom'] ?>" data-container="utilisateurs">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </h5>
@@ -159,12 +159,12 @@
     ?>
     <!-- Fin footer -->
 
-    <!-- Modal -->
+    <!-- Modal suppression -->
     <div class="modal fade" id="data_del" tabindex="-1" role="dialog" aria-labelledby="data_del_titre" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="data_del_titre">Suppression d<label for="data_name" class="col-form-label" id="data_type"></label></h5>
+            <h5 class="modal-title" id="data_del_titre">Suppression d<label for="data_name" class="col-form-label" id="data_del_type"></label></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -172,13 +172,37 @@
           <div class="modal-body">
             <form>
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Etes-vous sûr de vouloir supprimer: <label for="data_name" class="col-form-label" id="data"></label></label>
+                <label for="recipient-name" class="col-form-label">Etes-vous sûr de vouloir supprimer: <label for="data_name" class="col-form-label" id="data_del_data"></label></label>
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-            <button type="button" class="btn btn-primary conf_del" data-type="data_type" data-id="data_id">Confirmer</button>
+            <button type="button" class="btn btn-primary conf_del" data-type="data_type" data-id="data_id" data-container="data_container">Confirmer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin modal -->
+
+    <!-- Modal modification -->
+    <div class="modal fade" id="data_mod" tabindex="-1" role="dialog" aria-labelledby="data_mod_titre" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="data_mod_titre">Modification d<label for="data_name" class="col-form-label" id="data_mod_type"></label></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group" id="data_mod_data"></div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            <button type="button" class="btn btn-primary conf_mod" data-type="data_type" data-id="data_id">Confirmer</button>
           </div>
         </div>
       </div>
