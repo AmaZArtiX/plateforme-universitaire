@@ -127,13 +127,13 @@
           if($_SESSION['termine'] == true) {
 
       ?>
-            <div class="jumbotron jumbotron-fluid">
-              <div class="container">
-                <h3>Vos réponses ont été enregistrées!</h3>
-                <p>Vos résultats ont été analysés pour nous permettre de vous positionner dans le groupe de soutien idéal. Vous pouvez consulter la correction depuis le fichier PDF et ainsi prendre connaissance de votre numéro de groupe.</p>
-                <p><a class="btn btn-primary btn-lg" href="../resultats/resultats-<?= $_SESSION['mem_id'] ?><?= $matiere ?><?= $niveau ?>.pdf" target="_blank" role="button">Visualiser</a></p>
-              </div>
-            </div>
+      <div class="jumbotron jumbotron-fluid" style="margin-top:3.5rem; margin-bottom:-7rem; height:50vh;">
+        <div class="container">
+          <h3>Vos réponses ont été enregistrées!</h3>
+          <p>Vos résultats ont été analysés pour nous permettre de vous positionner dans le groupe de soutien idéal. Vous pouvez consulter la correction depuis le fichier PDF et ainsi prendre connaissance de votre numéro de groupe.</p>
+          <p><a class="btn btn-primary btn-lg" href="../resultats/resultats-<?= $_SESSION['mem_id'] ?><?= $matiere ?><?= $niveau ?>.pdf" target="_blank" role="button">Visualiser</a></p>
+        </div>
+      </div>
       <?php
             unset($_SESSION['termine']);
           }
