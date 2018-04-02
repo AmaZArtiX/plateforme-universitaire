@@ -135,19 +135,41 @@
         if(isset($_POST['btn_terminer'])){
 
           $resultat = intval(($_SESSION['nbBonnesReponses']/$_SESSION['nbQuestions']) * 100);
+          $niveauGroupe = getNiveauGroupe($resultat);
 
           $requete  = $bdd->prepare("INSERT INTO tj_evaluation_eval (mat_id, form_id, mem_id, eval_resultat, eval_date) VALUES (?, ?, ?, ?, NOW())");
           $requete->execute(array($matiere, $niveau, $_SESSION['mem_id'], $resultat));
 
-          setPDFResultats($_SESSION['mem_id'], $matiere, $niveau, $_SESSION['questions'], $_SESSION['reponses']);
+          $requete = $bdd->prepare("SELECT t_groupe_gr.gr_id FROM tj_appartenance_app JOIN t_groupe_gr ON tj_appartenance_app.gr_id = t_groupe_gr.gr_id WHERE t_groupe_gr.form_id = ? AND t_groupe_gr.mat_id = ? AND t_groupe_gr.gr_niveau = ? GROUP BY t_groupe_gr.gr_id HAVING COUNT(tj_appartenance_app.gr_id) < 10 LIMIT 0,1");
+          $requete->execute(array($niveau, $matiere, $niveauGroupe));
+
+          if($requete->rowCount() > 0) {
+
+            $idGroupe = $requete->fetch()['gr_id'];
+            $insertion = $bdd->prepare("INSERT INTO tj_appartenance_app(gr_id, mem_id) VALUES (?, ?)");
+            $insertion->execute(array($idGroupe, $_SESSION['mem_id']));
+
+          } else {
+
+            $insertion = $bdd->prepare("INSERT INTO t_groupe_gr(form_id, mat_id, gr_niveau) VALUES(?, ?, ?)");
+            $insertion->execute(array($niveau, $matiere, $niveauGroupe));
+
+            $groupe = $bdd->query("SELECT gr_id FROM t_groupe_gr ORDER BY gr_id DESC LIMIT 0,1");
+            $idGroupe = $groupe->fetch()['gr_id'];
+
+            $insertion2 = $bdd->prepare("INSERT INTO tj_appartenance_app(gr_id, mem_id) VALUES (?, ?)");
+            $insertion2->execute(array($idGroupe, $_SESSION['mem_id']));
+          }
+
+          setPDFResultats($_SESSION['mem_id'], $matiere, $niveau, $idGroupe, $_SESSION['questions'], $_SESSION['reponses']);
 
           $_SESSION['termine'] = true;
 
-          // unset($_SESSION['questionEnCours']);
-          // unset($_SESSION['questions']);
-          // unset($_SESSION['reponses']);
-          // unset($_SESSION['nbQuestions']);
-          // unset($_SESSION['termine']);
+          unset($_SESSION['questionEnCours']);
+          unset($_SESSION['questions']);
+          unset($_SESSION['reponses']);
+          unset($_SESSION['nbQuestions']);
+          unset($_SESSION['nbBonnesReponses']);
         }
       }
     } else {

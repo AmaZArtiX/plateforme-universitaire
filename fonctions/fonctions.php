@@ -731,6 +731,13 @@
     return $nom;
   }
 
+  /**
+   * [getScoreEvaluation description]
+   * @param  [type] $idMembre    [description]
+   * @param  [type] $idMatiere   [description]
+   * @param  [type] $idFormation [description]
+   * @return [type]              [description]
+   */
   function getScoreEvaluation($idMembre, $idMatiere, $idFormation){
 
     global $bdd;
@@ -739,6 +746,23 @@
     $score = $score->fetch()['eval_resultat'];
 
     return $score;
+  }
+
+  /**
+   * [getNiveauGroupe description]
+   * @param  [type] $resultat [description]
+   * @return [type]           [description]
+   */
+  function getNiveauGroupe($resultat) {
+
+    if($resultat >= 0 && $resultat <= 25)
+      return 1;
+    else if($resultat > 25 && $resultat <= 50)
+      return 2;
+    else if($resultat > 50 && $resultat <= 75)
+      return 3;
+    else
+      return 4;
   }
 
 ?>
