@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  sam. 31 mars 2018 à 18:15
+-- Généré le :  lun. 02 avr. 2018 à 08:58
 -- Version du serveur :  5.7.19
 -- Version de PHP :  7.1.9
 
@@ -71,22 +71,16 @@ CREATE TABLE IF NOT EXISTS `tj_topictheme_topth` (
   KEY `fk_topictheme_top_id` (`top_id`),
   KEY `fk_topictheme_cat_id` (`cat_id`),
   KEY `fk_topictheme_sscat_id` (`sscat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `tj_topictheme_topth`
 --
 
 INSERT INTO `tj_topictheme_topth` (`topth_id`, `top_id`, `cat_id`, `sscat_id`) VALUES
-(1, 1, 1, 1),
-(2, 2, 1, 1),
 (3, 3, 1, 1),
 (5, 5, 1, 1),
-(6, 6, 1, 1),
-(7, 7, 1, 1),
-(10, 10, 1, 1),
-(11, 11, 1, 1),
-(12, 12, 1, 1);
+(6, 6, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -117,7 +111,7 @@ INSERT INTO `t_categorie_cat` (`cat_id`, `for_id`, `cat_nom`, `cat_description`)
 (6, 1, 'IPAG', 'Description'),
 (7, 1, 'ISTV', 'Description'),
 (8, 1, 'IUT', 'Description'),
-(9, 1, 'Bibliothèques', '');
+(9, 1, 'Bibliothèques', 'Description');
 
 -- --------------------------------------------------------
 
@@ -273,9 +267,7 @@ CREATE TABLE IF NOT EXISTS `t_membre_mem` (
 --
 
 INSERT INTO `t_membre_mem` (`mem_id`, `mem_nom`, `mem_prenom`, `mem_mail`, `mem_pwd`, `mem_administrateur`, `mem_date_inscription`) VALUES
-(1, 'pute', 'salope', 'salope@pute.com', '28ea55d6c22578e7a26e3a7769dcc3a74a1e34f1', 0, '2018-03-13'),
 (2, 'Bacquet', 'Simon', 'simon.bacquet@mail.fr', '28ea55d6c22578e7a26e3a7769dcc3a74a1e34f1', 0, '2018-03-18'),
-(3, 'Test', 'Test', 'test@test.fr', '51abb9636078defbf888d8457a7c76f85c8f114c', 0, '2018-03-24'),
 (4, 'Lampe', 'Ronan', 'lampe.ronan@outlook.fr', '57698a857060b48a65ed5eee25bca82cc3d3e586', 1, '2018-03-31');
 
 -- --------------------------------------------------------
@@ -295,26 +287,13 @@ CREATE TABLE IF NOT EXISTS `t_message_mess` (
   PRIMARY KEY (`mess_id`),
   KEY `fk_message_top_id` (`top_id`),
   KEY `fk_message_mem_id` (`mem_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `t_message_mess`
 --
 
 INSERT INTO `t_message_mess` (`mess_id`, `top_id`, `mem_id`, `mess_contenu`, `mess_date_post`, `mess_date_edition`) VALUES
-(1, 1, 1, 'kdjddj', '2018-03-13 00:00:00', '2018-03-19 00:00:00'),
-(2, 1, 2, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2018-03-20 00:00:00', '2018-03-13 00:00:00'),
-(3, 1, 2, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2018-03-21 00:00:00', NULL),
-(4, 1, 2, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2018-03-06 00:00:00', NULL),
-(5, 1, 2, 'ohlhhhlhlhllhlhl', '2018-03-14 00:00:00', NULL),
-(6, 1, 2, 'coucou', '2018-03-22 00:00:00', NULL),
-(7, 1, 2, 'var_dump($depart);', '2018-03-21 00:00:00', '2018-03-21 00:00:00'),
-(8, 1, 1, 'hgcccjckcvkvkgvv', '2018-03-14 00:00:00', '2018-03-29 00:00:00'),
-(9, 1, 2, 'hello', '2018-03-20 00:00:00', '2018-03-30 00:00:00'),
-(10, 1, 2, 'test', '2018-03-21 00:00:00', '2018-03-21 00:00:00'),
-(11, 1, 1, 'mnmnmnmmnm', '2018-03-21 00:00:00', '2018-03-27 00:00:00'),
-(12, 2, 2, 'test', '2018-03-12 00:00:00', '2018-03-26 00:00:00'),
-(13, 2, 1, 'test', '2018-03-21 00:00:00', '2018-03-21 00:00:00'),
 (14, 6, 2, 'hello', '2018-03-19 20:37:53', NULL),
 (15, 6, 2, 'ah désolé gros lourd', '2018-03-19 20:38:09', NULL),
 (16, 6, 2, 'ah désolé gros lourd', '2018-03-19 20:40:33', NULL),
@@ -324,7 +303,7 @@ INSERT INTO `t_message_mess` (`mess_id`, `top_id`, `mem_id`, `mess_contenu`, `me
 (20, 6, 2, '[b]tmkjyjmjmyjyjyjyjyyy[/b] [i]yyjyjyjyjyy[/i] [s]ylyjyjyjyjyjy ylkylkjyjyklyjy [/s]y:yj[url=http://google.com]yjyjyjyjyjy[/url]', '2018-03-19 20:51:35', NULL),
 (21, 6, 2, '[b]tmkjyjmjmyjyjyjyjyyy[/b] [i]yyjyjyjyjyy[/i] [s]ylyjyjyjyjyjy ylkylkjyjyklyjy [/s]y:yj[url=http://google.com]yjyjyjyjyjy[/url]', '2018-03-19 20:51:52', NULL),
 (22, 6, 2, '[moncode]funciton myFunction($toto) {\r\n   ﻿\r\n   ﻿return $toto;\r\n}[/moncode]', '2018-03-19 20:55:48', NULL),
-(23, 5, 2, '[b]Lourd gros t\'as essayé de mettre du beurre ?[/b] [u][i]ou d\'utiliser cette fonction ?[/i][/u]\r\n\r\n[moncode]function sortirLesCouillesDuGrillePain($couilles){\r\n\r\n   ﻿return $couilles;\r\n}[/moncode]', '2018-03-19 21:02:12', NULL),
+(23, 5, 2, '[b]Lourd gros t\'as essayé de mettre du beurre ?[/b] [u][i]ou d\'utiliser cette fonction ?[/i][/u]\r\n\r\n[moncode]function sortirLesDoigtsDuGrillePain($doigts){\r\n\r\n   ﻿return $doigts;\r\n}[/moncode]', '2018-03-19 21:02:12', NULL),
 (24, 5, 2, '[img]http://www.noelshack.com/2018-12-1-1521484739-df.png[/img]ah ouais sympa \r\n', '2018-03-19 21:12:34', NULL),
 (25, 5, 2, '[img]http://www.noelshack.com/2018-12-1-1521484739-df.png[/img]ah ouais sympa \r\n', '2018-03-19 21:15:56', NULL),
 (26, 5, 2, 'heloo\r\n\r\n[img]http://www.noelshack.com/2018-12-1-1521484739-df.png[/img]', '2018-03-19 21:16:16', NULL),
@@ -361,13 +340,7 @@ INSERT INTO `t_message_mess` (`mess_id`, `top_id`, `mem_id`, `mess_contenu`, `me
 (57, 5, 2, 'tuto', '2018-03-21 14:36:37', NULL),
 (58, 6, 2, 'coucou', '2018-03-21 18:47:33', NULL),
 (59, 3, 2, 'rhrpr', '2018-03-21 18:48:07', NULL),
-(60, 6, 2, '[b]hello [/b][u]je suis la \r\n\r\n\r\n[/u][codec]void main(){\r\n\r\n}[/codec]', '2018-03-24 10:40:08', NULL),
-(61, 2, 2, 'hello je suis un con\r\n[b]tu m\'entends[/b]', '2018-03-24 10:51:11', NULL),
-(62, 2, 2, '**** de merde', '2018-03-24 10:51:27', NULL),
-(63, 2, 2, 'ok viens *******', '2018-03-24 10:51:37', NULL),
-(64, 2, 2, '[codec]void main {\r\n\r\n}[/codec]', '2018-03-24 10:52:27', NULL),
-(65, 6, 3, 'sorry bro', '2018-03-24 12:44:51', NULL),
-(66, 6, 3, '[codec]void main(){\r\n\r\n}[/codec]', '2018-03-24 12:59:22', NULL);
+(60, 6, 2, '[b]hello [/b][u]je suis la \r\n\r\n\r\n[/u][codec]void main(){\r\n\r\n}[/codec]', '2018-03-24 10:40:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -470,7 +443,9 @@ CREATE TABLE IF NOT EXISTS `t_souscategorie_sscat` (
 --
 
 INSERT INTO `t_souscategorie_sscat` (`sscat_id`, `cat_id`, `sscat_nom`) VALUES
-(1, 1, 'toto');
+(1, 1, 'Mécanique'),
+(2, 9, 'Mont Houy'),
+(3, 9, 'Tertiales');
 
 -- --------------------------------------------------------
 
@@ -485,26 +460,20 @@ CREATE TABLE IF NOT EXISTS `t_topic_top` (
   `top_sujet` text NOT NULL,
   `top_contenu` text NOT NULL,
   `top_date_creation` datetime NOT NULL,
-  `top_resolu` tinyint(1) NOT NULL,
+  `top_resolu` tinyint(1) NOT NULL DEFAULT '0',
   `top_notification` tinyint(1) NOT NULL,
   PRIMARY KEY (`top_id`),
   KEY `fk_topic_mem_id` (`mem_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `t_topic_top`
 --
 
 INSERT INTO `t_topic_top` (`top_id`, `mem_id`, `top_sujet`, `top_contenu`, `top_date_creation`, `top_resolu`, `top_notification`) VALUES
-(1, 1, 'toto', 'toto', '2018-03-14 00:00:00', 0, 0),
-(2, 1, 'îfjf', 'jfjf', '2018-03-06 00:00:00', 0, 0),
-(3, 2, 'Je cherche une pute', 'detresse', '2018-03-20 00:00:00', 0, 0),
-(5, 2, 'Couilles coincées dans un grille pain', 'eeerrrffff', '2018-03-14 00:00:00', 0, 0),
-(6, 2, 'Boule d\'escalier coincée dans le cul', 'hohfhfh', '2018-03-29 00:00:00', 1, 0),
-(7, 2, 'hello', 'hello', '2018-03-24 14:03:50', 0, 0),
-(10, 2, 'test2', 'heloo', '2018-03-24 14:09:09', 0, 1),
-(11, 2, 'Hello j\'ai un pb', 'grosses couilles', '2018-03-24 14:24:24', 0, 0),
-(12, 2, 'totopic', 'tititatadgfmbzkjf', '2018-03-24 14:26:13', 1, 0);
+(3, 2, 'Je cherche un indice', 'detresse', '2018-03-20 00:00:00', 0, 0),
+(5, 2, 'Doigts coincés dans un grille pain', 'eeerrrffff', '2018-03-14 00:00:00', 0, 0),
+(6, 2, 'Boule d\'escalier coincée dans le vase', 'hohfhfh', '2018-03-29 00:00:00', 1, 0);
 
 --
 -- Contraintes pour les tables déchargées
@@ -585,7 +554,3 @@ ALTER TABLE `t_souscategorie_sscat`
 ALTER TABLE `t_topic_top`
   ADD CONSTRAINT `fk_topic_mem_id` FOREIGN KEY (`mem_id`) REFERENCES `t_membre_mem` (`mem_id`) ON DELETE CASCADE;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
