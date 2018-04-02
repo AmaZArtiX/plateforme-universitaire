@@ -45,11 +45,11 @@
           <div class="col-md-2">
             <div class="dropdown">
               <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:white; color:#8CB75B;">
-                Ajout de contenu
+                Ajouter du contenu
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Catégorie</a>
-                <a class="dropdown-item" href="#">Sous-catégorie</a>
+                <a class="dropdown-item add_data" href="#" data-type="e catégorie">Catégorie</a>
+                <a class="dropdown-item add_data" href="#" data-type="e sous-catégorie">Sous-catégorie</a>
               </div>
             </div>
           </div>
@@ -87,7 +87,6 @@
             <?php
               if($forums->rowCount() > 0) {
                 while ($f = $forums->fetch()) {
-                  $categories->execute(array($f['for_id']));
             ?>
             <!-- Forum -->
             <div class="card" style="margin-bottom:1rem;">
@@ -95,9 +94,9 @@
               <div id="for_<?= $f['for_id'] ?>">
 
                 <?php
+                  $categories->execute(array($f['for_id']));
                   if($categories->rowCount() > 0) {
                     while ($c = $categories->fetch()) {
-                      $sscategories->execute(array($c['cat_id']));
                 ?>
                 <div class="card"><!-- Niveau 1 - Catégories -->
                   <div class="card-header" id="heading_cat_<?= $c['cat_id'] ?>">
@@ -105,7 +104,7 @@
                       <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_cat_<?= $c['cat_id'] ?>" aria-expanded="false" aria-controls="collapse_cat_<?= $c['cat_id'] ?>" style="color:#8CB75B;">
                         <?= $c['cat_nom'] ?>
                       </button>
-                      <button type="button" class="close del_data" aria-label="Close" data-type="catégorie" data-id="<?= $c['cat_id'] ?>" data="<?= $c['cat_nom'] ?>">
+                      <button type="button" class="close del_data" aria-label="Close" data-type="e catégorie" data-id="<?= $c['cat_id'] ?>" data="<?= $c['cat_nom'] ?>" data-container="for_<?= $f['for_id'] ?>">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </h5>
@@ -115,9 +114,9 @@
                     <div id="cat_<?= $c['cat_id'] ?>">
 
                       <?php
+                        $sscategories->execute(array($c['cat_id']));
                         if($sscategories->rowCount() > 0) {
                           while ($ssc = $sscategories->fetch()) {
-                            $topics->execute(array($c['cat_id'], $ssc['sscat_id']));
                       ?>
                       <div class="card"><!-- Niveau 2 - Sous-catégories -->
                         <div class="card-header" id="heading_sscat_<?= $ssc['sscat_id'] ?>">
@@ -125,7 +124,7 @@
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_sscat_<?= $ssc['sscat_id'] ?>" aria-expanded="false" aria-controls="collapse_sscat_<?= $ssc['sscat_id'] ?>" style="color:#8CB75B;">
                               <?= $ssc['sscat_nom'] ?>
                             </button>
-                            <button type="button" class="close del_data" aria-label="Close" data-type="sous-catégorie" data-id="<?= $ssc['sscat_id'] ?>" data="<?= $ssc['sscat_nom'] ?>">
+                            <button type="button" class="close del_data" aria-label="Close" data-type="e sous-catégorie" data-id="<?= $ssc['sscat_id'] ?>" data="<?= $ssc['sscat_nom'] ?>" data-container="cat_<?= $c['cat_id'] ?>">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </h5>
@@ -135,6 +134,7 @@
                           <div id="sscat_<?= $ssc['sscat_id'] ?>">
 
                             <?php
+                              $topics->execute(array($c['cat_id'], $ssc['sscat_id']));
                               if($topics->rowCount() > 0) {
                                 while ($t = $topics->fetch()) {
                                   $parser->parse($t['top_contenu']);
@@ -145,7 +145,7 @@
                                   <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse_top_<?= $t['top_id'] ?>" aria-expanded="false" aria-controls="collapse_top_<?= $t['top_id'] ?>" style="color:#8CB75B;">
                                     <?= $t['top_sujet'] ?>
                                   </button>
-                                  <button type="button" class="close del_data" aria-label="Close" data-type="topic" data-id="<?= $t['top_id'] ?>" data="<?= $t['top_sujet'] ?>">
+                                  <button type="button" class="close del_data" aria-label="Close" data-type="e topic" data-id="<?= $t['top_id'] ?>" data="<?= $t['top_sujet'] ?>" data-container="sscat_<?= $ssc['sscat_id'] ?>">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                 </h5>
@@ -217,12 +217,12 @@
     ?>
     <!-- Fin footer -->
 
-    <!-- Modal -->
+    <!-- Modal suppression -->
     <div class="modal fade" id="data_del" tabindex="-1" role="dialog" aria-labelledby="data_del_titre" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="data_del_titre">Suppression de <label for="data_name" class="col-form-label" id="data_type"></label></h5>
+            <h5 class="modal-title" id="data_del_titre">Suppression d<label for="data_name" class="col-form-label" id="data_del_type"></label></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -230,13 +230,37 @@
           <div class="modal-body">
             <form>
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Etes-vous sûr de vouloir supprimer: <label for="data_name" class="col-form-label" id="data"></label></label>
+                <label for="recipient-name" class="col-form-label">Etes-vous sûr de vouloir supprimer: <label for="data_name" class="col-form-label" id="data_del_data"></label></label>
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-            <button type="button" class="btn btn-primary conf_del" data-type="data_type" data-id="data_id">Confirmer</button>
+            <button type="button" class="btn btn-primary conf_del" data-type="data_type" data-id="data_id" data-container="data_container">Confirmer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin modal -->
+
+    <!-- Modal ajout -->
+    <div class="modal fade" id="data_add" tabindex="-1" role="dialog" aria-labelledby="data_add_titre" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="data_add_titre">Ajout d<label for="data_name" class="col-form-label" id="data_add_type"></label></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group" id="data_add_data"></div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            <button type="button" class="btn btn-primary conf_add" data-type="data_type">Confirmer</button>
           </div>
         </div>
       </div>
